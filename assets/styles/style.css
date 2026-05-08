@@ -1,54 +1,55 @@
 #body-login {
-    background: linear-gradient(135deg, #1a1a2e, #0f0f1a);
-    margin: 0;
+    background: linear-gradient(135deg, #161625, #0d0d18);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     font-family: Arial, sans-serif;
 }
 
 .login-box {
-    background-color: #e9e9e9;
-    width: 100%;
-    max-width: 420px;
+    background-color: #ececec;
+    width: 100%;    max-width: 420px;
     padding: 35px;
     border-radius: 12px;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
     text-align: center;
 }
 
 .logo {
-    width: 260px;
-    max-width: 100%;
+    width: 240px;
     display: block;
-    margin: 0 auto 15px auto;
+    margin: 0 auto 10px auto;
 }
 
 .subtitle {
     font-size: 12px;
     color: #777;
-    margin-bottom: 20px;
+    margin-bottom: 18px;
 }
 
 .form-control {
     height: 45px;
     border-radius: 6px;
-    border: 1px solid #ccc;
+    border: 1px solid #bcbcbc;
     background-color: #fff;
 }
 
 .btn-secondary {
     height: 45px;
-    background-color: #dcdcdc;
+    background-color: #dfdfdf;
     border: none;
     color: #333;
-    font-size: 18px;
+    font-size: 16px;
     border-radius: 6px;
 }
 
 .btn-danger {
     height: 45px;
-    background: linear-gradient(90deg, #ff0000, #ff3b3b);
+    background: linear-gradient(90deg, #ff0000, #ff2f45);
     border: none;
     font-weight: bold;
-    font-size: 18px;
+    font-size: 16px;
     border-radius: 6px;
 }
 
