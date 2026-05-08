@@ -1,6 +1,6 @@
 #body-login {
     background: linear-gradient(135deg, #161625, #0d0d18);
-    min-height: 100vh;
+    min-height: 100px;
     display: flex;
     justify-content: center;
     align-items: center;
