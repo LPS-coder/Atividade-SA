@@ -9,24 +9,23 @@
     <link rel="stylesheet" href="../assets/styles/style.css">
 </head>
 
-<body id="body-login">
-    <div class="login-box">
-        <img src="../assets/images/omnirail.png" alt="Logo" class="logo">
-        <p class="subtitle">Plataforma de Monitoramento Ferroviário</p>
+<body id="body-login" class="d-flex justify-content-center align-items-center vh-100" style="background-color: #0d0d16;">
+    <div class="login-box p-4 shadow" style="background-color: #e9ecef; border-radius: 10px; width: 350px;">
+        <img src="../assets/images/omnirail.png" alt="Logo" class="img-fluid mb-3">
+        <p class="subtitle text-muted small">Plataforma de Monitoramento Ferroviário</p>
 
-        <button class="btn btn-secondary w-100">Entrar</button>
+        <form>
+            <div class="mb-3 text-start">
+                <label class="form-label">E-mail</label>
+                <input type="email" class="form-control">
+            </div>
 
-        <div class="mb-3 text-start">
-            <label class="form-label">E-mail</label>
-            <input type="email" class="form-control">
-        </div>
+            <div class="mb-4 text-start">
+                <label class="form-label">Senha</label>
+                <input type="password" class="form-control">
+            </div>
 
-        <div class="mb-4 text-start">
-            <label class="form-label">Senha</label>
-            <input type="password" class="form-control">
-        </div>
-
-        <button class="btn btn-danger w-100">Entrar</button>
+            <button type="submit" class="btn btn-danger w-100">Entrar</button>
+        </form>
     </div>
 </body>
-</html>

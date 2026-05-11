@@ -128,3 +128,61 @@ data_fim
 tipo
 
 **Cada tabela deve possuir pelo menos três registros para testes e validações do sistema.**
+
+**Pesquisa sobre CRUD em PHP – Sistema OMNIRAIL**
+
+CRUD é um conjunto de operações usadas para manipular dados em sistemas com banco de dados. A sigla significa:
+
+* **Create** → Criar
+* **Read** → Ler
+* **Update** → Atualizar
+* **Delete** → Excluir
+
+No PHP, o CRUD é utilizado junto ao MySQL para cadastrar, visualizar, alterar e remover informações do sistema.
+
+**Aplicação no OMNIRAIL**
+
+**Create (Criar)**
+
+Usado para cadastrar:
+
+* Usuários;
+* Sensores;
+* Trens;
+* Relatórios.
+
+Exemplo: cadastro de sensores ferroviários.
+
+**Read (Ler)**
+
+Usado para visualizar:
+
+* Sensores cadastrados;
+* Dados em tempo real;
+* Relatórios e gráficos.
+
+Exemplo: tela de monitoramento da ferrovia.
+
+**Update (Atualizar)**
+
+Usado para alterar:
+
+* Status dos sensores;
+* Dados operacionais;
+* Informações dos trens.
+
+Exemplo: mudança do status para “Alerta” ou “Falha”.
+
+**Delete (Excluir)**
+
+Usado para remover:
+
+* Sensores;
+* Registros incorretos;
+* Dados antigos.
+
+Regra do sistema: sensores com dados registrados não podem ser excluídos.
+
+**Conclusão**
+
+O CRUD é fundamental no sistema OMNIRAIL, pois permite gerenciar todas as informações da ferrovia de forma organizada, segura e eficiente, utilizando PHP e MySQL para o controle dos dados em tempo real.
