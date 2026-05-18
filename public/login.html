@@ -14,18 +14,26 @@
         <img src="../assets/images/omnirail.png" alt="Logo" class="img-fluid mb-3">
         <p class="subtitle text-muted small">Plataforma de Monitoramento Ferroviário</p>
 
-        <form>
-            <div class="mb-3 text-start">
-                <label class="form-label">E-mail</label>
-                <input type="email" class="form-control">
-            </div>
+        <form id="loginForm">
 
-            <div class="mb-4 text-start">
-                <label class="form-label">Senha</label>
-                <input type="password" class="form-control">
-            </div>
+    <div class="mb-3 text-start">
+        <label class="form-label">E-mail</label>
+        <input type="email" class="form-control" id="email">
+    </div>
 
-            <button type="submit" class="btn btn-danger w-100">Entrar</button>
-        </form>
+    <div class="mb-4 text-start">
+        <label class="form-label">Senha</label>
+        <input type="password" class="form-control" id="senha">
+    </div>
+
+    <p id="erro" style="display:none; color:red;"></p>
+
+    <button type="submit" class="btn btn-danger w-100">
+        Entrar
+    </button>
+
+</form>
+
+<script src="../scripts/script.js"></script>
     </div>
 </body>
