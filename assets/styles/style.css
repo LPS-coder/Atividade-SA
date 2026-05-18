@@ -62,11 +62,13 @@
     color: white !important;
 }
 
-.sidebar{
+#sidebar{
     height:100vh;
+    width: 280px;
     position:fixed;
     left:0;
     top:0;
+
 }
 
 /* ========================== Dashboard =========================== */
@@ -74,4 +76,10 @@
 #body-dashboard .main{
     margin-left:280px;
     padding:30px;
+}
+
+#body-dashboard .btn-novo-sensor{
+    background:#E30613;
+    border:none;
+    color:rgb(250, 10, 10);
 }
