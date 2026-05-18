@@ -9,7 +9,7 @@
 </head>
 <body>
     
-<div class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark vh-100" style="width: 280px;">
+<div class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark vh-100 position-fixed" style="width: 280px;">
     <a href="/ceb/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none"> 
      <img src="../assets/images/logo.png" alt="Logo" width="40" height="40" class="me-2"> <span class="fs-4">OMNIRAIL</span> </a> 
     <hr> 
@@ -50,82 +50,38 @@
     </div> 
 </div>
 
-<div class="container-fluid p-5 bg-light" style="margin-left: 280px; margin-top: -100vh; min-height: 100vh;">
+ <div class="flex-grow-1 bg-light p-5"
+         style="margin-left: 280px; min-height: 100vh; width: calc(100% - 280px);">
 
-    <h1 class="fw-bold">Funcionarios Cadastrados</h1>
+        <h1 class="fw-bold">Funcionários Cadastrados</h1>
 
-    <p class="text-muted">
-        Preencha as informações abaixo para cadastrar um novo usuário ou administrador
-    </p>
+        <p class="text-muted">
+            Preencha as informações abaixo para cadastrar um novo usuário.
+        </p>
 
-    <div class="card p-4 mt-4 shadow-sm">
+        <div class="card p-4 mt-4 shadow-sm">
 
-        <div class="row">
+            <div class="row">
 
-            <div class="col-md-6 mb-3">
-                <label class="form-label fw-bold">Nome Completo</label>
-                <input type="text" class="form-control" placeholder="Digite o nome completo">
-            </div>
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">Nome Completo</label>
+                    <input type="text" class="form-control">
+                </div>
 
-            <div class="col-md-6 mb-3">
-                <label class="form-label fw-bold">E-mail</label>
-                <input type="email" class="form-control" placeholder="Digite o E-mail">
-            </div>
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">E-mail</label>
+                    <input type="email" class="form-control">
+                </div>
 
-            <div class="col-md-6 mb-3">
-                <label class="form-label fw-bold">CPF</label>
-                <input type="text" class="form-control" placeholder="Digite o CPF">
-            </div>
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">CPF</label>
+                    <input type="text" class="form-control">
+                </div>
 
-            <div class="col-md-6 mb-3">
-                <label class="form-label fw-bold">Confirmar Senha</label>
-                <input type="password" class="form-control" placeholder="Confirme a senha">
-            </div>
-
-            <div class="col-md-6 mb-3">
-                <label class="form-label fw-bold">Senha</label>
-                <input type="password" class="form-control" placeholder="Digite senha forte">
-            </div>
-
-        </div>
-
-    </div>
-
-    <h2 class="text-center fw-bold mt-5">Permissões</h2>
-
-    <div class="row mt-4">
-
-        <div class="col-md-7">
-
-            <div class="card border-danger p-4 mb-4">
-                <h3>Administrador</h3>
-
-                <p class="text-muted">
-                    Acesso completo ao sistema, com permissão para gerenciar usuários, sensores, trens e relatórios.
-                </p>
-            </div>
-
-            <div class="card p-4">
-                <h3>Usuário</h3>
-
-                <p class="text-muted">
-                    Acesso restrito ao sistema, com permissão somente para visualizar dados e relatórios.
-                </p>
-            </div>
-
-        </div>
-
-        <div class="col-md-5">
-
-            <div class="card p-4 text-center">
-
-                <img src="https://cdn-icons-png.flaticon.com/512/149/149071.png"
-                     width="180"
-                     class="mx-auto">
-
-                <button class="btn btn-danger mt-4">
-                    Gerar Relatório
-                </button>
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">Senha</label>
+                    <input type="password" class="form-control">
+                </div>
 
             </div>
 
@@ -135,7 +91,6 @@
 
 </div>
 
-</div>
 </body>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </html>
