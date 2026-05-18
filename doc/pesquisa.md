@@ -186,3 +186,53 @@ Regra do sistema: sensores com dados registrados não podem ser excluídos.
 **Conclusão**
 
 O CRUD é fundamental no sistema OMNIRAIL, pois permite gerenciar todas as informações da ferrovia de forma organizada, segura e eficiente, utilizando PHP e MySQL para o controle dos dados em tempo real.
+
+
+**PESQUISA SOBRE O SCRUM E SUAS FUNCIONALIDADES**
+
+**O que é o SCRUM**
+ 
+ É uma estrutura de trabalho para gerenciar tarefas complexas em tarefas menores, ajudando os devs envolvidos a conseguir fazer um melhor gerenciamento de tempo para melhor desenvolvimento do site, eles geram valor ao tempo de trabalho do funcionário, adaptando mudanças pequenas, mas necessárias para o desenvolvimento. 
+
+ **FUNCIONABILIDADES**
+
+ **Product Owner**
+ 
+ É o responsável por maximizar o valor do produto e o trabalho da equipe de desenvolvimento. Ele atua como o principal elo entre o negócio, os clientes e o time, garantindo que o produto atenda às necessidades reais de quem vai utilizá-lo, sendo mais didático, ele funciona como uma secretária, que prioriza o que primeiro deve ser feito do código, juntamente do que o usuário precisa receber.
+
+ **Scrum Master**
+
+ O Scrum Master é o facilitador de metodologias ágeis em uma equipe. Seu papel principal é garantir que o grupo siga os valores, princípios e práticas do framework Scrum. Ele atua como um líder servidor e coach, ajudando a remover obstáculos para que os desenvolvedores foquem na execução.
+
+**Development Team**
+
+ É o grupo de profissionais responsáveis na faixa de 6 a 10 profissionais por criar o incremento do produto a cada Sprint. Eles são multifuncionais e autogerenciáveis, possuindo todas as habilidades técnicas necessárias para transformar os requisitos do Product Owner em um produto pronto e utilizável,  eles decidem como o trabalho será realizado, sem ordens externas de gerentes ou líderes de projeto.
+
+ **Sprint**
+
+ O Sprint é o coração da metodologia Scrum. Trata-se de um ciclo de trabalho com prazo fixo (de 1 semana a no máximo 1 mês) no qual a equipe desenvolve e entrega um incremento do produto pronto e utilizável.
+ Cada Sprint funciona como um "mini-projeto" independente. Durante esse período, o time transforma as prioridades do backlog em algo com valor real para o negócio. Uma nova Sprint começa imediatamente após o término da anterior, sem interrupções.
+
+ **Sprint Planning**
+
+ O Sprint Planning é a reunião que inicia cada ciclo de trabalho (Sprint) no framework Scrum. O objetivo é alinhar a equipe e definir o que será feito durante aquele período e como esse trabalho será entregue.
+
+**Daily Scrum**
+
+ O Daily Scrum (ou reunião diária) é um evento rápido de 15 minutos realizado todos os dias úteis por desenvolvedores para alinhar o trabalho, inspecionar o progresso em direção à Meta da Sprint e adaptar o planejamento das próximas 24 horas.
+ O principal objetivo dessa cerimônia é manter a equipe inteira sincronizada e identificar quaisquer impedimentos logo cedo para manter o foco e a agilidade, a dinâmica do Daily Scrum costuma girar em torno de três perguntas fundamentais.
+
+**O Sprint Review**
+
+ O Sprint Review é uma reunião colaborativa que ocorre no final de cada Sprint. Seu objetivo principal é inspecionar o incremento de trabalho concluído e coletar feedback das partes interessadas para orientar os próximos passos do projeto.
+ O evento foca na demonstração prática, a equipe apresenta o trabalho realizado rodando o produto ou sistema, e não apenas através de apresentações de slides.
+
+**Sprint Retrospective**
+
+ O Sprint Retrospective é uma cerimônia do Scrum em que a equipe avalia o último ciclo de trabalho para identificar pontos fortes e oportunidades de melhoria. O foco não é o produto final, mas sim os processos, as ferramentas, a comunicação e as interações entre os membros.
+ Inspecionar o trabalho recente e criar um plano de melhorias concretas para implementar na próxima Sprint, promovendo a melhoria contínua.
+
+ **Benefícios do uso do SCRUM em projetos de software.**
+
+ O scrum ajuda os projetos de software a serem mais organizados e eficientes, melhorando a comunicação entre a equipe e dividindo o trabalho em pequenas etapas.Isso facilita acompanhar o progresso, corrigir problemas mais rápido e manter todos focados nos objetivos do projeto.
+ Além disso, o método permite adaptar mudanças sem grandes dificuldades, tornando o desenvolvimento mais flexível. Como partes do sistema são entregues aos poucos, o cliente pode acompanhar o resultado e dar opiniões durante o processo, ajudando a criar um software mais útil e de melhor qualidade.
