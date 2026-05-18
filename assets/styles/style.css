@@ -81,5 +81,6 @@
 #body-dashboard .btn-novo-sensor{
     background:#E30613;
     border:none;
-    color:rgb(250, 10, 10);
+    color:rgb(255, 255, 255);
+    box-shadow:none !important;
 }
