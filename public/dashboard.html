@@ -7,8 +7,8 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 </head>
-<body>
-    <div class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark vh-100" style="width: 280px;">
+<body id="body-dashboard">
+    <div id="sidebar" class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark vh-100" style="width: 280px;">
     <a href="/ceb/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none"> 
      <img src="../assets/images/logo.png" alt="Logo" width="40" height="40" class="me-2"> <span class="fs-4">OMNIRAIL</span> </a> 
     <hr> 
@@ -48,6 +48,165 @@
      </ul> 
     </div> 
    </div>
+
+   <div class="main">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <p class="text-secondary mb-0">
+                Bem-vindo de volta,
+            </p>
+            <h1 class="fw-bold">
+                Artur Lopes Garcia
+            </h1>
+        </div>
+
+        <button class="btn btn-danger px-4 py-2 rounded-3 fw-bold">
+            <i class="bi bi-plus-lg me-2"></i>
+            Novo Sensor
+        </button>
+
+    </div>
+    <div class="row g-4">
+        <div class="col-md-3">
+            <div class="card shadow-sm border-0 rounded-4 p-3">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <p class="text-secondary mb-1">
+                            Trens
+                        </p>
+                        <h1 class="fw-bold">
+                            3
+                        </h1>
+                    </div>
+                    <i class="bi bi-train-front-fill text-danger fs-1"></i>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card shadow-sm border-0 rounded-4 p-3">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <p class="text-secondary mb-1">
+                            Sensores
+                        </p>
+                        <h1 class="fw-bold">
+                            10
+                        </h1>
+                    </div>
+                    <i class="bi bi-broadcast text-success fs-1"></i>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card shadow-sm border-0 rounded-4 p-3">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <p class="text-secondary mb-1">
+                            Leituras
+                        </p>
+                        <h1 class="fw-bold">
+                            9
+                        </h1>
+                    </div>
+                    <i class="bi bi-activity text-warning fs-1"></i>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card shadow-sm border-0 rounded-4 p-3">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <p class="text-secondary mb-1">
+                            Alertas
+                        </p>
+                        <h1 class="fw-bold">
+                            2
+                        </h1>
+                    </div>
+                    <i class="bi bi-exclamation-triangle text-danger fs-1"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card mt-4 border-0 shadow-sm rounded-4 p-4">
+        <h4 class="fw-bold mb-4">
+            Sensores Cadastrados
+        </h4>
+        <table class="table align-middle">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nome</th>
+                    <th>Localização</th>
+                    <th>Tipo</th>
+                    <th>Trem</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>c9902840</td>
+                    <td>
+                        <strong>Sensor Peso LOC-002</strong>
+                    </td>
+                    <td>Vagão 7</td>
+                    <td>
+                        <span class="badge bg-primary">
+                            Peso
+                        </span>
+                    </td>
+                    <td>Locomotiva Gamma</td>
+                    <td>
+                        <i class="bi bi-eye me-3"></i>
+                        <i class="bi bi-trash text-danger"></i>
+                    </td>
+                </tr>
+                <tr>
+                    <td>82101cd5</td>
+                    <td>
+                        <strong>
+                            Sensor Velocidade LOC-002
+                        </strong>
+                    </td>
+                    <td>Cabine Frontal</td>
+                    <td>
+                        <span class="badge bg-danger">
+                            Velocidade
+                        </span>
+                    </td>
+                    <td>Locomotiva Beta</td>
+                    <td>
+                        <i class="bi bi-eye me-3"></i>
+                        <i class="bi bi-trash text-danger"></i>
+                    </td>
+                </tr>
+                <tr>
+                    <td>f11a64fd</td>
+                    <td>
+                        <strong>
+                            Sensor Temperatura LOC-001
+                        </strong>
+                    </td>
+                    <td>Motor</td>
+                    <td>
+                        <span class="badge bg-warning text-dark">
+                            Temperatura
+                        </span>
+                    </td>
+                    <td>Locomotiva Alpha</td>
+                    <td>
+                        <i class="bi bi-eye me-3"></i>
+                        <i class="bi bi-trash text-danger"></i>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
 </body>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </html>

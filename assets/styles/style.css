@@ -61,3 +61,17 @@
     background-color: #E30613 !important;
     color: white !important;
 }
+
+.sidebar{
+    height:100vh;
+    position:fixed;
+    left:0;
+    top:0;
+}
+
+/* ========================== Dashboard =========================== */
+
+#body-dashboard .main{
+    margin-left:280px;
+    padding:30px;
+}
