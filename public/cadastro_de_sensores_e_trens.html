@@ -48,6 +48,203 @@
      </ul> 
     </div> 
    </div>
+
+    <div class="bg-white border-bottom px-4 py-3 flex-shrink-0">
+      <h1 class="fs-4 fw-bold mb-0" style="color:#1a1d23;">Cadastro de sensores & Trens</h1>
+      <p class="text-secondary mb-0" style="font-size:13px;">Gerencie a frota e os sensores IoT instalados.</p>
+    </div>
+ 
+    <!-- Área de scroll -->
+    <div class="scroll-area px-4 py-4 d-flex flex-column gap-4">
+ 
+      <!-- ─── FORMULÁRIOS ─── -->
+      <div class="row g-4">
+ 
+        <!-- Novo Sensor -->
+        <div class="col-md-6">
+          <div class="card border rounded-3 h-100">
+            <div class="card-body p-4">
+              <h5 class="card-title fw-bold d-flex align-items-center gap-2 mb-4">
+                <i class="bi bi-broadcast card-title-icon fs-5"></i>
+                Novo Sensor
+              </h5>
+ 
+              <div class="mb-3">
+                <label class="form-label fw-medium" style="font-size:12.5px;">Nome do sensor</label>
+                <input type="text" class="form-control form-control-sm" id="sensorNome">
+              </div>
+ 
+              <div class="mb-3">
+                <label class="form-label fw-medium" style="font-size:12.5px;">Localização</label>
+                <input type="text" class="form-control form-control-sm" id="sensorLocalizacao">
+              </div>
+ 
+              <div class="mb-3">
+                <label class="form-label fw-medium" style="font-size:12.5px;">Tipo de dado monitorado</label>
+                <select class="form-select form-select-sm" id="sensorTipo">
+                  <option value="Velocidade" selected>Velocidade</option>
+                  <option value="Temperatura">Temperatura</option>
+                  <option value="Energia">Energia</option>
+                  <option value="Falha">Falha</option>
+                  <option value="Localização">Localização</option>
+                </select>
+              </div>
+ 
+              <div class="mb-4">
+                <label class="form-label fw-medium" style="font-size:12.5px;">Trem vinculado</label>
+                <select class="form-select form-select-sm" id="sensorTrem">
+                  <option value="" selected disabled>Selecione</option>
+                  <option value="Locomotiva Alpha">Locomotiva Alpha (LOC-001)</option>
+                  <option value="Locomotiva Beta">Locomotiva Beta (LOC-002)</option>
+                  <option value="Locomotiva Gamma">Locomotiva Gamma (LOC-003)</option>
+                </select>
+              </div>
+ 
+              <button class="btn btn-cadastrar-sensor btn-danger w-100 d-flex align-items-center justify-content-center gap-2 fw-semibold" onclick="cadastrarSensor()">
+                <i class="bi bi-plus-lg"></i>
+                Cadastrar Sensor
+              </button>
+            </div>
+          </div>
+        </div>
+
+         <!-- Novo Trem -->
+        <div class="col-md-6">
+          <div class="card border rounded-3 h-100">
+            <div class="card-body p-4">
+              <h5 class="card-title fw-bold mb-4" style="color:#1a1d23;">Novo Trem</h5>
+ 
+              <div class="mb-3">
+                <label class="form-label fw-medium" style="font-size:12.5px;">Nome</label>
+                <input type="text" class="form-control form-control-sm" id="tremNome">
+              </div>
+ 
+              <div class="mb-3">
+                <label class="form-label fw-medium" style="font-size:12.5px;">Código</label>
+                <input type="text" class="form-control form-control-sm" id="tremCodigo">
+              </div>
+ 
+              <div class="mb-4">
+                <label class="form-label fw-medium" style="font-size:12.5px;">Modelo</label>
+                <input type="text" class="form-control form-control-sm" id="tremModelo">
+              </div>
+ 
+              <button class="btn btn-outline-dark w-100 d-flex align-items-center justify-content-center gap-2 fw-semibold mt-auto" onclick="cadastrarTrem()">
+                <i class="bi bi-plus-lg"></i>
+                Cadastrar Trem
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- FIM DO FORMULÁRIO -->
+
+       <div class="card border rounded-3">
+        <div class="card-body p-0">
+          <div class="px-4 py-3 border-bottom">
+            <h5 class="fw-bold mb-0" style="font-size:15px; color:#1a1d23;">Sensores da Ferrovia</h5>
+          </div>
+          <div class="table-responsive">
+            <table class="table table-hover mb-0">
+              <thead>
+                <tr>
+                  <th class="px-4 py-3">ID</th>
+                  <th class="px-3 py-3">Nome</th>
+                  <th class="px-3 py-3">Localização</th>
+                  <th class="px-3 py-3">Tipo</th>
+                  <th class="px-3 py-3">Trem</th>
+                  <th class="px-3 py-3">Ações</th>
+                </tr>
+              </thead>
+              <tbody id="sensorsTable">
+                <tr>
+                  <td class="px-4 td-id">c9902840</td>
+                  <td class="px-3">Sensor Barra do Sul</td>
+                  <td class="px-3">Vagão 7</td>
+                  <td class="px-3"><span class="badge text-bg-warning">Temperatura</span></td>
+                  <td class="px-3">Locomotiva Gamma</td>
+                  <td class="px-3"><button class="btn btn-sm btn-link delete-btn p-0" onclick="excluirSensor(this)"><i class="bi bi-trash"></i></button></td>
+                </tr>
+                <tr>
+                  <td class="px-4 td-id">82101cd5</td>
+                  <td class="px-3">Sensor Velocidade LOC-002</td>
+                  <td class="px-3">Cabine Frontal</td>
+                  <td class="px-3"><span class="badge text-bg-primary">Velocidade</span></td>
+                  <td class="px-3">Locomotiva Beta</td>
+                  <td class="px-3"><button class="btn btn-sm btn-link delete-btn p-0" onclick="excluirSensor(this)"><i class="bi bi-trash"></i></button></td>
+                </tr>
+                <tr>
+                  <td class="px-4 td-id">ba295b5d</td>
+                  <td class="px-3">Sensor Velocidade LOC-003</td>
+                  <td class="px-3">Cabine Frontal</td>
+                  <td class="px-3"><span class="badge text-bg-primary">Velocidade</span></td>
+                  <td class="px-3">Locomotiva Gamma</td>
+                  <td class="px-3"><button class="btn btn-sm btn-link delete-btn p-0" onclick="excluirSensor(this)"><i class="bi bi-trash"></i></button></td>
+                </tr>
+                <tr>
+                  <td class="px-4 td-id">ff1a64fd</td>
+                  <td class="px-3">Sensor Temperatura LOC-001</td>
+                  <td class="px-3">Motor</td>
+                  <td class="px-3"><span class="badge text-bg-warning">Temperatura</span></td>
+                  <td class="px-3">Locomotiva Alpha</td>
+                  <td class="px-3"><button class="btn btn-sm btn-link delete-btn p-0" onclick="excluirSensor(this)"><i class="bi bi-trash"></i></button></td>
+                </tr>
+                <tr>
+                  <td class="px-4 td-id">61cb4ac8</td>
+                  <td class="px-3">Sensor Temperatura LOC-002</td>
+                  <td class="px-3">Motor</td>
+                  <td class="px-3"><span class="badge text-bg-warning">Temperatura</span></td>
+                  <td class="px-3">Locomotiva Beta</td>
+                  <td class="px-3"><button class="btn btn-sm btn-link delete-btn p-0" onclick="excluirSensor(this)"><i class="bi bi-trash"></i></button></td>
+                </tr>
+                <tr>
+                  <td class="px-4 td-id">cdc72424</td>
+                  <td class="px-3">Sensor Velocidade LOC-001</td>
+                  <td class="px-3">Cabine Frontal</td>
+                  <td class="px-3"><span class="badge text-bg-primary">Velocidade</span></td>
+                  <td class="px-3">Locomotiva Alpha</td>
+                  <td class="px-3"><button class="btn btn-sm btn-link delete-btn p-0" onclick="excluirSensor(this)"><i class="bi bi-trash"></i></button></td>
+                </tr>
+                <tr>
+                  <td class="px-4 td-id">20d9fa79</td>
+                  <td class="px-3">Sensor Energia LOC-001</td>
+                  <td class="px-3">Compartimento Elétrico</td>
+                  <td class="px-3"><span class="badge text-bg-success">Energia</span></td>
+                  <td class="px-3">Locomotiva Alpha</td>
+                  <td class="px-3"><button class="btn btn-sm btn-link delete-btn p-0" onclick="excluirSensor(this)"><i class="bi bi-trash"></i></button></td>
+                </tr>
+                <tr>
+                  <td class="px-4 td-id">05145dda</td>
+                  <td class="px-3">Sensor Energia LOC-002</td>
+                  <td class="px-3">Compartimento Elétrico</td>
+                  <td class="px-3"><span class="badge text-bg-success">Energia</span></td>
+                  <td class="px-3">Locomotiva Beta</td>
+                  <td class="px-3"><button class="btn btn-sm btn-link delete-btn p-0" onclick="excluirSensor(this)"><i class="bi bi-trash"></i></button></td>
+                </tr>
+                <tr>
+                  <td class="px-4 td-id">5e9e7692</td>
+                  <td class="px-3">Sensor Energia LOC-003</td>
+                  <td class="px-3">Compartimento Elétrico</td>
+                  <td class="px-3"><span class="badge text-bg-success">Energia</span></td>
+                  <td class="px-3">Locomotiva Gamma</td>
+                  <td class="px-3"><button class="btn btn-sm btn-link delete-btn p-0" onclick="excluirSensor(this)"><i class="bi bi-trash"></i></button></td>
+                </tr>
+                <tr>
+                  <td class="px-4 td-id">a2097a96</td>
+                  <td class="px-3">Sensor Temperatura LOC-003</td>
+                  <td class="px-3">Motor</td>
+                  <td class="px-3"><span class="badge text-bg-warning">Temperatura</span></td>
+                  <td class="px-3">Locomotiva Gamma</td>
+                  <td class="px-3"><button class="btn btn-sm btn-link delete-btn p-0" onclick="excluirSensor(this)"><i class="bi bi-trash"></i></button></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>  
+    </div>
+  </div>
+</div>
   
 </body>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
