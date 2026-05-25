@@ -188,6 +188,8 @@ Regra do sistema: sensores com dados registrados não podem ser excluídos.
 O CRUD é fundamental no sistema OMNIRAIL, pois permite gerenciar todas as informações da ferrovia de forma organizada, segura e eficiente, utilizando PHP e MySQL para o controle dos dados em tempo real.
 
 
+---------------//-------------------------------//--------------------------------//---------------------------//-------------------------
+
 **PESQUISA SOBRE O SCRUM E SUAS FUNCIONALIDADES**
 
 **O que é o SCRUM**
