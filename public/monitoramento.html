@@ -56,7 +56,7 @@
                 Dados ao vivo da locomotiva LOC-001
             </p>
             <h1 class="fw-bold">
-                Monitoramento em Tempo Real 
+                Monitoramento 
             </h1>
         </div>
 
@@ -159,7 +159,7 @@
 
     <div class="row g-4">
 
-        <!-- Gráfico -->
+        
         <div class="col-lg-8">
             <div class="border rounded-4 p-3 bg-light h-100">
 
@@ -172,7 +172,7 @@
             </div>
         </div>
 
-        <!-- Mapa -->
+        
         <div class="col-lg-4">
             <div class="border rounded-4 p-3 bg-light h-100">
 
@@ -188,7 +188,7 @@
             </div>
         </div>
 
-        <!-- Gráfico inferior -->
+        
         <div class="col-12">
             <div class="border rounded-4 p-3 bg-light">
 
@@ -204,11 +204,11 @@
     </div>
 </div>
 
-<!-- CHART JS -->
+
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <script>
-    // gráfico velocidade
+
     new Chart(document.getElementById('graficoLinha'), {
         type: 'line',
 
@@ -237,7 +237,6 @@
         }
     });
 
-    // gráfico energia
     new Chart(document.getElementById('graficoEnergia'), {
         type: 'line',
 
@@ -265,14 +264,13 @@
     });
 </script>
 
-<!-- LEAFLET -->
 <link rel="stylesheet"
 href="https://unpkg.com/leaflet/dist/leaflet.css"/>
 
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 
 <script>
-    // mapa
+    
     var map = L.map('map').setView([-23.5505, -46.6333], 11);
 
     L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
