@@ -238,3 +238,43 @@ O CRUD é fundamental no sistema OMNIRAIL, pois permite gerenciar todas as infor
 
  O scrum ajuda os projetos de software a serem mais organizados e eficientes, melhorando a comunicação entre a equipe e dividindo o trabalho em pequenas etapas.Isso facilita acompanhar o progresso, corrigir problemas mais rápido e manter todos focados nos objetivos do projeto.
  Além disso, o método permite adaptar mudanças sem grandes dificuldades, tornando o desenvolvimento mais flexível. Como partes do sistema são entregues aos poucos, o cliente pode acompanhar o resultado e dar opiniões durante o processo, ajudando a criar um software mais útil e de melhor qualidade.
+
+
+=====================//===========================================//===========================================================//================================================
+
+ **PESQUISA SOBRE O XAMPP E SUA UTILIZAÇÃO NO DESENVOLVIMENTO DE APLICAÇÕES PHP**
+
+**O que é o XAMPP**
+
+O XAMPP é um pacote de software que reúne ferramentas essenciais para criar um ambiente de desenvolvimento local no computador. Ele é muito usado no desenvolvimento de aplicações PHP, porque permite testar sites e sistemas sem precisar publicar tudo na internet logo no início. Seu nome vem da combinação de componentes como Apache, MariaDB/MySQL e PHP, facilitando a criação de um servidor local para testes e aprendizado.
+
+**FUNCIONALIDADES**
+
+**Apache**
+
+O Apache é o servidor web do XAMPP. Ele é responsável por receber as requisições do navegador e exibir as páginas criadas em PHP, funcionando como a base para rodar aplicações web no ambiente local.
+
+**PHP**
+
+O PHP é a linguagem de programação mais utilizada no XAMPP para criar sites dinâmicos, sistemas de login, cadastros, formulários e outras funções interativas. Ele permite que o desenvolvedor teste o código antes de colocá-lo em um servidor real.
+
+**MariaDB/MySQL**
+
+O banco de dados do XAMPP serve para armazenar informações como usuários, produtos, mensagens e registros em geral. Ele é muito importante em aplicações PHP, pois permite que o sistema grave e consulte dados com facilidade.
+
+**phpMyAdmin**
+
+O phpMyAdmin é uma ferramenta visual que ajuda a gerenciar bancos de dados de forma prática. Com ele, o desenvolvedor pode criar tabelas, editar registros e fazer consultas sem precisar escrever comandos complexos toda hora.
+
+**Painel de Controle do XAMPP**
+
+O painel de controle é onde o usuário inicia e para os serviços do pacote, como Apache e MySQL. Ele torna o uso mais simples, pois reúne tudo em um único lugar e facilita a organização do ambiente de desenvolvimento.
+
+**Utilização no desenvolvimento de aplicações PHP**
+
+O XAMPP é muito utilizado porque permite que o programador desenvolva e teste suas aplicações PHP diretamente no computador, sem depender de um servidor online. Assim, é possível criar páginas, conectar com banco de dados, verificar erros e ajustar o sistema com mais segurança. Ele também é muito útil para estudos, projetos escolares e desenvolvimento de pequenos sistemas, já que oferece um ambiente completo e fácil de instalar.
+
+**Benefícios do uso do XAMPP no desenvolvimento PHP**
+
+O XAMPP ajuda bastante no desenvolvimento de aplicações PHP porque deixa os testes mais rápidos e práticos. Ele evita que o programador precise configurar cada ferramenta separadamente, economizando tempo e reduzindo erros. Além disso, permite trabalhar offline, testar o sistema com segurança e corrigir problemas antes da publicação final, tornando o processo de desenvolvimento mais eficiente e organizado.
+
