@@ -12,7 +12,7 @@ Ele é utilizada para conectar, consultar e gerenciar múltiplos bancos de dados
 
 **Quais são suas principais características;** 
 
-
+Os fios de PDO são filamentos sintéticos e reabsorvíveis biocompatíveis que ativam o estímulo de colágeno, promovendo efeito lifting e resultados duradouros. O procedimento é realizado em consultório com anestesia local e oferece rápida recuperação. Para mais informações, consulte fontes especializadas em estética.
 
 **Diferenças entre PDO e MySQLi;** 
 
@@ -38,7 +38,7 @@ PDO: Possui desempenho similar, mas com uma pequena sobrecarga por causa da cama
 
 **Vantagens e desvantagens de utilizar PDO;**
 
-
+As principais vantagens dos fios de PDO são a segurança elevada por ser um material 100% biocompatível, o estímulo natural de colágeno que trata a flacidez de dentro para fora, a recuperação rápida com retorno imediato às atividades e a versatilidade de tratar desde rugas finas até flacidez leve.Por outro lado, as desvantagens incluem os resultados temporários que duram de 12 a 24 meses e exigem manutenção, o efeito lifting sutil que não substitui uma cirurgia plástica, o desconforto inicial como inchaço e hematomas, e a dependência técnica da habilidade do profissional para evitar irregularidades na pele.Se quiser saber mais, me diga se prefere entender os cuidados após a aplicação ou as principais contraindicações do procedimento.
 
 **O que são Prepared Statements e por que são importantes;**
 
