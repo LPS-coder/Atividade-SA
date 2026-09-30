@@ -1,3 +1,51 @@
+<?php
+
+require_once "../database/conexao.php";
+
+$mensagem = "";
+$erro = "";
+
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+
+    $nome = trim($_POST["nome"]);
+    $email = trim($_POST["email"]);
+    $cpf = trim($_POST["cpf"]);
+    $senha = $_POST["senha"];
+
+    if ($nome === "" || $email === "" || $cpf === "" || $senha === "") {
+
+        $erro = "Preencha todos os campos.";
+
+    } else {
+
+        $senhaHash = password_hash($senha, PASSWORD_DEFAULT);
+
+        $sql = "INSERT INTO funcionarios (nome, cpf, email, senha) VALUES (?, ?, ?, ?)";
+
+        $stmt = $conn->prepare($sql);
+
+        $stmt->bind_param("ssss", $nome, $cpf, $email, $senhaHash);
+
+        if ($stmt->execute()) {
+
+            $mensagem = "Usuário cadastrado com sucesso.";
+
+        } else {
+
+            if ($stmt->errno == 1062) {
+                $erro = "CPF ou e-mail já cadastrado.";
+            } else {
+                $erro = "Erro ao cadastrar usuário.";
+            }
+
+        }
+
+        $stmt->close();
+    }
+}
+
+?>
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -61,29 +109,49 @@
 
         <div class="card p-4 mt-4 shadow-sm">
 
-            <div class="row">
+            <form method="POST">
 
-                <div class="col-md-6 mb-3">
-                    <label class="form-label">Nome Completo</label>
-                    <input type="text" class="form-control">
+                <div class="row">
+
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label">Nome Completo</label>
+                        <input type="text" name="nome" class="form-control" required>
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label">E-mail</label>
+                        <input type="email" name="email" class="form-control" required>
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label">CPF</label>
+                        <input type="text" name="cpf" class="form-control" required>
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label">Senha</label>
+                        <input type="password" name="senha" class="form-control" required>
+                    </div>
+
                 </div>
 
-                <div class="col-md-6 mb-3">
-                    <label class="form-label">E-mail</label>
-                    <input type="email" class="form-control">
-                </div>
+                <?php if ($mensagem): ?>
+                    <div class="alert alert-success mt-3">
+                        <?= htmlspecialchars($mensagem) ?>
+                    </div>
+                <?php endif; ?>
 
-                <div class="col-md-6 mb-3">
-                    <label class="form-label">CPF</label>
-                    <input type="text" class="form-control">
-                </div>
+                <?php if ($erro): ?>
+                    <div class="alert alert-danger mt-3">
+                        <?= htmlspecialchars($erro) ?>
+                    </div>
+                <?php endif; ?>
 
-                <div class="col-md-6 mb-3">
-                    <label class="form-label">Senha</label>
-                    <input type="password" class="form-control">
-                </div>
+                <button type="submit" class="btn btn-danger mt-2">
+                    Cadastrar Usuário
+                </button>
 
-            </div>
+            </form>
 
         </div>
 
