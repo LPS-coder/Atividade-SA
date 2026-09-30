@@ -2,8 +2,9 @@
 
 $host = "localhost";
 $usuario = "root";
-$senha = "";
-$banco = "omnirail";
+$senha = "root";
+$banco = "xampp";
+// PORTA DO BANCO: 3309 
 
 $conn = new mysqli($host, $usuario, $senha, $banco);
 
