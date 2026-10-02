@@ -2,35 +2,62 @@
 
 session_start();
 
-require_once "../database/conexao.php";
+require_once "../infra/conexao.php";
 
 $erro = "";
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
-    $email = $_POST["email"];
-    $senha = $_POST["senha"];
+    $email = trim($_POST["email"] ?? "");
+    $senha = $_POST["senha"] ?? "";
 
-    $sql = "SELECT * FROM usuario WHERE email_usuario = ?";
+    if ($email === "" || $senha === "") {
 
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("s", $email);
-    $stmt->execute();
+        $erro = "Preencha todos os campos.";
 
-    $resultado = $stmt->get_result();
+    } else {
 
-    if ($resultado->num_rows === 1) {
+        $sql = "SELECT
+                    id_funcionario,
+                    nome_funcionario,
+                    email_funcionario,
+                    senha_funcionario,
+                    tipo_usuario
+                FROM funcionario
+                WHERE email_funcionario = ?";
 
-        $usuario = $resultado->fetch_assoc();
+        $stmt = $conn->prepare($sql);
 
-        if (password_verify($senha, $usuario["senha_usuario"])) {
+        if (!$stmt) {
+            die("Erro na consulta: " . $conn->error);
+        }
 
-            $_SESSION["id_usuario"] = $usuario["id_usuario"];
-            $_SESSION["nome_usuario"] = $usuario["nome_usuario"];
-            $_SESSION["email_usuario"] = $usuario["email_usuario"];
+        $stmt->bind_param("s", $email);
+        $stmt->execute();
 
-            header("Location: dashboard.html");
-            exit;
+        $resultado = $stmt->get_result();
+
+        if ($resultado->num_rows === 1) {
+
+            $usuario = $resultado->fetch_assoc();
+
+            if (password_verify($senha, $usuario["senha_funcionario"])) {
+
+                session_regenerate_id(true);
+
+                $_SESSION["id_funcionario"] = $usuario["id_funcionario"];
+                $_SESSION["nome_funcionario"] = $usuario["nome_funcionario"];
+                $_SESSION["email_funcionario"] = $usuario["email_funcionario"];
+                $_SESSION["tipo_usuario"] = $usuario["tipo_usuario"];
+
+                header("Location: dashboard.php");
+                exit;
+
+            } else {
+
+                $erro = "E-mail ou senha incorretos!";
+
+            }
 
         } else {
 
@@ -38,13 +65,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
         }
 
-    } else {
-
-        $erro = "E-mail ou senha incorretos!";
-
+        $stmt->close();
     }
-
-    $stmt->close();
 }
 
 ?>
@@ -108,10 +130,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
             </div>
 
-            <?php if ($erro != ""): ?>
+            <?php if ($erro !== ""): ?>
 
                 <p id="erro" style="color: red;">
-                    <?php echo $erro; ?>
+                    <?php echo htmlspecialchars($erro); ?>
                 </p>
 
             <?php endif; ?>

@@ -58,7 +58,7 @@
                 <ul class="nav nav-pills flex-column gap-1 mb-auto">
 
                     <li class="nav-item">
-                        <a href="dashboard.html"
+                        <a href="dashboard.php"
                             class="nav-link text-white">
 
                             <i class="bi bi-speedometer2 me-2"></i>
@@ -68,7 +68,7 @@
 
 
                     <li>
-                        <a href="cadastro_de_sensores_e_trens.html"
+                        <a href="cadastro_de_sensores_e_trens.php"
                             class="nav-link text-white">
 
                             <i class="bi bi-broadcast me-2"></i>
@@ -78,7 +78,7 @@
 
 
                     <li>
-                        <a href="monitoramento.html"
+                        <a href="monitoramento.php"
                             class="nav-link text-white">
 
                             <i class="bi bi-activity me-2"></i>
@@ -88,7 +88,7 @@
 
 
                     <li>
-                        <a href="relatorios.html"
+                        <a href="relatorios.php"
                             class="nav-link active">
 
                             <i class="bi bi-file-earmark-text me-2"></i>
@@ -98,7 +98,7 @@
 
 
                     <li>
-                        <a href="cadastro_user.html"
+                        <a href="cadastro_user.php"
                             class="nav-link text-white">
 
                             <i class="bi bi-people me-2"></i>
@@ -134,13 +134,8 @@
                     <ul class="dropdown-menu dropdown-menu-dark shadow">
 
                         <li>
-                            <a class="dropdown-item"
-                                href="../public/login.html">
-
-                                Sair
-
-                            </a>
-                        </li>
+                            <a class="dropdown-item" href="logout.php">Sair</a>
+                        </li> 
                     </ul>
                 </div>
             </div>

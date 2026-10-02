@@ -1,0 +1,251 @@
+<?php
+session_start();
+
+require_once "../infra/conexao.php";
+
+if (
+    !isset($_SESSION["id_funcionario"]) ||
+    !isset($_SESSION["tipo_usuario"]) ||
+    $_SESSION["tipo_usuario"] !== "Administrador"
+) {
+    header("Location: login.php");
+    exit;
+}
+
+$mensagem = "";
+$erro = "";
+
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+
+    $nome = trim($_POST["nome"] ?? "");
+    $cpf = preg_replace("/\D/", "", $_POST["cpf"] ?? "");
+    $email = trim($_POST["email"] ?? "");
+    $senha = $_POST["senha"] ?? "";
+    $tipo_usuario = $_POST["tipo_usuario"] ?? "";
+
+if (
+    $nome === "" ||
+    $cpf === "" ||
+    $email === "" ||
+    $senha === "" ||
+    $tipo_usuario === ""
+) {
+    $erro = "Preencha todos os campos.";
+} elseif (strlen($cpf) !== 11) {
+    $erro = "O CPF deve conter 11 números.";
+} elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+    $erro = "Informe um e-mail válido.";
+} elseif (!in_array($tipo_usuario, ["Administrador", "Operador"])) {
+    $erro = "Tipo de usuário inválido.";
+} else {
+
+    $senha_hash = password_hash($senha, PASSWORD_DEFAULT);
+
+    $sql = "INSERT INTO funcionario
+        (nome_funcionario, cpf_funcionario, email_funcionario, senha_funcionario, tipo_usuario)
+        VALUES (?, ?, ?, ?, ?)";
+
+        $stmt = $conn->prepare($sql);
+
+        $stmt->bind_param(
+            "sssss",
+            $nome,
+            $cpf,
+            $email,
+            $senha_hash,
+            $tipo_usuario
+        );
+
+        if ($stmt->execute()) {
+            $mensagem = "Funcionário cadastrado com sucesso.";
+        } elseif ($stmt->errno === 1062) {
+            $erro = "O CPF ou e-mail informado já está cadastrado.";
+        } else {
+            $erro = "Erro ao cadastrar funcionário.";
+        }
+
+        $stmt->close();
+    }
+}
+?>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro</title>
+    <link rel="stylesheet" href="../assets/styles/style.css">
+    <link rel="stylesheet" href="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+</head>
+<body>
+    
+<div id="sidebar" class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark">
+    <a href="/ceb/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none"> 
+     <img src="../assets/images/logo.png" alt="Logo" width="40" height="40" class="me-2"> <span class="fs-4">OMNIRAIL</span> </a> 
+    <hr> 
+    <ul class="nav nav-pills flex-column mb-auto"> 
+     <li class="nav-item"> <a href="dashboard.php" class="nav-link text-white" aria-current="page"> 
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-speedometer2 me-2" viewBox="0 0 16 16">
+            <path d="M8 4a.5.5 0 0 1 .5.5V6a.5.5 0 0 1-1 0V4.5A.5.5 0 0 1 8 4M3.732 5.732a.5.5 0 0 1 .707 0l.915.914a.5.5 0 1 1-.708.708l-.914-.915a.5.5 0 0 1 0-.707M2 10a.5.5 0 0 1 .5-.5h1.586a.5.5 0 0 1 0 1H2.5A.5.5 0 0 1 2 10m9.5 0a.5.5 0 0 1 .5-.5h1.5a.5.5 0 0 1 0 1H12a.5.5 0 0 1-.5-.5m.754-4.246a.39.39 0 0 0-.527-.02L7.547 9.31a.91.91 0 1 0 1.302 1.258l3.434-4.297a.39.39 0 0 0-.029-.518z"/>
+            <path fill-rule="evenodd" d="M0 10a8 8 0 1 1 15.547 2.661c-.442 1.253-1.845 1.602-2.932 1.25C11.309 13.488 9.475 13 8 13c-1.474 0-3.31.488-4.615.911-1.087.352-2.49.003-2.932-1.25A8 8 0 0 1 0 10m8-7a7 7 0 0 0-6.603 9.329c.203.575.923.876 1.68.63C4.397 12.533 6.358 12 8 12s3.604.532 4.923.96c.757.245 1.477-.056 1.68-.631A7 7 0 0 0 8 3"/>
+        </svg>Dashboard</a> </li>
+
+     <li> <a href="cadastro_de_sensores_e_trens.php" class="nav-link text-white"> 
+       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-broadcast me-2" viewBox="0 0 16 16">
+            <path d="M3.05 3.05a7 7 0 0 0 0 9.9.5.5 0 0 1-.707.707 8 8 0 0 1 0-11.314.5.5 0 0 1 .707.707m2.122 2.122a4 4 0 0 0 0 5.656.5.5 0 1 1-.708.708 5 5 0 0 1 0-7.072.5.5 0 0 1 .708.708m5.656-.708a.5.5 0 0 1 .708 0 5 5 0 0 1 0 7.072.5.5 0 1 1-.708-.708 4 4 0 0 0 0-5.656.5.5 0 0 1 0-.708m2.122-2.12a.5.5 0 0 1 .707 0 8 8 0 0 1 0 11.313.5.5 0 0 1-.707-.707 7 7 0 0 0 0-9.9.5.5 0 0 1 0-.707zM10 8a2 2 0 1 1-4 0 2 2 0 0 1 4 0"/>
+        </svg>Sensores & Trens</a> </li> 
+
+     <li> <a href="monitoramento.php" class="nav-link text-white"> 
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-activity me-2" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M6 2a.5.5 0 0 1 .47.33L10 12.036l1.53-4.208A.5.5 0 0 1 12 7.5h3.5a.5.5 0 0 1 0 1h-3.15l-1.88 5.17a.5.5 0 0 1-.94 0L6 3.964 4.47 8.171A.5.5 0 0 1 4 8.5H.5a.5.5 0 0 1 0-1h3.15l1.88-5.17A.5.5 0 0 1 6 2"/>
+        </svg>Monitoramento</a> </li> 
+
+     <li> <a href="relatorios.php" class="nav-link text-white"> 
+       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-earmark-text me-2" viewBox="0 0 16 16">
+            <path d="M5.5 7a.5.5 0 0 0 0 1h5a.5.5 0 0 0 0-1zM5 9.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5m0 2a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5"/>
+            <path d="M9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.5zm0 1v2A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1z"/>
+        </svg>Relatórios</a> </li> 
+
+     <li> <a href="cadastro_user.php" class="nav-link active"> 
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-people me-2" viewBox="0 0 16 16">
+            <path d="M15 14s1 0 1-1-1-4-5-4-5 3-5 4 1 1 1 1zm-7.978-1L7 12.996c.001-.264.167-1.03.76-1.72C8.312 10.629 9.282 10 11 10c1.717 0 2.687.63 3.24 1.276.593.69.758 1.457.76 1.72l-.008.002-.014.002zM11 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4m3-2a3 3 0 1 1-6 0 3 3 0 0 1 6 0M6.936 9.28a6 6 0 0 0-1.23-.247A7 7 0 0 0 5 9c-4 0-5 3-5 4q0 1 1 1h4.216A2.24 2.24 0 0 1 5 13c0-1.01.377-2.042 1.09-2.904.243-.294.526-.569.846-.816M4.92 10A5.5 5.5 0 0 0 4 13H1c0-.26.164-1.03.76-1.724.545-.636 1.492-1.256 3.16-1.275ZM1.5 5.5a3 3 0 1 1 6 0 3 3 0 0 1-6 0m3-2a2 2 0 1 0 0 4 2 2 0 0 0 0-4"/>
+        </svg>Cadastrados</a> </li> 
+    </ul> 
+    <hr> 
+    <div class="dropdown"> 
+     <a href="/ceb/docs/5.1/examples/sidebars/#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false"> <img src="../assets/images/User.png" alt="" class="rounded-circle me-2" width="32" height="32"> <strong>Administrador</strong> </a> 
+     <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1"> 
+      <li>
+          <a class="dropdown-item" href="logout.php">Sair</a>
+      </li>  
+     </ul> 
+    </div> 
+   </div>
+
+        <div class="flex-grow-1 bg-light p-5"
+                style="margin-left: 280px; min-height: 100vh; width: calc(100% - 280px);">
+
+                <h1 class="fw-bold">Funcionários Cadastrados</h1>
+
+                <p class="text-muted">
+                    Preencha as informações abaixo para cadastrar um novo usuário.
+                </p>
+
+                <div class="card p-4 mt-4 shadow-sm">
+
+            <?php if ($mensagem !== ""): ?>
+
+                <div class="alert alert-success">
+                    <?= htmlspecialchars($mensagem) ?>
+                </div>
+
+            <?php endif; ?>
+
+            <?php if ($erro !== ""): ?>
+
+                <div class="alert alert-danger">
+                    <?= htmlspecialchars($erro) ?>
+                </div>
+
+            <?php endif; ?>
+
+            <form method="POST" action="cadastro_user.php">
+
+                <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label for="nome" class="form-label">
+                        Nome Completo
+                    </label>
+                    <input
+                        type="text"
+                        class="form-control"
+                        id="nome"
+                        name="nome"
+                        required
+                        >
+                </div>
+
+                    <div class="col-md-6 mb-3">
+                        <label for="email" class="form-label">
+                            E-mail
+                        </label>
+
+                        <input
+                            type="email"
+                            class="form-control"
+                            id="email"
+                            name="email"
+                            required
+                        >
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <label for="cpf" class="form-label">
+                            CPF
+                        </label>
+
+                        <input
+                            type="text"
+                            class="form-control"
+                            id="cpf"
+                            name="cpf"
+                            maxlength="11"
+                            required
+                        >
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <label for="senha" class="form-label">
+                            Senha
+                        </label>
+
+                        <input
+                            type="password"
+                            class="form-control"
+                            id="senha"
+                            name="senha"
+                            required
+                        >
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+
+                        <label for="tipo_usuario" class="form-label">
+                            Tipo de usuário
+                        </label>
+
+                        <select
+                            class="form-select"
+                            id="tipo_usuario"
+                            name="tipo_usuario"
+                            required
+                        >
+                            <option value="Operador" selected>
+                                Operador
+                            </option>
+
+                            <option value="Administrador">
+                                Administrador
+                            </option>
+                        </select>
+
+                    </div>
+
+                </div>
+
+                <button type="submit" class="btn btn-danger">
+                    Cadastrar funcionário
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+</html>
