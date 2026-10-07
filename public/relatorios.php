@@ -1,407 +1,421 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Relatórios</title>
 
-    <title>Relatórios Operacionais</title>
-
-    <link rel="stylesheet" 
-        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="../assets/styles/style.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
         rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
-        crossorigin="anonymous">
+        crossorigin="anonymous"
+    >
 </head>
 
-<body class="m-0 bg-light">
-    <div class="d-flex min-vh-100">
+<body id="body-dashboard">
 
+    <div id="sidebar" class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark">
 
-        <!-- SIDEBAR -->
-        <aside class="position-relative d-flex flex-column flex-shrink-0 p-3 text-white"
-            style="width: 280px;">
+        <a href="dashboard.php" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+            <img
+                src="../assets/images/logo.png"
+                alt="Logo"
+                width="40"
+                height="40"
+                class="me-2"
+            >
+            <span class="fs-4">OMNIRAIL</span>
+        </a>
 
-            <!-- Fundo exato da sidebar -->
-            <svg class="position-absolute top-0 start-0 w-100 h-100"
-                xmlns="http://www.w3.org/2000/svg"
-                preserveAspectRatio="none">
+        <hr>
 
-                <rect width="100%" height="100%" fill="#161B25"></rect>
-            </svg>
+        <ul class="nav nav-pills flex-column mb-auto">
 
-
-            <!-- Conteúdo da sidebar -->
-            <div class="position-relative d-flex flex-column h-100">
-
-                <!-- Logo -->
-                <a href="/ceb/"
-                    class="d-flex align-items-center mb-2 text-white text-decoration-none">
-
-                    <img src="../assets/images/logo.png"
-                        alt="Logo"
-                        width="40"
-                        height="40"
-                        class="me-2">
-
-                    <span class="fs-4">
-                        OMNIRAIL
-                    </span>
+            <li class="nav-item">
+                <a href="dashboard.php" class="nav-link text-white">
+                    <i class="bi bi-speedometer2 me-2"></i>
+                    Dashboard
                 </a>
+            </li>
 
-                <hr class="my-2">
+            <li>
+                <a href="cadastro_de_sensores_e_trens.php" class="nav-link text-white">
+                    <i class="bi bi-broadcast me-2"></i>
+                    Sensores & Trens
+                </a>
+            </li>
 
+            <li>
+                <a href="monitoramento.php" class="nav-link text-white">
+                    <i class="bi bi-activity me-2"></i>
+                    Monitoramento
+                </a>
+            </li>
 
-                <!-- Menu -->
-                <ul class="nav nav-pills flex-column gap-1 mb-auto">
+            <li>
+                <a href="relatorios.php" class="nav-link active" aria-current="page">
+                    <i class="bi bi-file-earmark-text me-2"></i>
+                    Relatórios
+                </a>
+            </li>
 
-                    <li class="nav-item">
-                        <a href="dashboard.php"
-                            class="nav-link text-white">
+            <li>
+                <a href="cadastro_user.php" class="nav-link text-white">
+                    <i class="bi bi-people me-2"></i>
+                    Cadastrados
+                </a>
+            </li>
 
-                            <i class="bi bi-speedometer2 me-2"></i>
-                            Dashboard
-                        </a>
-                    </li>
+        </ul>
 
+        <hr>
 
-                    <li>
-                        <a href="cadastro_de_sensores_e_trens.php"
-                            class="nav-link text-white">
+        <div class="dropdown">
 
-                            <i class="bi bi-broadcast me-2"></i>
-                            Sensores & Trens
-                        </a>
-                    </li>
+            <a
+                href="#"
+                class="d-flex align-items-center text-white text-decoration-none dropdown-toggle"
+                id="dropdownUser1"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+            >
+                <img
+                    src="../assets/images/User.png"
+                    alt="Usuário"
+                    class="rounded-circle me-2"
+                    width="32"
+                    height="32"
+                >
 
+                <strong>Administrador</strong>
+            </a>
 
-                    <li>
-                        <a href="monitoramento.php"
-                            class="nav-link text-white">
-
-                            <i class="bi bi-activity me-2"></i>
-                            Monitoramento
-                        </a>
-                    </li>
-
-
-                    <li>
-                        <a href="relatorios.php"
-                            class="nav-link active">
-
-                            <i class="bi bi-file-earmark-text me-2"></i>
-                            Relatórios
-                        </a>
-                    </li>
-
-
-                    <li>
-                        <a href="cadastro_user.php"
-                            class="nav-link text-white">
-
-                            <i class="bi bi-people me-2"></i>
-                            Cadastrados
-                        </a>
-                    </li>
-                </ul>
-
-
-                <hr class="my-2">
-
-
-                <!-- Usuário -->
-                <div class="dropdown">
-
-                    <a href="#"
-                        class="d-flex align-items-center text-white text-decoration-none dropdown-toggle"
-                        data-bs-toggle="dropdown"
-                        aria-expanded="false">
-
-                        <img src="../assets/images/User.png"
-                            alt="Usuário"
-                            width="32"
-                            height="32"
-                            class="rounded-circle me-2">
-
-                        <strong>
-                            Administrador
-                        </strong>
-
+            <ul
+                class="dropdown-menu dropdown-menu-dark text-small shadow"
+                aria-labelledby="dropdownUser1"
+            >
+                <li>
+                    <a class="dropdown-item" href="logout.php">
+                        Sair
                     </a>
+                </li>
+            </ul>
 
-                    <ul class="dropdown-menu dropdown-menu-dark shadow">
+        </div>
 
-                        <li>
-                            <a class="dropdown-item" href="logout.php">Sair</a>
-                        </li> 
-                    </ul>
-                </div>
-            </div>
-        </aside>
+    </div>
 
 
+    <div class="main">
 
-        <!-- CONTEÚDO -->
-        <main class="flex-grow-1 p-3 bg-light">
+        <div class="d-flex justify-content-between align-items-center mb-4">
 
-
-            <!-- Cabeçalho -->
-            <div class="mb-2">
-                <h2 class="fw-bold mb-0">
-                    Relatórios Operacionais
-                </h2>
-                <small class="text-muted">
+            <div>
+                <p class="text-secondary mb-0">
                     Gere e consulte análises da operação ferroviária.
-                </small>
+                </p>
+
+                <h1 class="fw-bold">
+                    Relatórios Operacionais
+                </h1>
+            </div>
+
+        </div>
+
+
+        <div class="row g-4">
+
+            <div class="col-lg-4">
+
+                <div class="card shadow-sm border-0 rounded-4 p-3 h-100">
+
+                    <div class="card-body">
+
+                        <h4 class="fw-bold mb-4">
+                            Novo Relatório
+                        </h4>
+
+
+                        <div class="mb-3">
+
+                            <label class="form-label fw-semibold">
+                                Título
+                            </label>
+
+                            <input
+                                type="text"
+                                class="form-control"
+                                placeholder="Digite o título do relatório"
+                            >
+
+                        </div>
+
+
+                        <div class="mb-3">
+
+                            <label class="form-label fw-semibold">
+                                Data início
+                            </label>
+
+                            <input
+                                type="date"
+                                class="form-control"
+                            >
+
+                        </div>
+
+
+                        <div class="mb-3">
+
+                            <label class="form-label fw-semibold">
+                                Data fim
+                            </label>
+
+                            <input
+                                type="date"
+                                class="form-control"
+                            >
+
+                        </div>
+
+
+                        <div class="mb-4">
+
+                            <label class="form-label fw-semibold">
+                                Tipo
+                            </label>
+
+                            <select class="form-select">
+
+                                <option selected disabled>
+                                    Selecione
+                                </option>
+
+                                <option>
+                                    Trens cadastrados
+                                </option>
+
+                                <option>
+                                    Sensores
+                                </option>
+
+                                <option>
+                                    Operacional
+                                </option>
+
+                                <option>
+                                    Falhas
+                                </option>
+
+                                <option>
+                                    Energia
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+                        <button
+                            type="button"
+                            class="btn btn-danger w-100 py-2 fw-bold"
+                        >
+                            <i class="bi bi-file-earmark-bar-graph me-2"></i>
+                            Gerar Relatório
+                        </button>
+
+                    </div>
+
+                </div>
 
             </div>
 
 
-            <!-- Linha superior -->
-            <div class="row g-2 mb-2">
+            <div class="col-lg-8">
+
+                <div class="card shadow-sm border-0 rounded-4 p-3 h-100">
+
+                    <div class="card-body">
+
+                        <h4 class="fw-bold mb-4">
+                            Tendências por Tipo de Leitura
+                        </h4>
 
 
-                <!-- Novo relatório -->
-                <div class="col-lg-4">
-                    <div class="card h-100 shadow-sm">
-                        <div class="card-body p-3">
-                            <h6 class="fw-bold mb-2">
-                                Novo Relatório
-                            </h6>
+                        <div class="d-flex align-items-center justify-content-center h-75">
+
+                            <div class="text-center">
+
+                                <i class="bi bi-bar-chart-fill text-danger display-3"></i>
+
+                                <h5 class="fw-bold mt-3 mb-2">
+                                    Velocidade
+                                </h5>
+
+                                <span class="badge bg-danger">
+                                    Total: 1000
+                                </span>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
 
 
-                            <div class="mb-1">
+        <div class="card mt-4 border-0 shadow-sm rounded-4 p-4">
 
-                                <label class="form-label small fw-semibold mb-0">
-                                    Título
-                                </label>
+            <h4 class="fw-bold mb-4">
+                Relatórios Gerados
+            </h4>
 
-                                <input type="text"
-                                    class="form-control form-control-sm">
+
+            <div class="row g-4">
+
+
+                <div class="col-md-6">
+
+                    <div class="border rounded-4 p-3">
+
+                        <div class="d-flex align-items-center">
+
+                            <i class="bi bi-file-earmark-text fs-3 text-danger me-3"></i>
+
+                            <div class="flex-grow-1">
+
+                                <div class="fw-bold">
+                                    Relatório Mensal Operacional
+                                </div>
+
+                                <small class="text-muted">
+                                    2026-04-01 - 2026-05-04
+                                </small>
 
                             </div>
 
 
-                            <div class="mb-1">
-
-                                <label class="form-label small fw-semibold mb-0">
-                                    Data início
-                                </label>
-
-                                <input type="date"
-                                    class="form-control form-control-sm">
-
-                            </div>
-
-
-                            <div class="mb-1">
-
-                                <label class="form-label small fw-semibold mb-0">
-                                    Data fim
-                                </label>
-
-                                <input type="date"
-                                    class="form-control form-control-sm">
-
-                            </div>
-
-
-                            <div class="mb-2">
-
-                                <label class="form-label small fw-semibold mb-0">
-                                    Tipo
-                                </label>
-
-                                <select class="form-select form-select-sm">
-
-                                    <option selected disabled>
-                                        Selecione
-                                    </option>
-
-                                    <option>
-                                        Trens cadastrados
-                                    </option>
-
-                                    <option>
-                                        Sensores
-                                    </option>
-
-                                    <option>
-                                        Operacional
-                                    </option>
-
-                                    <option>
-                                        Falhas
-                                    </option>
-
-                                    <option>
-                                        Energia
-                                    </option>
-
-                                </select>
-
-                            </div>
-
-
-                            <button type="button"
-                                class="btn btn-danger btn-sm w-100">
-
-                                <i class="bi bi-file-earmark-bar-graph me-1"></i>
-
-                                Gerar Relatório
-
+                            <button
+                                type="button"
+                                class="btn btn-sm text-danger"
+                                data-bs-toggle="modal"
+                                data-bs-target="#modalExcluir"
+                            >
+                                <i class="bi bi-trash"></i>
                             </button>
+
                         </div>
+
+
+                        <span class="badge bg-light text-dark mt-2">
+                            Operacional
+                        </span>
+
                     </div>
+
                 </div>
 
 
+                <div class="col-md-6">
 
-                <!-- Tendências -->
-                <div class="col-lg-8">
-                    <div class="card h-100 shadow-sm">
-                        <div class="card-body p-3">
+                    <div class="border rounded-4 p-3">
 
-                            <h6 class="fw-bold mb-2">
-                                Tendências por Tipo de Leitura
-                            </h6>
+                        <div class="d-flex align-items-center">
 
+                            <i class="bi bi-file-earmark-text fs-3 text-danger me-3"></i>
 
-                            <div class="d-flex align-items-center justify-content-center h-75">
-                                <div class="text-center">
-                                    <i class="bi bi-bar-chart-fill display-5 text-danger"></i>
+                            <div class="flex-grow-1">
 
-                                    <div class="fw-bold mt-1">
-                                        Velocidade
-                                    </div>
-
-                                    <span class="badge bg-danger">
-                                        Total: 1000
-                                    </span>
-
+                                <div class="fw-bold">
+                                    Análise de Falhas
                                 </div>
+
+                                <small class="text-muted">
+                                    2026-04-19 - 2026-05-04
+                                </small>
+
                             </div>
+
+
+                            <button
+                                type="button"
+                                class="btn btn-sm text-danger"
+                                data-bs-toggle="modal"
+                                data-bs-target="#modalExcluir"
+                            >
+                                <i class="bi bi-trash"></i>
+                            </button>
+
                         </div>
+
+
+                        <span class="badge bg-light text-dark mt-2">
+                            Operacional
+                        </span>
+
                     </div>
+
                 </div>
+
+
             </div>
 
+        </div>
+
+    </div>
 
 
-            <!-- Relatórios -->
-            <div class="card shadow-sm mb-2">
-                <div class="card-body p-3">
-                    <h6 class="fw-bold mb-2">
-                        Relatórios Gerados
-                    </h6>
-
-
-                    <div class="row g-2">
-
-
-                        <!-- Relatório -->
-                        <div class="col-md-6">
-                            <div class="border rounded p-2">
-                                <div class="d-flex align-items-center">
-                                    <i class="bi bi-file-earmark-text fs-4 text-danger me-2"></i>
-                                    <div class="flex-grow-1">
-
-                                        <div class="fw-bold small">
-                                            Relatório Mensal Operacional
-                                        </div>
-
-                                        <small class="text-muted">
-                                            2026-04-01 - 2026-05-04
-                                        </small>
-                                    </div>
-
-                                    <button type="button"
-                                        class="btn btn-sm text-danger"
-                                        data-bs-toggle="modal"
-                                        data-bs-target="#modalExcluir">
-
-                                        <i class="bi bi-trash"></i>
-
-                                    </button>
-                                </div>
-
-
-                                <span class="badge bg-light text-dark mt-1">
-                                    Operacional
-                                </span>
-                            </div>
-                        </div>
-
-
-                        <!-- Relatório -->
-                        <div class="col-md-6">
-                            <div class="border rounded p-2">
-                                <div class="d-flex align-items-center">
-                                    <i class="bi bi-file-earmark-text fs-4 text-danger me-2"></i>
-                                    <div class="flex-grow-1">
-
-                                        <div class="fw-bold small">
-                                            Análise de Falhas
-                                        </div>
-
-                                        <small class="text-muted">
-                                            2026-04-19 - 2026-05-04
-                                        </small>
-                                    </div>
-
-                                    <button type="button"
-                                        class="btn btn-sm text-danger"
-                                        data-bs-toggle="modal"
-                                        data-bs-target="#modalExcluir">
-
-                                        <i class="bi bi-trash"></i>
-
-                                    </button>
-                                </div>
-
-
-                                <span class="badge bg-light text-dark mt-1">
-                                    Operacional
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-
-    <!-- Modal -->
-    <div class="modal fade"
+    <div
+        class="modal fade"
         id="modalExcluir"
         tabindex="-1"
-        aria-hidden="true">
+        aria-hidden="true"
+    >
 
         <div class="modal-dialog modal-dialog-centered">
 
             <div class="modal-content">
 
-                <div class="modal-body text-center p-3">
+                <div class="modal-body text-center p-4">
 
-                    <h5 class="fw-bold mb-2">
+                    <h5 class="fw-bold mb-3">
                         Deseja mesmo excluir?
                     </h5>
 
-                    <button type="button"
-                        class="btn btn-link text-secondary text-decoration-none"
-                        data-bs-dismiss="modal">
+                    <p class="text-muted mb-4">
+                        Essa ação não poderá ser desfeita.
+                    </p>
 
-                        Cancelar
 
-                    </button>
+                    <div class="d-flex gap-2">
 
-                    <button type="button"
-                        class="btn btn-danger w-100">
+                        <button
+                            type="button"
+                            class="btn btn-light w-100"
+                            data-bs-dismiss="modal"
+                        >
+                            Cancelar
+                        </button>
 
-                        Excluir
 
-                    </button>
+                        <button
+                            type="button"
+                            class="btn btn-danger w-100"
+                        >
+                            Excluir
+                        </button>
+
+                    </div>
 
                 </div>
 
@@ -412,11 +426,11 @@
     </div>
 
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-        crossorigin="anonymous">
-    </script>
+    <script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8NlM6XUeP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"
+    ></script>
 
 </body>
-
 </html>
