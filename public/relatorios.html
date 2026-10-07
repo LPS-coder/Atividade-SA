@@ -7,13 +7,12 @@
 
     <title>Relatórios Operacionais</title>
 
-    <link rel="stylesheet"
-        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
-        rel="stylesheet"
-        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
-        crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="../assets/styles/style.css">
 </head>
 
 <body class="m-0 bg-light">
@@ -21,12 +20,10 @@
 
 
         <!-- SIDEBAR -->
-        <aside class="position-relative d-flex flex-column flex-shrink-0 p-3 text-white"
-            style="width: 280px;">
+        <aside class="position-relative d-flex flex-column flex-shrink-0 p-3 text-white" style="width: 280px;">
 
             <!-- Fundo exato da sidebar -->
-            <svg class="position-absolute top-0 start-0 w-100 h-100"
-                xmlns="http://www.w3.org/2000/svg"
+            <svg class="position-absolute top-0 start-0 w-100 h-100" xmlns="http://www.w3.org/2000/svg"
                 preserveAspectRatio="none">
 
                 <rect width="100%" height="100%" fill="#161B25"></rect>
@@ -37,14 +34,9 @@
             <div class="position-relative d-flex flex-column h-100">
 
                 <!-- Logo -->
-                <a href="/ceb/"
-                    class="d-flex align-items-center mb-2 text-white text-decoration-none">
+                <a href="/ceb/" class="d-flex align-items-center mb-2 text-white text-decoration-none">
 
-                    <img src="../assets/images/logo.png"
-                        alt="Logo"
-                        width="40"
-                        height="40"
-                        class="me-2">
+                    <img src="../assets/images/logo.png" alt="Logo" width="40" height="40" class="me-2">
 
                     <span class="fs-4">
                         OMNIRAIL
@@ -58,8 +50,7 @@
                 <ul class="nav nav-pills flex-column gap-1 mb-auto">
 
                     <li class="nav-item">
-                        <a href="dashboard.html"
-                            class="nav-link text-white">
+                        <a href="dashboard.html" class="nav-link text-white">
 
                             <i class="bi bi-speedometer2 me-2"></i>
                             Dashboard
@@ -68,8 +59,7 @@
 
 
                     <li>
-                        <a href="cadastro_de_sensores_e_trens.html"
-                            class="nav-link text-white">
+                        <a href="cadastro_de_sensores_e_trens.html" class="nav-link text-white">
 
                             <i class="bi bi-broadcast me-2"></i>
                             Sensores & Trens
@@ -78,8 +68,7 @@
 
 
                     <li>
-                        <a href="monitoramento.html"
-                            class="nav-link text-white">
+                        <a href="monitoramento.html" class="nav-link text-white">
 
                             <i class="bi bi-activity me-2"></i>
                             Monitoramento
@@ -87,19 +76,19 @@
                     </li>
 
 
-                    <li class="nav-item">
-                        <a href="relatorios.html" 
-                            class="nav-link text-white active"> 
+                    <li>
+                        <a href="relatorios.html" class="nav-link text-white active">
 
                             <i class="bi bi-file-earmark-text me-2"></i>
                             Relatórios
                         </a>
+
                     </li>
 
 
+
                     <li>
-                        <a href="cadastro_user.html"
-                            class="nav-link text-white">
+                        <a href="cadastro_user.html" class="nav-link text-white">
 
                             <i class="bi bi-people me-2"></i>
                             Cadastrados
@@ -114,15 +103,10 @@
                 <!-- Usuário -->
                 <div class="dropdown">
 
-                    <a href="#"
-                        class="d-flex align-items-center text-white text-decoration-none dropdown-toggle"
-                        data-bs-toggle="dropdown"
-                        aria-expanded="false">
+                    <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle"
+                        data-bs-toggle="dropdown" aria-expanded="false">
 
-                        <img src="../assets/images/User.png"
-                            alt="Usuário"
-                            width="32"
-                            height="32"
+                        <img src="../assets/images/User.png" alt="Usuário" width="32" height="32"
                             class="rounded-circle me-2">
 
                         <strong>
@@ -134,8 +118,7 @@
                     <ul class="dropdown-menu dropdown-menu-dark shadow">
 
                         <li>
-                            <a class="dropdown-item"
-                                href="../public/login.html">
+                            <a class="dropdown-item" href="../public/login.html">
 
                                 Sair
 
@@ -183,8 +166,7 @@
                                     Título
                                 </label>
 
-                                <input type="text"
-                                    class="form-control form-control-sm">
+                                <input type="text" class="form-control form-control-sm">
 
                             </div>
 
@@ -195,8 +177,7 @@
                                     Data início
                                 </label>
 
-                                <input type="date"
-                                    class="form-control form-control-sm">
+                                <input type="date" class="form-control form-control-sm">
 
                             </div>
 
@@ -207,8 +188,7 @@
                                     Data fim
                                 </label>
 
-                                <input type="date"
-                                    class="form-control form-control-sm">
+                                <input type="date" class="form-control form-control-sm">
 
                             </div>
 
@@ -250,12 +230,16 @@
                             </div>
 
 
-                            <button type="button"
-                                class="btn btn-danger btn-sm w-100">
-
+                            <button class="btn btn-danger btn-sm w-100"
+                                style="background-color: #ff0000; border-color: #800000;">
                                 <i class="bi bi-file-earmark-bar-graph me-1"></i>
-
                                 Gerar Relatório
+
+                            </button>
+
+
+
+
 
                             </button>
                         </div>
@@ -322,9 +306,7 @@
                                         </small>
                                     </div>
 
-                                    <button type="button"
-                                        class="btn btn-sm text-danger"
-                                        data-bs-toggle="modal"
+                                    <button type="button" class="btn btn-sm text-danger" data-bs-toggle="modal"
                                         data-bs-target="#modalExcluir">
 
                                         <i class="bi bi-trash"></i>
@@ -356,9 +338,7 @@
                                         </small>
                                     </div>
 
-                                    <button type="button"
-                                        class="btn btn-sm text-danger"
-                                        data-bs-toggle="modal"
+                                    <button type="button" class="btn btn-sm text-danger" data-bs-toggle="modal"
                                         data-bs-target="#modalExcluir">
 
                                         <i class="bi bi-trash"></i>
@@ -377,50 +357,45 @@
             </div>
 
 
-    <!-- Modal -->
-    <div class="modal fade"
-        id="modalExcluir"
-        tabindex="-1"
-        aria-hidden="true">
+            <!-- Modal -->
+            <div class="modal fade" id="modalExcluir" tabindex="-1" aria-hidden="true">
 
-        <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-dialog modal-dialog-centered">
 
-            <div class="modal-content">
+                    <div class="modal-content">
 
-                <div class="modal-body text-center p-3">
+                        <div class="modal-body text-center p-3">
 
-                    <h5 class="fw-bold mb-2">
-                        Deseja mesmo excluir?
-                    </h5>
+                            <h5 class="fw-bold mb-2">
+                                Deseja mesmo excluir?
+                            </h5>
 
-                    <button type="button"
-                        class="btn btn-link text-secondary text-decoration-none"
-                        data-bs-dismiss="modal">
+                            <button type="button" class="btn btn-link text-secondary text-decoration-none"
+                                data-bs-dismiss="modal">
 
-                        Cancelar
+                                Cancelar
 
-                    </button>
+                            </button>
 
-                    <button type="button"
-                        class="btn btn-danger w-100">
+                            <button type="button" class="btn btn-danger w-100">
 
-                        Excluir
+                                Excluir
 
-                    </button>
+                            </button>
+
+                        </div>
+
+                    </div>
 
                 </div>
 
             </div>
 
-        </div>
 
-    </div>
-
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-        crossorigin="anonymous">
-    </script>
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+                integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+                crossorigin="anonymous">
+                </script>
 
 </body>
 
