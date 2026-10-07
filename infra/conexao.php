@@ -4,9 +4,9 @@ $host = "localhost";
 $usuario = "root";
 $senha = "";
 $banco = "omnirail";
-// PORTA DO BANCO: 3309 
+$porta = 3309;
 
-$conn = new mysqli($host, $usuario, $senha, $banco);
+$conn = new mysqli($host, $usuario, $senha, $banco, $porta);
 
 if ($conn->connect_error) {
     die("Erro na conexão com o banco de dados.");

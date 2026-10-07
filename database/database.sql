@@ -1,15 +1,14 @@
-CREATE DATABASE omnirail;
-USE omnirail;
+CREATE DATABASE IF NOT EXISTS omnirail;
 
--- PORTA DO BANCO: 3309 -- 
--- NOME DO BANCO: omnirail --
+USE omnirail;
 
 CREATE TABLE IF NOT EXISTS funcionario (
     id_funcionario INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     nome_funcionario VARCHAR(100) NOT NULL,
     cpf_funcionario VARCHAR(11) NOT NULL UNIQUE,
     email_funcionario VARCHAR(150) NOT NULL UNIQUE,
-    senha_funcionario VARCHAR(255) NOT NULL
+    senha_funcionario VARCHAR(255) NOT NULL,
+    tipo_usuario ENUM('Administrador', 'Operador') NOT NULL DEFAULT 'Operador'
 );
 
 CREATE TABLE IF NOT EXISTS trens (

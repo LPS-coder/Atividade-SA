@@ -67,6 +67,26 @@ if (
         $stmt->close();
     }
 }
+
+$usuarios = [];
+
+$sqlUsuarios = "SELECT
+                    id_funcionario,
+                    nome_funcionario,
+                    email_funcionario,
+                    cpf_funcionario,
+                    tipo_usuario
+                FROM funcionario
+                ORDER BY id_funcionario DESC";
+
+$resultadoUsuarios = $conn->query($sqlUsuarios);
+
+if ($resultadoUsuarios) {
+    while ($usuario = $resultadoUsuarios->fetch_assoc()) {
+        $usuarios[] = $usuario;
+    }
+}
+
 ?>
 
 <html lang="en">
@@ -242,10 +262,200 @@ if (
 
         </div>
 
+        <div class="card p-4 mt-4 shadow-sm">
+
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <div>
+                    <h4 class="fw-bold mb-1">Usuários registrados</h4>
+                    <p class="text-muted mb-0">
+                        Consulte e filtre os funcionários cadastrados no sistema.
+                    </p>
+                </div>
+
+                <span class="badge bg-dark">
+                    <?= count($usuarios) ?> usuários
+                </span>
+            </div>
+
+            <div class="row g-3 mb-4">
+
+                <div class="col-md-4">
+                    <label for="filtroId" class="form-label">
+                        Filtrar por ID
+                    </label>
+
+                    <input
+                        type="number"
+                        id="filtroId"
+                        class="form-control"
+                        placeholder="Digite o ID">
+                </div>
+
+                <div class="col-md-4">
+                    <label for="filtroNome" class="form-label">
+                        Filtrar por nome
+                    </label>
+
+                    <input
+                        type="text"
+                        id="filtroNome"
+                        class="form-control"
+                        placeholder="Digite o nome">
+                </div>
+
+                <div class="col-md-4">
+                    <label for="filtroTipo" class="form-label">
+                        Tipo de usuário
+                    </label>
+
+                    <select id="filtroTipo" class="form-select">
+                        <option value="">Todos</option>
+                        <option value="Administrador">Administrador</option>
+                        <option value="Operador">Operador</option>
+                    </select>
+                </div>
+
+            </div>
+
+            <div class="table-responsive">
+
+                <table class="table table-hover align-middle mb-0">
+
+                    <thead class="table-dark">
+
+                        <tr>
+                            <th>ID</th>
+                            <th>Nome</th>
+                            <th>E-mail</th>
+                            <th>CPF</th>
+                            <th>Tipo de usuário</th>
+                        </tr>
+
+                    </thead>
+
+                    <tbody id="tabelaUsuarios">
+
+                        <?php foreach ($usuarios as $usuario): ?>
+
+                            <tr
+                                data-id="<?= $usuario["id_funcionario"] ?>"
+                                data-nome="<?= htmlspecialchars(strtolower($usuario["nome_funcionario"])) ?>"
+                                data-tipo="<?= htmlspecialchars($usuario["tipo_usuario"]) ?>"
+                            >
+
+                                <td>
+                                    <?= $usuario["id_funcionario"] ?>
+                                </td>
+
+                                <td class="fw-semibold">
+                                    <?= htmlspecialchars($usuario["nome_funcionario"]) ?>
+                                </td>
+
+                                <td>
+                                    <?= htmlspecialchars($usuario["email_funcionario"]) ?>
+                                </td>
+
+                                <td>
+                                    <?= htmlspecialchars($usuario["cpf_funcionario"]) ?>
+                                </td>
+
+                                <td>
+
+                                    <?php if ($usuario["tipo_usuario"] === "Administrador"): ?>
+
+                                        <span class="badge bg-danger">
+                                            Administrador
+                                        </span>
+
+                                    <?php else: ?>
+
+                                        <span class="badge bg-secondary">
+                                            Operador
+                                        </span>
+
+                                    <?php endif; ?>
+
+                                </td>
+
+                            </tr>
+
+                        <?php endforeach; ?>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+            <div id="semResultados" class="text-center text-muted py-4" style="display: none;">
+                Nenhum usuário encontrado.
+            </div>
+
+        </div>
+        
     </div>
 
 </div>
 
 </body>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+<script>
+
+const filtroId = document.getElementById("filtroId");
+const filtroNome = document.getElementById("filtroNome");
+const filtroTipo = document.getElementById("filtroTipo");
+const linhas = document.querySelectorAll("#tabelaUsuarios tr");
+const semResultados = document.getElementById("semResultados");
+
+function filtrarUsuarios() {
+
+    const id = filtroId.value.trim();
+    const nome = filtroNome.value.trim().toLowerCase();
+    const tipo = filtroTipo.value;
+
+    let encontrados = 0;
+
+    linhas.forEach(linha => {
+
+        const linhaId = linha.dataset.id;
+        const linhaNome = linha.dataset.nome;
+        const linhaTipo = linha.dataset.tipo;
+
+        const correspondeId =
+            id === "" || linhaId === id;
+
+        const correspondeNome =
+            nome === "" || linhaNome.includes(nome);
+
+        const correspondeTipo =
+            tipo === "" || linhaTipo === tipo;
+
+        if (
+            correspondeId &&
+            correspondeNome &&
+            correspondeTipo
+        ) {
+
+            linha.style.display = "";
+            encontrados++;
+
+        } else {
+
+            linha.style.display = "none";
+
+        }
+
+    });
+
+    semResultados.style.display =
+        encontrados === 0 ? "block" : "none";
+}
+
+filtroId.addEventListener("input", filtrarUsuarios);
+filtroNome.addEventListener("input", filtrarUsuarios);
+filtroTipo.addEventListener("change", filtrarUsuarios);
+
+</script>
+
 </html>
