@@ -87,6 +87,28 @@ if ($resultadoUsuarios) {
     }
 }
 
+if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["excluir_usuario"])) {
+
+    $id_usuario = (int) $_POST["excluir_usuario"];
+
+    if ($id_usuario === (int) $_SESSION["id_funcionario"]) {
+        $erro = "Você não pode excluir o próprio usuário.";
+    } else {
+        $sqlExcluir = "DELETE FROM funcionario WHERE id_funcionario = ?";
+
+        $stmtExcluir = $conn->prepare($sqlExcluir);
+        $stmtExcluir->bind_param("i", $id_usuario);
+
+        if ($stmtExcluir->execute()) {
+            $mensagem = "Usuário excluído com sucesso.";
+        } else {
+            $erro = "Erro ao excluir usuário.";
+        }
+
+        $stmtExcluir->close();
+    }
+}
+
 ?>
 
 <html lang="en">
@@ -95,7 +117,7 @@ if ($resultadoUsuarios) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastro</title>
     <link rel="stylesheet" href="../assets/styles/style.css">
-    <link rel="stylesheet" href="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 </head>
 <body>
@@ -329,6 +351,7 @@ if ($resultadoUsuarios) {
                             <th>E-mail</th>
                             <th>CPF</th>
                             <th>Tipo de usuário</th>
+                            <th>Ações</th>
                         </tr>
 
                     </thead>
@@ -375,6 +398,42 @@ if ($resultadoUsuarios) {
 
                                     <?php endif; ?>
 
+                                </td>
+
+                                <td>
+                                    <div class="d-flex gap-3">
+
+                                        <button
+                                            type="button"
+                                            class="btn btn-link p-0 text-secondary"
+                                            title="Visualizar"
+                                            onclick="visualizarUsuario(
+                                                '<?= htmlspecialchars($usuario["nome_funcionario"], ENT_QUOTES) ?>',
+                                                '<?= htmlspecialchars($usuario["email_funcionario"], ENT_QUOTES) ?>',
+                                                '<?= htmlspecialchars($usuario["cpf_funcionario"], ENT_QUOTES) ?>',
+                                                '<?= htmlspecialchars($usuario["tipo_usuario"], ENT_QUOTES) ?>'
+                                            )"
+                                        >
+                                            <i class="bi bi-eye fs-5"></i>
+                                        </button>
+
+                                        <form method="POST" action="cadastro_user.php" onsubmit="return confirmarExclusao()">
+                                            <input
+                                                type="hidden"
+                                                name="excluir_usuario"
+                                                value="<?= $usuario["id_funcionario"] ?>"
+                                            >
+
+                                            <button
+                                                type="submit"
+                                                class="btn btn-link p-0 text-danger"
+                                                title="Excluir"
+                                            >
+                                                <i class="bi bi-trash fs-5"></i>
+                                            </button>
+                                        </form>
+
+                                    </div>
                                 </td>
 
                             </tr>
@@ -455,6 +514,19 @@ function filtrarUsuarios() {
 filtroId.addEventListener("input", filtrarUsuarios);
 filtroNome.addEventListener("input", filtrarUsuarios);
 filtroTipo.addEventListener("change", filtrarUsuarios);
+
+function confirmarExclusao() {
+    return confirm("Tem certeza que deseja excluir este usuário?");
+}
+
+function visualizarUsuario(nome, email, cpf, tipo) {
+    alert(
+        "Nome: " + nome +
+        "\nE-mail: " + email +
+        "\nCPF: " + cpf +
+        "\nTipo de usuário: " + tipo
+    );
+}
 
 </script>
 
