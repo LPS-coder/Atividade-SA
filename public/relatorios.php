@@ -5,11 +5,13 @@ exigirLogin();
 ?>
 
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Relatórios</title>
+
+    <title>Relatórios Operacionais</title>
 
     <link rel="stylesheet" href="../assets/styles/style.css">
 
@@ -27,7 +29,10 @@ exigirLogin();
 
     <div id="sidebar" class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark">
 
-        <a href="dashboard.php" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+        <a
+            href="dashboard.php"
+            class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none"
+        >
             <img
                 src="../assets/images/logo.png"
                 alt="Logo"
@@ -35,7 +40,10 @@ exigirLogin();
                 height="40"
                 class="me-2"
             >
-            <span class="fs-4">OMNIRAIL</span>
+
+            <span class="fs-4">
+                OMNIRAIL
+            </span>
         </a>
 
         <hr>
@@ -64,7 +72,11 @@ exigirLogin();
             </li>
 
             <li>
-                <a href="relatorios.php" class="nav-link active" aria-current="page">
+                <a
+                    href="relatorios.php"
+                    class="nav-link active"
+                    aria-current="page"
+                >
                     <i class="bi bi-file-earmark-text me-2"></i>
                     Relatórios
                 </a>
@@ -98,7 +110,9 @@ exigirLogin();
                     height="32"
                 >
 
-                <strong>Administrador</strong>
+                <strong>
+                    Administrador
+                </strong>
             </a>
 
             <ul
@@ -122,13 +136,15 @@ exigirLogin();
         <div class="d-flex justify-content-between align-items-center mb-4">
 
             <div>
+
                 <p class="text-secondary mb-0">
                     Gere e consulte análises da operação ferroviária.
                 </p>
 
-                <h1 class="fw-bold">
+                <h1 class="fw-bold mb-0">
                     Relatórios Operacionais
                 </h1>
+
             </div>
 
         </div>
@@ -229,9 +245,9 @@ exigirLogin();
 
                         <button
                             type="button"
-                            class="btn btn-danger w-100 py-2 fw-bold"
+                            class="btn btn-danger w-100 py-2 fw-bold d-flex align-items-center justify-content-center gap-2"
                         >
-                            <i class="bi bi-file-earmark-bar-graph me-2"></i>
+                            <i class="bi bi-file-earmark-bar-graph"></i>
                             Gerar Relatório
                         </button>
 
@@ -439,4 +455,5 @@ exigirLogin();
     ></script>
 
 </body>
+
 </html>
