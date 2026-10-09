@@ -26,3 +26,15 @@ CREATE TABLE IF NOT EXISTS sensores (
     id_trem INT NOT NULL,
     FOREIGN KEY (id_trem) REFERENCES trens(id_trem)
 );
+
+CREATE TABLE IF NOT EXISTS relatorios (
+    id_relatorio INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    id_funcionario INT NOT NULL,
+    id_sensor INT NOT NULL,
+    id_trem INT NOT NULL,
+    data_geracao DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    descricao TEXT,
+    FOREIGN KEY (id_trem) REFERENCES trens(id_trem),
+    FOREIGN KEY (id_sensor) REFERENCES sensores(id_sensor),
+    FOREIGN KEY (id_funcionario) REFERENCES funcionario(id_funcionario)
+);
