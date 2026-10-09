@@ -1,3 +1,9 @@
+<?php
+require_once "../infra/seguranca.php";
+
+exigirLogin();
+?>
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">

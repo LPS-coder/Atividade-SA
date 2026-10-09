@@ -1,3 +1,9 @@
+<?php
+require_once "../infra/seguranca.php";
+
+exigirLogin();
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 

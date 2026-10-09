@@ -1,5 +1,7 @@
 <?php
-session_start();
+require_once "../infra/seguranca.php";
+
+exigirAdministrador();
 
 require_once "../infra/conexao.php";
 
