@@ -35,3 +35,6 @@ CREATE TABLE IF NOT EXISTS usuario (
     cpf_usuario VARCHAR(11) NOT NULL UNIQUE,
     senha_usuario VARCHAR(255) NOT NULL
 );
+
+
+
