@@ -16,6 +16,7 @@ CREATE TABLE IF NOT EXISTS trens (
     nome_trens VARCHAR(100) NOT NULL,
     codigo VARCHAR(20) NOT NULL UNIQUE,
     modelo VARCHAR(100) NOT NULL
+    FOREIGN KEY (id_funcionario) REFERENCES funcionario(id_funcionario)
 );
 
 CREATE TABLE IF NOT EXISTS sensores (
