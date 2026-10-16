@@ -1,3 +1,5 @@
+artur lopes repique
+
 <?php
 require_once "../infra/seguranca.php";
 
@@ -17,7 +19,7 @@ exigirLogin();
     <div id="sidebar" class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark">
         <a href="/ceb/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none"> 
             <img src="../assets/images/logo.png" alt="Logo" width="40" height="40" class="me-2"> <span class="fs-4">OMNIRAIL</span> </a> 
-            <hr> 
+            <hr>
             <ul class="nav nav-pills flex-column mb-auto"> 
             <li class="nav-item"> <a href="dashboard.php" class="nav-link text-white" aria-current="page"> 
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-speedometer2 me-2" viewBox="0 0 16 16">
