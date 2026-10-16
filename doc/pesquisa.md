@@ -278,3 +278,7 @@ O XAMPP é muito utilizado porque permite que o programador desenvolva e teste s
 
 O XAMPP ajuda bastante no desenvolvimento de aplicações PHP porque deixa os testes mais rápidos e práticos. Ele evita que o programador precise configurar cada ferramenta separadamente, economizando tempo e reduzindo erros. Além disso, permite trabalhar offline, testar o sistema com segurança e corrigir problemas antes da publicação final, tornando o processo de desenvolvimento mais eficiente e organizado.
 
+
+
+
+

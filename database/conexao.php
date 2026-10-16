@@ -2,11 +2,11 @@
 
 $host = "localhost";
 $usuario = "root";
-$senha = "";
-$banco = "omnirail";
-$porta = 3309;
+$senha = "root";
+$banco = "xampp";
+// PORTA DO BANCO: 3309 
 
-$conn = new mysqli($host, $usuario, $senha, $banco, $porta);
+$conn = new mysqli($host, $usuario, $senha, $banco);
 
 if ($conn->connect_error) {
     die("Erro na conexão com o banco de dados.");

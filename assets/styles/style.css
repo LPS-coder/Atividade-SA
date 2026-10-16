@@ -126,14 +126,6 @@ form-select:focus {
     color: #c70505;
 }
 
-html, body {
-  overflow-x: hidden;
-}
-
-#conteudo-principal {
-  margin-left: 280px;
-  width: calc(100% - 280px);
-  max-width: calc(100% - 280px);
-  min-width: 0;
-  box-sizing: border-box;
+#conteudo-principal{
+    margin-left: 280px;
 }

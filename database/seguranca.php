@@ -1,6 +1,4 @@
-
 <?php
-
 function exigirLogin(): void
 {
     if (session_status() !== PHP_SESSION_ACTIVE) {
@@ -22,3 +20,4 @@ function exigirAdministrador(): void
         exit;
     }
 }
+?>
