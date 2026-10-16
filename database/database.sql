@@ -16,7 +16,9 @@ CREATE TABLE IF NOT EXISTS trens (
     id_trem INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     nome_trens VARCHAR(100) NOT NULL,
     codigo VARCHAR(20) NOT NULL UNIQUE,
-    modelo VARCHAR(100) NOT NULL
+    modelo VARCHAR(100) NOT NULL,
+    id_funcionario INT NOT NULL,
+    FOREIGN KEY (id_funcionario) REFERENCES funcionario(id_funcionario)
 );
 
 CREATE TABLE IF NOT EXISTS sensores (
@@ -28,13 +30,14 @@ CREATE TABLE IF NOT EXISTS sensores (
     FOREIGN KEY (id_trem) REFERENCES trens(id_trem)
 );
 
-CREATE TABLE IF NOT EXISTS usuario (
-    id_usuario INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    nome_usuario VARCHAR(100) NOT NULL,
-    email_usuario VARCHAR(150) NOT NULL UNIQUE,
-    cpf_usuario VARCHAR(11) NOT NULL UNIQUE,
-    senha_usuario VARCHAR(255) NOT NULL
+CREATE TABLE IF NOT EXISTS relatorios (
+    id_relatorio INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    id_funcionario INT NOT NULL,
+    id_sensor INT NOT NULL,
+    id_trem INT NOT NULL,
+    data_geracao DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    descricao TEXT,
+    FOREIGN KEY (id_trem) REFERENCES trens(id_trem),
+    FOREIGN KEY (id_sensor) REFERENCES sensores(id_sensor),
+    FOREIGN KEY (id_funcionario) REFERENCES funcionario(id_funcionario)
 );
-
-
-
