@@ -41,3 +41,18 @@ CREATE TABLE IF NOT EXISTS relatorios (
     FOREIGN KEY (id_sensor) REFERENCES sensores(id_sensor),
     FOREIGN KEY (id_funcionario) REFERENCES funcionario(id_funcionario)
 );
+
+CREATE TABLE IF NOT EXISTS rotas (
+    id_rota INT NOT NULL  PRIMARY KEY AUTO_INCREMENT,
+    nome_rota VARCHAR(100) NOT NULL,
+    descricao_rota VARCHAR(500) NOT NULL,
+    distancia_km DECIMAL(8,2) NOT NULL,
+    tempo_previsto_min INT NOT NULL,
+    data_criacao DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    id_trem INT NOT NULL,
+    UNIQUE KEY uq_rotas_nome_rota (nome_rota),
+    CONSTRAINT fk_rotas_trens 
+    FOREIGN KEY (id_trem) REFERENCES trens (id_trem)
+    ON DELETE RESTRICT
+    ON UPDATE CASCADE
+);
