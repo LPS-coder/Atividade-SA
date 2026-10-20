@@ -1,15 +1,22 @@
 CREATE DATABASE omnirail;
 USE omnirail;
 
--- PORTA DO BANCO: 3399 -- 
--- NOME DO BANCO: xampp --
-
 CREATE TABLE IF NOT EXISTS funcionario (
     id_funcionario INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     nome_funcionario VARCHAR(100) NOT NULL,
     cpf_funcionario VARCHAR(11) NOT NULL UNIQUE,
     email_funcionario VARCHAR(150) NOT NULL UNIQUE,
-    senha_funcionario VARCHAR(255) NOT NULL
+    senha_funcionario VARCHAR(255) NOT NULL,
+    tipo_funcionario ENUM('ADMINISTRADOR','USUARIO','OPERARIO') NOT NULL DEFAULT 'USUARIO'
+);
+
+INSERT INTO funcionario (nome_funcionario, cpf_funcionario, email_funcionario, senha_funcionario, tipo_funcionario)
+VALUES (
+    'Administrador OMNIRAIL',
+    '12345678967',
+    'omnirail@gmail.com',
+    '$2y$10$6bbkevGjPY96eOy.c6h2R.VAF/1VCxyBafy2Z.YGNTS30Pr1BUEdG',
+    'ADMINISTRADOR'
 );
 
 CREATE TABLE IF NOT EXISTS trens (
