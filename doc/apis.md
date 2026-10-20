@@ -55,10 +55,46 @@ O JSON é universal e não pertence a nenhuma linguagem de programação. Isso p
 
 **Diferenças entre uma API e um sistema web tradicional**
 
+Sistema Web Tradicional: Desenvolvido diretamente para interação humana. O servidor processa a solicitação e retorna o código HTML, CSS e JavaScript já formatado para visualização no navegador (interface gráfica completa).
+
+API: Desenvolvida para comunicação entre máquinas (sistema para sistema). O servidor retorna apenas dados puros (geralmente em formato JSON ou XML) sem qualquer camada visual de estilização, permitindo que a aplicação cliente decida como exibir essas informações ao usuário.
+
 **Como uma aplicação PHP pode consumir uma API**
+
+Em PHP, o consumo de uma API ocorre através do envio de requisições HTTP para os endpoints do servidor remoto. As duas abordagens mais comuns são:
+
+cURL (Nativo): Biblioteca integrada ao PHP que oferece total controle sobre a requisição (definição de cabeçalhos, métodos HTTP, timeouts e envio de dados).
+
+Guzzle (Biblioteca Externa): Um cliente HTTP mais moderno e expressivo, amplamente utilizado no ecossistema PHP (como no Laravel) para simplificar requisições assíncronas e manipulação de JSON.
 
 **Como uma API pode disponibilizar informações para outros sistemas**
 
+Uma API expõe seus recursos por meio de rotas (endpoints) públicas ou privadas sob o protocolo HTTP. Para disponibilizar dados com eficiência, ela segue o fluxo:
+
+Roteamento: Mapeia URLs para funções específicas no código do servidor (ex: /api/produtos aciona a função de listagem de produtos).
+
+Consulta e Processamento: O servidor busca os dados solicitados no banco de dados ou realiza o processamento de regras de negócio.
+
+Formatagem e Resposta: O servidor formata o resultado como JSON, define o cabeçalho correto (Content-Type: application/json), anexa o código de status HTTP adequado (ex: 200 OK) e devolve a resposta ao cliente.
+
 **Importância da autenticação, autorização e segurança no consumo de APIs**
 
+Autenticação (Quem é você?): Valida a identidade do cliente que está fazendo a solicitação. Utiliza mecanismos como API Keys, Tokens Bearer ou OAuth 2.0 / JWT (JSON Web Tokens).
+
+Autorização (O que você pode fazer?): Define os privilégios e permissões do usuário ou sistema autenticado (ex: um cliente comum pode usar o método GET, mas apenas administradores têm permissão para usar o DELETE).
+
+Boas Práticas de Segurança:
+
+HTTPS/TLS: Criptografia do tráfego para impedir interceptação de dados em trânsito.
+
+Rate Limiting: Limitação de taxa de requisições para evitar ataques de negação de serviço (DDoS) ou varreduras automatizadas.
+
+Validação de Entrada: Higienização de dados recebidos no body para evitar injeção de código nocivo (ex: SQL Injection).
+
 **Exemplos de utilização de APIs em sistemas empresariais**
+
+Sistemas de Pagamento: Lojas virtuais e e-commerces utilizam APIs de plataformas como Gateway de Pagamentos, Mercado Pago ou Stripe para processar pagamentos via PIX ou cartão de crédito sem precisar armazenar dados bancários em seus próprios servidores.
+
+Logística e Frete: Integração com APIs dos Correios ou transportadoras para calcular custos de entrega e prazo estimado em tempo real com base no CEP.
+
+Logins Sociais (SSO): Opção de autenticação em aplicativos utilizando credenciais já existentes do Google, Facebook ou Apple.

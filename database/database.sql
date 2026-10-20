@@ -1,7 +1,7 @@
 CREATE DATABASE omnirail;
 USE omnirail;
 
--- PORTA DO BANCO: 3309 -- 
+-- PORTA DO BANCO: 3399 -- 
 -- NOME DO BANCO: xampp --
 
 CREATE TABLE IF NOT EXISTS funcionario (
