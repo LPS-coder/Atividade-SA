@@ -5,15 +5,6 @@ exigirAdministrador();
 
 require_once "../infra/conexao.php";
 
-if (
-    !isset($_SESSION["id_funcionario"]) ||
-    !isset($_SESSION["tipo_usuario"]) ||
-    $_SESSION["tipo_usuario"] !== "Administrador"
-) {
-    header("Location: login.php");
-    exit;
-}
-
 $mensagem = "";
 $erro = "";
 
