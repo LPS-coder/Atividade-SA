@@ -437,19 +437,13 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["excluir_usuario"])) {
 
                                 <td>
 
-                                    <?php if ($usuario["tipo_usuario"] === "Administrador"): ?>
-
-                                        <span class="badge bg-danger">
-                                            Administrador
-                                        </span>
-
+                                    
+                                    <?php if (strtoupper(trim($usuario["tipo_usuario"])) === "ADMINISTRADOR"): ?>
+                                        <span class="badge bg-danger">Administrador</span>
                                     <?php else: ?>
-
-                                        <span class="badge bg-secondary">
-                                            Operador
-                                        </span>
-
+                                        <span class="badge bg-secondary">Operador</span>
                                     <?php endif; ?>
+
 
                                 </td>
 
