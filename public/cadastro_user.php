@@ -208,7 +208,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["excluir_usuario"])) {
                 >
 
                 <strong>
-                    Administrador
+                <?= htmlspecialchars($_SESSION["nome_funcionario"] ?? "Usuário") ?>
                 </strong>
             </a>
 

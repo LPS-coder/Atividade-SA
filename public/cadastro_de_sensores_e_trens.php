@@ -111,7 +111,7 @@ exigirLogin();
                 >
 
                 <strong>
-                    Administrador
+                <?= htmlspecialchars($_SESSION["nome_funcionario"] ?? "Usuário") ?>
                 </strong>
             </a>
 
