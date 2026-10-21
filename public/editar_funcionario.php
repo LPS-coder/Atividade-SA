@@ -164,7 +164,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 >
 
                 <strong>
-                    Administrador
+                <?= htmlspecialchars($_SESSION["nome_funcionario"] ?? "Usuário") ?>
                 </strong>
             </a>
 
