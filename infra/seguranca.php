@@ -1,4 +1,5 @@
 <?php
+
 function exigirLogin(): void
 {
     if (session_status() !== PHP_SESSION_ACTIVE) {
@@ -15,7 +16,9 @@ function exigirAdministrador(): void
 {
     exigirLogin();
 
-    if (($_SESSION["tipo_usuario"] ?? "") !== "Administrador") {
+    $tipo = strtoupper($_SESSION["tipo_usuario"] ?? "");
+
+    if ($tipo !== "ADMINISTRADOR") {
         header("Location: dashboard.php?erro=acesso_negado");
         exit;
     }
