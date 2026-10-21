@@ -4,7 +4,7 @@ $host = "localhost";
 $usuario = "root";
 $senha = "";
 $banco = "omnirail";
-// PORTA DO BANCO: 3309 
+// PORTA DO BANCO: 3389 
 
 $conn = new mysqli($host, $usuario, $senha, $banco,3389);
 
