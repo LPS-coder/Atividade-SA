@@ -1,6 +1,7 @@
 CREATE DATABASE IF NOT EXISTS omnirail;
 USE omnirail;
 
+-- Tabela de funcionários
 CREATE TABLE IF NOT EXISTS funcionario (
     id_funcionario INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     nome_funcionario VARCHAR(100) NOT NULL,
@@ -11,7 +12,7 @@ CREATE TABLE IF NOT EXISTS funcionario (
         NOT NULL DEFAULT 'USUARIO'
 );
 
--- Administrador padrão
+-- Administrador padrão do sistema
 INSERT INTO funcionario (
     nome_funcionario,
     cpf_funcionario,
@@ -19,18 +20,18 @@ INSERT INTO funcionario (
     senha_funcionario,
     tipo_usuario
 )
-SELECT
+VALUES (
     'Administrador OMNIRAIL',
     '12345678967',
     'omnirail@gmail.com',
-    'COLE_AQUI_O_HASH_GERADO',
+    '$2y$12$IljBJIRc2YGfztLL6wib5OW24lVekj18ba8Kv5QU3roH/KEj776zy',
     'ADMINISTRADOR'
-WHERE NOT EXISTS (
-    SELECT 1
-    FROM funcionario
-    WHERE email_funcionario = 'omnirail@gmail.com'
-);
+)
+ON DUPLICATE KEY UPDATE
+    senha_funcionario = '$2y$12$IljBJIRc2YGfztLL6wib5OW24lVekj18ba8Kv5QU3roH/KEj776zy',
+    tipo_usuario = 'ADMINISTRADOR';
 
+-- Tabela de trens
 CREATE TABLE IF NOT EXISTS trens (
     id_trem INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     nome_trens VARCHAR(100) NOT NULL,
@@ -41,6 +42,7 @@ CREATE TABLE IF NOT EXISTS trens (
         REFERENCES funcionario(id_funcionario)
 );
 
+-- Tabela de sensores
 CREATE TABLE IF NOT EXISTS sensores (
     id_sensor INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     nome_sensores VARCHAR(100) NOT NULL,
@@ -51,6 +53,7 @@ CREATE TABLE IF NOT EXISTS sensores (
         REFERENCES trens(id_trem)
 );
 
+-- Tabela de relatórios
 CREATE TABLE IF NOT EXISTS relatorios (
     id_relatorio INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     id_funcionario INT NOT NULL,
@@ -66,6 +69,7 @@ CREATE TABLE IF NOT EXISTS relatorios (
         REFERENCES funcionario(id_funcionario)
 );
 
+-- Tabela de rotas
 CREATE TABLE IF NOT EXISTS rotas (
     id_rota INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     nome_rota VARCHAR(100) NOT NULL,
