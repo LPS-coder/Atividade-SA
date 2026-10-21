@@ -128,7 +128,7 @@ exigirLogin();
             </h1>
         </div>
 
-        <a href="../public/cadastro_de_sensores_e_trens.html" class="btn btn-novo-sensor px-4 py-2 rounded-3 fw-bold">
+        <a class="btn btn-novo-sensor px-4 py-2 rounded-3 fw-bold">
             <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" fill="currentColor" class="bi bi-circle-fill" viewBox="0 0 16 16">
   <circle cx="8" cy="8" r="7"/>
 </svg>
@@ -145,7 +145,7 @@ exigirLogin();
                             Velocidade
                         </p>
                         <h1 class="fw-bold">
-                            42 km/h
+                           
                         </h1>
                     </div>
                     <div style="color: red;">
@@ -166,7 +166,7 @@ exigirLogin();
                             Consumo 
                         </p>
                         <h1 class="fw-bold">
-                            484 kW
+                       
                         </h1>
                     </div>
                      <div style="color: rgb(255, 208, 0);">
@@ -187,7 +187,7 @@ exigirLogin();
                             Temperatura 
                         </p>
                         <h1 class="fw-bold">
-                            63.2°c
+
                         </h1>
                     </div>
                      <i class="bi bi-activity text-warning fs-1"></i>
@@ -203,7 +203,7 @@ exigirLogin();
                             Falhas(total)
                         </p>
                         <h1 class="fw-bold">
-                            23
+                       
                         </h1>
                     </div>
                     <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-check-circle" viewBox="0 0 16 16">
@@ -235,7 +235,7 @@ exigirLogin();
                     Velocidade e Temperatura
                 </h4>
 
-                <canvas id="graficoLinha" height="120"></canvas>
+            
 
             </div>
         </div>
@@ -245,13 +245,11 @@ exigirLogin();
             <div class="border rounded-4 p-3 bg-light h-100">
 
                 <h4 class="fw-bold mb-3">
-                    <i class="bi bi-geo-alt-fill text-danger"></i>
+                    
                     Localização
                 </h4>
 
-                <div id="map"
-                style="height: 260px; border-radius: 20px;">
-                </div>
+                
 
             </div>
         </div>
@@ -264,8 +262,7 @@ exigirLogin();
                     Consumo de Energia
                 </h4>
 
-                <canvas id="graficoEnergia" height="100"></canvas>
-
+              
             </div>
         </div>
 
