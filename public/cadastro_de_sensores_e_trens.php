@@ -300,91 +300,40 @@ exigirLogin();
             </div>
 
 
+            
             <div class="col-lg-6">
-
                 <div class="card shadow-sm border-0 rounded-4 p-3 h-100">
-
                     <div class="card-body">
-
                         <h4 class="fw-bold mb-4">
-
                             <i class="bi bi-train-front-fill text-danger me-2"></i>
-
                             Novo Trem
-
                         </h4>
 
+                        <form method="POST" action="trens/cadastro.php">
+                            <div class="mb-3">
+                                <label for="tremNome" class="form-label">Nome</label>
+                                <input type="text" class="form-control" id="tremNome" name="nome_trens" maxlength="100" required>
+                            </div>
 
-                        <div class="mb-3">
+                            <div class="mb-3">
+                                <label for="tremCodigo" class="form-label">Código</label>
+                                <input type="text" class="form-control" id="tremCodigo" name="codigo" maxlength="20" required>
+                            </div>
 
-                            <label
-                                for="tremNome"
-                                class="form-label"
-                            >
-                                Nome
-                            </label>
+                            <div class="mb-4">
+                                <label for="tremModelo" class="form-label">Modelo</label>
+                                <input type="text" class="form-control" id="tremModelo" name="modelo" maxlength="100" required>
+                            </div>
 
-                            <input
-                                type="text"
-                                class="form-control"
-                                id="tremNome"
-                            >
-
-                        </div>
-
-
-                        <div class="mb-3">
-
-                            <label
-                                for="tremCodigo"
-                                class="form-label"
-                            >
-                                Código
-                            </label>
-
-                            <input
-                                type="text"
-                                class="form-control"
-                                id="tremCodigo"
-                            >
-
-                        </div>
-
-
-                        <div class="mb-4">
-
-                            <label
-                                for="tremModelo"
-                                class="form-label"
-                            >
-                                Modelo
-                            </label>
-
-                            <input
-                                type="text"
-                                class="form-control"
-                                id="tremModelo"
-                            >
-
-                        </div>
-
-
-                        <button
-                            class="btn btn-outline-dark w-100 py-2 d-flex align-items-center justify-content-center gap-2 fw-bold"
-                            onclick="cadastrarTrem()"
-                        >
-
-                            <i class="bi bi-plus-lg"></i>
-
-                            Cadastrar Trem
-
-                        </button>
-
+                            <button type="submit" class="btn btn-outline-dark w-100 py-2 fw-bold">
+                                <i class="bi bi-plus-lg me-2"></i>
+                                Cadastrar Trem
+                            </button>
+                        </form>
                     </div>
-
                 </div>
-
             </div>
+
 
         </div>
 
