@@ -13,6 +13,7 @@ if ($_SERVER["REQUEST_METHOD"] !== "POST") {
 $nome = trim($_POST["nome_trens"] ?? "");
 $codigo = trim($_POST["codigo"] ?? "");
 $modelo = trim($_POST["modelo"] ?? "");
+
 $idFuncionario = filter_var(
     $_SESSION["id_funcionario"] ?? null,
     FILTER_VALIDATE_INT
@@ -31,10 +32,10 @@ $sql = "INSERT INTO trens
         (nome_trens, codigo, modelo, id_funcionario)
         VALUES (?, ?, ?, ?)";
 
-$stmt = $conn->prepare($sql);
-$stmt->bind_param("sssi", $nome, $codigo, $modelo, $idFuncionario);
-
 try {
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("sssi", $nome, $codigo, $modelo, $idFuncionario);
+
     if ($stmt->execute()) {
         $stmt->close();
         $conn->close();
@@ -42,11 +43,37 @@ try {
         header("Location: ../cadastro_de_sensores_e_trens.php?sucesso=trem");
         exit;
     }
+
 } catch (mysqli_sql_exception $e) {
-    die("Erro MySQL (" . $e->getCode() . "): " . $e->getMessage());
+
+    if ($e->getCode() == 1062) {
+        if (isset($stmt)) {
+            $stmt->close();
+        }
+
+        $conn->close();
+
+        header("Location: ../cadastro_de_sensores_e_trens.php?erro=codigo_duplicado");
+        exit;
+    }
+
+    error_log("Erro ao cadastrar trem: " . $e->getMessage());
+
+    if (isset($stmt)) {
+        $stmt->close();
+    }
+
+    $conn->close();
+
+    header("Location: ../cadastro_de_sensores_e_trens.php?erro=cadastro_trem");
+    exit;
 }
 
-$stmt->close();
+if (isset($stmt)) {
+    $stmt->close();
+}
+
 $conn->close();
 
-die("Erro: não foi possível cadastrar o trem.");
+header("Location: ../cadastro_de_sensores_e_trens.php?erro=cadastro_trem");
+exit;
