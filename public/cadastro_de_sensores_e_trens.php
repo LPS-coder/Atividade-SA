@@ -1,7 +1,12 @@
 <?php
 require_once "../infra/seguranca.php";
-
 exigirLogin();
+
+require_once "../infra/conexao.php";
+
+$trens = $conn->query(
+    "SELECT id_trem, nome_trens, codigo FROM trens ORDER BY nome_trens"
+);
 ?>
 
 <!DOCTYPE html>
@@ -181,148 +186,85 @@ exigirLogin();
 
 
             <div class="col-lg-6">
-
                 <div class="card shadow-sm border-0 rounded-4 p-3 h-100">
-
                     <div class="card-body">
-
                         <h4 class="fw-bold mb-4">
-
                             <i class="bi bi-broadcast text-danger me-2"></i>
-
                             Novo Sensor
-
                         </h4>
 
-
-                        <div class="mb-3">
-
-                            <label
-                                for="sensorNome"
-                                class="form-label"
-                            >
-                                Nome do sensor
-                            </label>
-
-                            <input
-                                type="text"
-                                class="form-control"
-                                id="sensorNome"
-                            >
-
-                        </div>
-
-
-                        <div class="mb-3">
-
-                            <label
-                                for="sensorLocalizacao"
-                                class="form-label"
-                            >
-                                Localização
-                            </label>
-
-                            <input
-                                type="text"
-                                class="form-control"
-                                id="sensorLocalizacao"
-                            >
-
-                        </div>
-
-
-                        <div class="mb-3">
-
-                            <label
-                                for="sensorTipo"
-                                class="form-label"
-                            >
-                                Tipo de dado monitorado
-                            </label>
-
-                            <select
-                                class="form-select"
-                                id="sensorTipo"
-                            >
-
-                                <option value="Velocidade" selected>
-                                    Velocidade
-                                </option>
-
-                                <option value="Temperatura">
-                                    Temperatura
-                                </option>
-
-                                <option value="Energia">
-                                    Energia
-                                </option>
-
-                                <option value="Falha">
-                                    Falha
-                                </option>
-
-                                <option value="Localização">
-                                    Localização
-                                </option>
-
-                            </select>
-
-                        </div>
-
-
-                        <div class="mb-4">
-
-                            <label
-                                for="sensorTrem"
-                                class="form-label"
-                            >
-                                Trem vinculado
-                            </label>
-
-                            <select
-                                class="form-select"
-                                id="sensorTrem"
-                            >
-
-                                <option
-                                    value=""
-                                    selected
-                                    disabled
+                        <form method="POST" action="sensores/cadastro.php">
+                            <div class="mb-3">
+                                <label for="sensorNome" class="form-label">Nome do sensor</label>
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    id="sensorNome"
+                                    name="nome_sensores"
+                                    maxlength="100"
+                                    required
                                 >
-                                    Selecione
-                                </option>
+                            </div>
 
-                                <option value="Locomotiva Alpha">
-                                    Locomotiva Alpha (LOC-001)
-                                </option>
+                            <div class="mb-3">
+                                <label for="sensorLocalizacao" class="form-label">Localização</label>
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    id="sensorLocalizacao"
+                                    name="localizacao"
+                                    maxlength="150"
+                                    required
+                                >
+                            </div>
 
-                                <option value="Locomotiva Beta">
-                                    Locomotiva Beta (LOC-002)
-                                </option>
+                            <div class="mb-3">
+                                <label for="sensorTipo" class="form-label">Tipo de dado monitorado</label>
+                                <select
+                                    class="form-select"
+                                    id="sensorTipo"
+                                    name="tipo_dado"
+                                    required
+                                >
+                                    <option value="" selected disabled>Selecione</option>
+                                    <option value="Velocidade">Velocidade</option>
+                                    <option value="Temperatura">Temperatura</option>
+                                    <option value="Energia">Energia</option>
+                                    <option value="Falha">Falha</option>
+                                    <option value="Localização">Localização</option>
+                                </select>
+                            </div>
 
-                                <option value="Locomotiva Gamma">
-                                    Locomotiva Gamma (LOC-003)
-                                </option>
+                            <div class="mb-4">
+                                <label for="sensorTrem" class="form-label">Trem vinculado</label>
+                                <select
+                                    class="form-select"
+                                    id="sensorTrem"
+                                    name="id_trem"
+                                    required
+                                >
+                                    <option value="" selected disabled>Selecione um trem</option>
 
-                            </select>
+                                    <?php while ($trem = $trens->fetch_assoc()): ?>
+                                        <option value="<?= (int) $trem["id_trem"] ?>">
+                                            <?= htmlspecialchars($trem["nome_trens"]) ?>
+                                            (<?= htmlspecialchars($trem["codigo"]) ?>)
+                                        </option>
+                                    <?php endwhile; ?>
+                                </select>
+                            </div>
 
-                        </div>
-
-
-                        <button
-                            class="btn btn-danger w-100 py-2 d-flex align-items-center justify-content-center gap-2 fw-bold"
-                            onclick="cadastrarSensor()"
-                        >
-
-                            <i class="bi bi-plus-lg"></i>
-
-                            Cadastrar Sensor
-
-                        </button>
-
+                            <button
+                                type="submit"
+                                class="btn btn-danger w-100 py-2 d-flex align-items-center justify-content-center gap-2 fw-bold"
+                            >
+                                <i class="bi bi-plus-lg"></i>
+                                Cadastrar Sensor
+                            </button>
+                        </form>
                     </div>
-
                 </div>
+
 
             </div>
 
