@@ -55,7 +55,7 @@ if (!$trem) {
         <div class="card border-0 shadow-sm rounded-4">
             <div class="card-body p-4">
                 <div class="d-flex align-items-center gap-3 mb-4">
-                    <div class="bg-danger bg-opacity-10 text-danger rounded-3 p-3">
+                    <div class="bg-danger text-white rounded-3 p-3 d-flex align-items-center justify-content-center">
                         <i class="bi bi-train-front-fill fs-2"></i>
                     </div>
 

@@ -143,6 +143,11 @@ exigirLogin();
                 Trem cadastrado com sucesso!
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Fechar"></button>
             </div>
+        <?php elseif (isset($_GET["erro"]) && $_GET["erro"] === "trem_nao_encontrado"): ?>
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                O trem solicitado não foi encontrado.
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Fechar"></button>
+            </div>    
         <?php endif; ?>
 
         <div class="d-flex justify-content-between align-items-center mb-4">
