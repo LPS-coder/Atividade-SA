@@ -339,8 +339,8 @@ $trens = $conn->query(
                     </thead>
 
 
-                    <tbody id="sensorsTable">
-
+                    <tbody>
+                        <?php require __DIR__ . "/sensores/listar.php"; ?>
                     </tbody>
 
                 </table>
