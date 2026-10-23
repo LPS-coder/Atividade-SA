@@ -124,7 +124,9 @@ exigirLogin();
                 Bem-vindo de volta,
             </p>
             <h1 class="fw-bold">
-                Administrador
+                <strong>
+                <?= htmlspecialchars($_SESSION["nome_funcionario"] ?? "Usuário") ?>
+</strong>
             </h1>
         </div>
 
