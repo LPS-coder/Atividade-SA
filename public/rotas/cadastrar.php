@@ -1,6 +1,6 @@
 <?php
 session_start();
-include '../INFRA/conexao.php';
+include '../infra/conexao.php';
 mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
 
 // Backend: só o administrador logado cadastra rotas
@@ -9,7 +9,7 @@ if (!isset($_SESSION['id'])) {
     exit;
 }
 if (!isset($_SESSION['cargo']) || strtolower($_SESSION['cargo']) != 'administrador') {
-    header('Location: LISTAR.php?msg=acesso_negado');
+    header('Location: listar.php?msg=acesso_negado');
     exit;
 }
 
@@ -70,7 +70,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 $stmt->execute();
                 $stmt->close();
 
-                header('Location: LISTAR.php?msg=cadastrada');
+                header('Location: listar.php?msg=cadastrada');
                 exit;
             }
         } catch (mysqli_sql_exception $e) {
@@ -143,7 +143,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
             <div class="col-12 d-flex gap-2">
                 <button type="submit" class="btn btn-danger fw-bold" <?= count($trens) == 0 ? 'disabled' : '' ?>>Salvar rota</button>
-                <a href="LISTAR.php" class="btn btn-outline-secondary">Cancelar</a>
+                <a href="listar.php" class="btn btn-outline-secondary">Cancelar</a>
             </div>
         </form>
     </div>
