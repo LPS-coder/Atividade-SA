@@ -163,6 +163,21 @@ $trens = $conn->query(
                 Não foi possível excluir o trem. Verifique se ele está vinculado a algum sensor.
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Fechar"></button>
             </div>
+        <?php elseif (($_GET["sucesso"] ?? "") === "sensor"): ?>
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                Sensor cadastrado com sucesso!
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Fechar"></button>
+            </div>
+        <?php elseif (($_GET["erro"] ?? "") === "sensor_vazio" || ($_GET["erro"] ?? "") === "trem_invalido"): ?>
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                Confira os campos e selecione um trem válido.
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Fechar"></button>
+            </div>
+        <?php elseif (($_GET["erro"] ?? "") === "cadastro_sensor"): ?>
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                Não foi possível cadastrar o sensor. Verifique os dados e tente novamente.
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Fechar"></button>
+            </div>
         <?php endif; ?>
 
         <div class="d-flex justify-content-between align-items-center mb-4">

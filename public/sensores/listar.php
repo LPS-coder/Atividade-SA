@@ -21,11 +21,12 @@ if ($resultado && $resultado->num_rows > 0):
             <?= htmlspecialchars($sensor["nome_trens"]) ?>
             (<?= htmlspecialchars($sensor["codigo"]) ?>)
         </td>
+        
         <td>
             <div class="d-flex gap-2">
                 <a
                     href="sensores/visualizar.php?id=<?= (int) $sensor["id_sensor"] ?>"
-                    class="btn btn-sm btn-outline-primary"
+                    class="btn btn-sm btn-outline-secondary"
                     title="Visualizar"
                 >
                     <i class="bi bi-eye"></i>
@@ -33,10 +34,10 @@ if ($resultado && $resultado->num_rows > 0):
 
                 <a
                     href="sensores/editar.php?id=<?= (int) $sensor["id_sensor"] ?>"
-                    class="btn btn-sm btn-outline-warning"
+                    class="btn btn-sm btn-outline-primary"
                     title="Editar"
                 >
-                    <i class="bi bi-pencil"></i>
+                    <i class="bi bi-pencil-square"></i>
                 </a>
 
                 <form
@@ -60,6 +61,7 @@ if ($resultado && $resultado->num_rows > 0):
                 </form>
             </div>
         </td>
+
     </tr>
 <?php
     endwhile;
