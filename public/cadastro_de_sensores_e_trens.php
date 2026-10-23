@@ -178,6 +178,21 @@ $trens = $conn->query(
                 Não foi possível cadastrar o sensor. Verifique os dados e tente novamente.
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Fechar"></button>
             </div>
+            <?php elseif (($_GET["sucesso"] ?? "") === "sensor_excluido"): ?>
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    Sensor excluído com sucesso!
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Fechar"></button>
+                </div>
+            <?php elseif (($_GET["erro"] ?? "") === "exclusao_sensor"): ?>
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    Não foi possível excluir o sensor.
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Fechar"></button>
+                </div>
+            <?php elseif (($_GET["erro"] ?? "") === "sensor_nao_encontrado"): ?>
+                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                    O sensor solicitado não foi encontrado.
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Fechar"></button>
+                </div>
         <?php endif; ?>
 
         <div class="d-flex justify-content-between align-items-center mb-4">
