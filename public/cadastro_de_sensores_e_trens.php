@@ -133,6 +133,18 @@ exigirLogin();
 
     <div class="main">
 
+        <?php if (isset($_GET["erro"]) && $_GET["erro"] === "codigo_duplicado"): ?>
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                Já existe um trem cadastrado com esse código. Informe outro código.
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Fechar"></button>
+            </div>
+        <?php elseif (isset($_GET["sucesso"]) && $_GET["sucesso"] === "trem"): ?>
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                Trem cadastrado com sucesso!
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Fechar"></button>
+            </div>
+        <?php endif; ?>
+
         <div class="d-flex justify-content-between align-items-center mb-4">
 
             <div>
@@ -377,8 +389,32 @@ exigirLogin();
                 </table>
 
             </div>
+            
 
         </div>
+
+        
+        <div class="card mt-4 border-0 shadow-sm rounded-4 p-4">
+            <h4 class="fw-bold mb-4">Trens da Ferrovia</h4>
+
+            <div class="table-responsive">
+                <table class="table align-middle mb-0">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nome</th>
+                            <th>Código</th>
+                            <th>Modelo</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php require __DIR__ . "/trens/listar.php"; ?>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
 
     </div>
 

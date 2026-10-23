@@ -1,9 +1,9 @@
 <?php
 
-require_once "../../infra/seguranca.php";
+require_once __DIR__ . "/../../infra/seguranca.php";
 exigirLogin();
 
-require_once "../../infra/conexao.php";
+require_once __DIR__ . "/../../infra/conexao.php";
 
 $sql = "SELECT id_trem, nome_trens, codigo, modelo
         FROM trens
