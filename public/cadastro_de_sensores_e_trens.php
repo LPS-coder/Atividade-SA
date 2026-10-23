@@ -1,7 +1,7 @@
 <?php
 require_once "../infra/seguranca.php";
 exigirLogin();
-
+exigirAdministrador();
 require_once "../infra/conexao.php";
 
 $trens = $conn->query(
