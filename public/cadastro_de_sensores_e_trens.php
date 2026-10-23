@@ -148,6 +148,16 @@ exigirLogin();
                 O trem solicitado não foi encontrado.
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Fechar"></button>
             </div>    
+        <?php elseif (isset($_GET["sucesso"]) && $_GET["sucesso"] === "trem_excluido"): ?>
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                Trem excluído com sucesso!
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Fechar"></button>
+            </div>
+        <?php elseif (isset($_GET["erro"]) && $_GET["erro"] === "exclusao_trem"): ?>
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                Não foi possível excluir o trem. Verifique se ele está vinculado a algum sensor.
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Fechar"></button>
+            </div>
         <?php endif; ?>
 
         <div class="d-flex justify-content-between align-items-center mb-4">
