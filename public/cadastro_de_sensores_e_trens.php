@@ -94,6 +94,13 @@ $trens = $conn->query(
                 </a>
             </li>
 
+            <li>
+                <a href="../rotas.php" class="nav-link text-white">
+                    <i class="bi bi-globe-americas me-2"></i>
+                    Rotas
+                </a>
+            </li>
+
         </ul>
 
         <hr>
