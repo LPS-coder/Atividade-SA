@@ -106,7 +106,14 @@ $resultado = $conn->query($sql);
                                         <div class="d-flex justify-content-center gap-1">
                                             <a href="visualizar.php?id=<?= (int) $rota["id_rota"] ?>" class="btn btn-sm btn-outline-secondary" title="Visualizar"><i class="bi bi-eye"></i></a>
                                             <a href="editar.php?id=<?= (int) $rota["id_rota"] ?>" class="btn btn-sm btn-outline-primary" title="Editar"><i class="bi bi-pencil"></i></a>
-                                            <a href="excluir.php?id=<?= (int) $rota["id_rota"] ?>" class="btn btn-sm btn-outline-danger" title="Excluir" onclick="return confirm('Tem certeza que deseja excluir esta rota?')"><i class="bi bi-trash"></i></a>
+                                            
+                                            <form action="excluir.php" method="POST" onsubmit="return confirm('Tem certeza que deseja excluir esta rota?')">
+                                                <input type="hidden" name="id" value="<?= (int) $rota["id_rota"] ?>">
+                                                <button type="submit" class="btn btn-sm btn-outline-danger" title="Excluir">
+                                                    <i class="bi bi-trash"></i>
+                                                </button>
+                                            </form>
+                                        
                                         </div>
                                     </td>
                                 </tr>

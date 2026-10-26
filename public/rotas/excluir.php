@@ -1,48 +1,38 @@
-<?php 
-session_start();
-include '../INFRA/conexao.php';
-mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
+<?php
+require_once "../../infra/conexao.php";
+require_once "../../infra/seguranca.php";
 
-// Backend: só o adminstrador logado exclui rotas 
+exigirAdministrador();
 
-if (!isset($_SESSION['id'])) {
-    header('Location: ../login.php');
-    exit;
-}
-if (!isset($_SESSION['cargo']) || strtolower($_SESSION['cargo']) != 'administrador') {
-    header('Location: LISTAR.php?msg=acesso_negado');
+if ($_SERVER["REQUEST_METHOD"] !== "POST") {
+    header("Location: listar.php");
     exit;
 }
 
+$id_rota = filter_input(INPUT_POST, "id", FILTER_VALIDATE_INT);
 
-// só exclui por formulário (POST), nunca por link ou URL digitada
-if ($_SERVER['REQUEST_METHOD'] != 'POST') {
-    header('Location: LISTAR.php');
+if (!$id_rota || $id_rota < 1) {
+    header("Location: listar.php?erro=" . urlencode("ID da rota inválido."));
     exit;
 }
 
+$stmt = $conn->prepare("DELETE FROM rotas WHERE id_rota = ?");
+$stmt->bind_param("i", $id_rota);
 
-$id = $_POST['id_rota'] ?? '';
-if (!is_string($id) || !ctype_digit($id)) {
-    header('Location: LISTAR.php?msg=nao_encontrada');
-    exit;
-}
-
-
-try {
-    $stmt = $conn->prepare("DELETE FROM rotas WHERE id_rota = ?");
-    $stmt->bind_param("i", $id);
-    $stmt->execute();
-
-
-    if ($stmt->affected_rows == 0) {
-        header('Location: LISTAR.php?msg=nao_encontrada');
+if ($stmt->execute()) {
+    if ($stmt->affected_rows > 0) {
+        $mensagem = "Rota excluída com sucesso.";
+        $destino = "sucesso";
     } else {
-        header('Location: LISTAR.php?msg=excluida');
+        $mensagem = "Rota não encontrada.";
+        $destino = "erro";
     }
-
-    $stmt->close();
-} catch (mysqli_sql_exception $e) {
-    header('Location: LISTAR.php?msg=erro');
+} else {
+    $mensagem = "Não foi possível excluir a rota. Verifique se ela está vinculada a outros registros.";
+    $destino = "erro";
 }
+
+$stmt->close();
+
+header("Location: listar.php?" . $destino . "=" . urlencode($mensagem));
 exit;
