@@ -178,7 +178,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["excluir_usuario"])) {
             </li>
 
             <li>
-                <a href="../rotas.php" class="nav-link text-white">
+                <a href="rotas.php" class="nav-link text-white">
                     <i class="bi bi-globe-americas me-2"></i>
                     Rotas
                 </a>
