@@ -80,3 +80,70 @@ async function buscarClima() {
         clearTimeout(temporizador);
     }
 }
+
+function climaDefinir(id, texto) {
+    const elemento = document.getElementById(id);
+
+    if (elemento) {
+        elemento.textContent = texto;
+    }
+}
+
+function climaFormatar(valor, sufixo) {
+    return typeof valor === "number" ? Math.round(valor) + sufixo : "--";
+}
+
+function climaDataHora() {
+    const agora = new Date();
+
+    return agora.toLocaleDateString("pt-BR") + " às "
+        + agora.toLocaleTimeString("pt-BR", { hour: "2-digit", minute: "2-digit" });
+}
+
+function mostrarClima(atual) {
+    const info = CLIMA_CODIGOS[atual.weather_code]
+        || { texto: "Condição não identificada", icone: "bi-cloud-fill", nivel: "nenhum" };
+    const ehDia = atual.is_day !== 0; // a API manda 1 para dia e 0 para noite
+    const nivel = CLIMA_NIVEIS[info.nivel];
+
+    climaDefinir("clima-local", CLIMA_LOCAL.nome);
+    climaDefinir("clima-temperatura", Math.round(atual.temperature_2m));
+    climaDefinir("clima-condicao", info.texto);
+    climaDefinir("clima-sensacao", climaFormatar(atual.apparent_temperature, "°C"));
+    climaDefinir("clima-umidade", climaFormatar(atual.relative_humidity_2m, "%"));
+    climaDefinir("clima-vento", climaFormatar(atual.wind_speed_10m, " km/h"));
+    climaDefinir("clima-atualizado", climaDataHora());
+
+    const icone = document.getElementById("clima-icone");
+    if (icone) {
+        icone.className = "bi " + (ehDia ? info.icone : (info.iconeNoite || info.icone));
+    }
+
+    const badge = document.getElementById("clima-operacao");
+    if (badge) {
+        badge.className = nivel.classe;
+        badge.textContent = nivel.texto;
+    }
+
+    const aviso = document.getElementById("clima-erro");
+    if (aviso) {
+        aviso.classList.add("d-none");
+    }
+
+    climaTemDados = true;
+}
+
+function mostrarErroClima() {
+    const aviso = document.getElementById("clima-erro");
+
+    if (aviso) {
+        aviso.classList.remove("d-none");
+        aviso.textContent = climaTemDados
+            ? "Não foi possível atualizar agora. Os valores acima são da última consulta que deu certo."
+            : "Não foi possível obter o clima agora. Verifique a conexão e tente novamente.";
+    }
+
+    if (!climaTemDados) {
+        climaDefinir("clima-condicao", "Indisponível");
+    }
+}
