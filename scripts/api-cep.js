@@ -114,54 +114,54 @@ function cancelarConsultaCep() {
 
 async function consultarCep(cep) {
     cancelarConsultaCep(); // se ainda havia uma consulta antiga rodando, ela é cancelada
- 
+
     const controle = new AbortController();
     cepConsulta = controle;
- 
+
     let estourouTempo = false;
     const temporizador = setTimeout(function () {
         estourouTempo = true;
         controle.abort();
     }, CEP_TEMPO_LIMITE_MS);
- 
+
     mostrarMensagemCep("carregando", "Consultando CEP...");
- 
+
     try {
         const resposta = await fetch("https://viacep.com.br/ws/" + cep + "/json/", { signal: controle.signal });
- 
+
         // A ViaCEP responde 400 quando o formato do CEP é inválido
         if (resposta.status === 400) {
             if (cepConsulta !== controle) return;
- 
+
             limparEnderecoCep();
             mostrarMensagemCep("erro", "CEP inválido. Informe 8 números.");
             return;
         }
- 
+
         if (!resposta.ok) {
             throw new Error("A ViaCEP respondeu com status " + resposta.status);
         }
- 
+
         const dados = await resposta.json();
- 
+
         if (cepConsulta !== controle) return; // já existe uma consulta mais nova: ignora esta
- 
+
         // Formato certo, mas o CEP não existe na base: a ViaCEP devolve { "erro": "true" }
         if (dados.erro) {
             limparEnderecoCep();
             mostrarMensagemCep("erro", "CEP não encontrado. Confira os números ou preencha o endereço manualmente.");
             return;
         }
- 
+
         preencherEnderecoCep(dados);
- 
+
         // CEP "geral" de cidade pequena vem sem logradouro/bairro: a pessoa completa na mão
         if (dados.logradouro) {
             mostrarMensagemCep("sucesso", "CEP encontrado.");
         } else {
             mostrarMensagemCep("sucesso", "CEP encontrado. Ele é geral da cidade: preencha o logradouro e o bairro.");
         }
- 
+
         // Leva o cursor para o próximo campo que a pessoa precisa preencher
         const proximo = dados.logradouro ? cepCampo("numero") : cepCampo("logradouro");
         if (proximo && document.activeElement === cepCampo("cep")) {
@@ -169,7 +169,7 @@ async function consultarCep(cep) {
         }
     } catch (falha) {
         if (cepConsulta !== controle) return; // cancelada de propósito: não é falha
- 
+
         console.error("Falha ao consultar o CEP:", falha);
         limparEnderecoCep();
         mostrarMensagemCep(
@@ -180,9 +180,61 @@ async function consultarCep(cep) {
         );
     } finally {
         clearTimeout(temporizador);
- 
+
         if (cepConsulta === controle) {
             cepConsulta = null;
         }
     }
+}
+
+function iniciarCep() {
+    const campoCep = cepCampo("cep");
+
+    if (!campoCep) {
+        return; // página sem o campo de CEP: não faz nada
+    }
+
+    // Digitou ou colou: aplica a máscara 00000-000 e consulta quando chegar nos 8 números
+    campoCep.addEventListener("input", function () {
+        const numeros = cepApenasNumeros(campoCep.value).slice(0, 8);
+        campoCep.value = cepComMascara(numeros);
+
+        cancelarConsultaCep();
+        mostrarMensagemCep("", "");
+
+        if (numeros.length === 8) {
+            consultarCep(numeros);
+        } else {
+            limparEnderecoCep(); // o CEP mudou: o endereço de antes não vale mais
+
+            // CEP pela metade impede o envio (o aviso na tela aparece quando sair do campo)
+            if (numeros.length > 0) {
+                campoCep.setCustomValidity("CEP incompleto. Informe os 8 números.");
+            }
+        }
+    });
+
+    // Saiu do campo com o CEP pela metade: mostra o aviso
+    campoCep.addEventListener("blur", function () {
+        const numeros = cepApenasNumeros(campoCep.value);
+
+        if (numeros.length > 0 && numeros.length < 8) {
+            mostrarMensagemCep("erro", "CEP incompleto. Informe os 8 números.");
+        }
+    });
+
+    // Botão "Limpar" do formulário: zera avisos e consulta pendente
+    if (campoCep.form) {
+        campoCep.form.addEventListener("reset", function () {
+            cancelarConsultaCep();
+            cepPreenchidoPelaApi = false;
+            mostrarMensagemCep("", "");
+        });
+    }
+}
+
+if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", iniciarCep);
+} else {
+    iniciarCep();
 }
