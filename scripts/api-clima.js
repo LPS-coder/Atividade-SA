@@ -37,3 +37,13 @@ const CLIMA_CODIGOS = {
     96: { texto: "Tempestade com granizo fraco", icone: "bi-cloud-hail-fill",           nivel: "risco" },
     99: { texto: "Tempestade com granizo forte", icone: "bi-cloud-hail-fill",           nivel: "risco" }
 };
+
+const CLIMA_NIVEIS = {
+    ok:      { classe: "badge bg-success",           texto: "Favorável à operação" },
+    atencao: { classe: "badge bg-warning text-dark", texto: "Atenção à operação" },
+    risco:   { classe: "badge bg-danger",            texto: "Risco à operação" },
+    nenhum:  { classe: "badge bg-secondary",         texto: "Sem avaliação" }
+};
+
+let climaCarregando = false; // evita duas consultas ao mesmo tempo
+let climaTemDados = false;   // já mostramos algum dado real da API?
