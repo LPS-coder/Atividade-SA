@@ -147,3 +147,28 @@ function mostrarErroClima() {
         climaDefinir("clima-condicao", "Indisponível");
     }
 }
+
+async function carregarClima() {
+    if (climaCarregando) {
+        return;
+    }
+
+    climaCarregando = true;
+
+    const botao = document.getElementById("clima-atualizar");
+    const girando = document.getElementById("clima-carregando");
+    if (botao) botao.disabled = true;
+    if (girando) girando.classList.remove("d-none");
+
+    try {
+        const atual = await buscarClima();
+        mostrarClima(atual);
+    } catch (falha) {
+        console.error("Falha ao consultar o clima:", falha);
+        mostrarErroClima();
+    } finally {
+        climaCarregando = false;
+        if (botao) botao.disabled = false;
+        if (girando) girando.classList.add("d-none");
+    }
+}
