@@ -172,3 +172,23 @@ async function carregarClima() {
         if (girando) girando.classList.add("d-none");
     }
 }
+
+function iniciarClima() {
+    if (!document.getElementById("clima-card")) {
+        return; 
+    }
+
+    const botao = document.getElementById("clima-atualizar");
+    if (botao) {
+        botao.addEventListener("click", carregarClima);
+    }
+
+    carregarClima();
+    setInterval(carregarClima, CLIMA_ATUALIZA_A_CADA_MS);
+}
+
+if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", iniciarClima);
+} else {
+    iniciarClima();
+}
