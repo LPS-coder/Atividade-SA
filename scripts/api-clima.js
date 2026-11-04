@@ -47,3 +47,36 @@ const CLIMA_NIVEIS = {
 
 let climaCarregando = false; // evita duas consultas ao mesmo tempo
 let climaTemDados = false;   // já mostramos algum dado real da API?
+
+
+
+async function buscarClima() {
+    const url = "https://api.open-meteo.com/v1/forecast"
+        + "?latitude=" + CLIMA_LOCAL.latitude
+        + "&longitude=" + CLIMA_LOCAL.longitude
+        + "&current=temperature_2m,apparent_temperature,relative_humidity_2m,weather_code,wind_speed_10m,is_day";
+
+    const controle = new AbortController();
+    const temporizador = setTimeout(function () {
+        controle.abort();
+    }, CLIMA_TEMPO_LIMITE_MS);
+
+    try {
+        const resposta = await fetch(url, { signal: controle.signal });
+
+        if (!resposta.ok) {
+            throw new Error("A Open-Meteo respondeu com status " + resposta.status);
+    }
+
+        const dados = await resposta.json();
+        const atual = dados.current;
+
+        if (!atual || typeof atual.temperature_2m !== "number" || typeof atual.weather_code !== "number") {
+            throw new Error("A resposta da Open-Meteo veio sem os dados esperados");
+        }
+
+        return atual;
+    } finally {
+        clearTimeout(temporizador);
+    }
+}
