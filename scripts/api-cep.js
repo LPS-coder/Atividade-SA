@@ -111,3 +111,78 @@ function cancelarConsultaCep() {
         cepConsulta = null;
     }
 }
+
+async function consultarCep(cep) {
+    cancelarConsultaCep(); // se ainda havia uma consulta antiga rodando, ela é cancelada
+ 
+    const controle = new AbortController();
+    cepConsulta = controle;
+ 
+    let estourouTempo = false;
+    const temporizador = setTimeout(function () {
+        estourouTempo = true;
+        controle.abort();
+    }, CEP_TEMPO_LIMITE_MS);
+ 
+    mostrarMensagemCep("carregando", "Consultando CEP...");
+ 
+    try {
+        const resposta = await fetch("https://viacep.com.br/ws/" + cep + "/json/", { signal: controle.signal });
+ 
+        // A ViaCEP responde 400 quando o formato do CEP é inválido
+        if (resposta.status === 400) {
+            if (cepConsulta !== controle) return;
+ 
+            limparEnderecoCep();
+            mostrarMensagemCep("erro", "CEP inválido. Informe 8 números.");
+            return;
+        }
+ 
+        if (!resposta.ok) {
+            throw new Error("A ViaCEP respondeu com status " + resposta.status);
+        }
+ 
+        const dados = await resposta.json();
+ 
+        if (cepConsulta !== controle) return; // já existe uma consulta mais nova: ignora esta
+ 
+        // Formato certo, mas o CEP não existe na base: a ViaCEP devolve { "erro": "true" }
+        if (dados.erro) {
+            limparEnderecoCep();
+            mostrarMensagemCep("erro", "CEP não encontrado. Confira os números ou preencha o endereço manualmente.");
+            return;
+        }
+ 
+        preencherEnderecoCep(dados);
+ 
+        // CEP "geral" de cidade pequena vem sem logradouro/bairro: a pessoa completa na mão
+        if (dados.logradouro) {
+            mostrarMensagemCep("sucesso", "CEP encontrado.");
+        } else {
+            mostrarMensagemCep("sucesso", "CEP encontrado. Ele é geral da cidade: preencha o logradouro e o bairro.");
+        }
+ 
+        // Leva o cursor para o próximo campo que a pessoa precisa preencher
+        const proximo = dados.logradouro ? cepCampo("numero") : cepCampo("logradouro");
+        if (proximo && document.activeElement === cepCampo("cep")) {
+            proximo.focus();
+        }
+    } catch (falha) {
+        if (cepConsulta !== controle) return; // cancelada de propósito: não é falha
+ 
+        console.error("Falha ao consultar o CEP:", falha);
+        limparEnderecoCep();
+        mostrarMensagemCep(
+            "falha",
+            estourouTempo
+                ? "A consulta demorou demais. Tente de novo ou preencha o endereço manualmente."
+                : "Não foi possível consultar o CEP agora (sem conexão ou serviço fora do ar). Preencha o endereço manualmente."
+        );
+    } finally {
+        clearTimeout(temporizador);
+ 
+        if (cepConsulta === controle) {
+            cepConsulta = null;
+        }
+    }
+}
