@@ -179,7 +179,7 @@ if (!$relatorio) {
                 <div class="card shadow-sm border-0 rounded-4 h-100">
                     <div class="card-body p-4">
                         <div class="d-flex align-items-center gap-3 mb-4">
-                            <div class="bg-success rounded-3 p-3">
+                            <div class="bg-danger rounded-3 p-3">
                                 <i class="bi bi-broadcast text-white fs-3"></i>
                             </div>
                             <div>
@@ -206,7 +206,7 @@ if (!$relatorio) {
                         <hr class="my-4">
 
                         <div class="d-flex align-items-center gap-3 mb-4">
-                            <div class="bg-secondary rounded-3 p-3">
+                            <div class="bg-danger rounded-3 p-3">
                                 <i class="bi bi-train-front text-white fs-3"></i>
                             </div>
                             <div>
@@ -236,6 +236,14 @@ if (!$relatorio) {
         </div>
 
         <div class="d-flex justify-content-end gap-2 mt-4">
+            <form action="excluir.php" method="POST" onsubmit="return confirm('Tem certeza que deseja excluir este relatório? Essa ação não poderá ser desfeita.');">
+                <input type="hidden" name="id" value="<?= (int) $relatorio["id_relatorio"] ?>">
+                <button type="submit" class="btn btn-outline-danger fw-bold">
+                    <i class="bi bi-trash me-1"></i>
+                    Excluir Relatório
+                </button>
+            </form>
+
             <a href="editar.php?id=<?= (int) $relatorio["id_relatorio"] ?>" class="btn btn-danger fw-bold">
                 <i class="bi bi-pencil-square me-1"></i>
                 Editar Relatório
