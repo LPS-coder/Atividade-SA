@@ -97,4 +97,25 @@ CREATE TABLE IF NOT EXISTS monitoramento (
         NOT NULL DEFAULT 'ATIVO',
     descricao TEXT,
 
-   
+    FOREIGN KEY (id_funcionario)
+        REFERENCES funcionario(id_funcionario),
+    FOREIGN KEY (id_trem)
+        REFERENCES trens(id_trem),
+    FOREIGN KEY (id_rota)
+         REFERENCES rotas(id_rota)
+);
+
+CREATE TABLE IF NOT EXISTS dados_monitoramento (
+    id_dado INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    id_monitoramento INT NOT NULL,
+    id_sensor INT NOT NULL,
+    valor_registrado VARCHAR(255) NOT NULL,
+    unidade VARCHAR(30),
+    data_registro DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    descricao TEXT,
+
+    FOREIGN KEY (id_monitoramento)
+        REFERENCES monitoramento(id_monitoramento),
+    FOREIGN KEY (id_sensor)
+        REFERENCES sensores(id_sensor)
+);
