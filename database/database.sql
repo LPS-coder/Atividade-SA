@@ -85,3 +85,16 @@ CREATE TABLE IF NOT EXISTS rotas (
         ON DELETE RESTRICT
         ON UPDATE CASCADE
 );
+
+CREATE TABLE IF NOT EXISTS monitoramento (
+    id_monitoramento INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    id_funcionario INT NOT NULL,
+    id_trem INT NOT NULL,
+    id_rota INT,
+    data_inicio DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    data_fim DATETIME,
+    status ENUM('ATIVO','FINALIZADO','PAUSADO')
+        NOT NULL DEFAULT 'ATIVO',
+    descricao TEXT,
+
+   
