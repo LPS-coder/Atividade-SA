@@ -104,7 +104,7 @@ $rotasRecentes = $conn->query($sqlRecentes);
                         <p class="text-secondary mb-2">Distância total</p>
                         <h2 class="fw-bold mb-0"><?= number_format((float) $estatisticas["distancia_total"], 2, ",", ".") ?> <small class="fs-6">km</small></h2>
                     </div>
-                    <div class="rounded-3 p-3 bg-success bg-opacity-10 text-success">
+                    <div class="rounded-3 p-3 bg-danger bg-opacity-10 text-success">
                         <i class="bi bi-signpost-2 fs-2 text-white"></i>
                     </div>
                 </div>
@@ -118,7 +118,7 @@ $rotasRecentes = $conn->query($sqlRecentes);
                         <p class="text-secondary mb-2">Tempo médio previsto</p>
                         <h2 class="fw-bold mb-0"><?= number_format((float) $estatisticas["tempo_medio"], 0, ",", ".") ?> <small class="fs-6">min</small></h2>
                     </div>
-                    <div class="rounded-3 p-3 bg-warning bg-opacity-10 text-warning">
+                    <div class="rounded-3 p-3 bg-danger bg-opacity-10 text-warning">
                         <i class="bi bi-clock-history fs-2 text-white"></i>
                     </div>
                 </div>

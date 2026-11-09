@@ -187,7 +187,7 @@ $tipos = [
                 <div class="col-12 col-md-6 col-xl-4">
                     <div class="card border-0 shadow-sm h-100">
                         <div class="card-body d-flex align-items-center">
-                            <div class="rounded p-3 bg-primary bg-opacity-10 me-3">
+                            <div class="rounded p-3 bg-danger bg-opacity-10 me-3">
                                 <i class="bi bi-tags-fill text-white fs-3"></i>
                             </div>
 
@@ -214,7 +214,7 @@ $tipos = [
                 <div class="col-12 col-md-6 col-xl-4">
                     <div class="card border-0 shadow-sm h-100">
                         <div class="card-body d-flex align-items-center">
-                            <div class="rounded p-3 bg-success bg-opacity-10 me-3">
+                            <div class="rounded p-3 bg-danger bg-opacity-10 me-3">
                                 <i class="bi bi-database-check text-white fs-3"></i>
                             </div>
 
