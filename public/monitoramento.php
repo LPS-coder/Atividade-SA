@@ -270,7 +270,7 @@ $tipos = [
                                                 $tipo = $sensor["tipo_dado"];
                                                 $cor = $tipos[$tipo] ?? "secondary";
                                                 ?>
-                                                <span class="badge bg-<?= $cor ?>">
+                                                <span class="badge bg-danger">
                                                     <?= htmlspecialchars($tipo) ?>
                                                 </span>
                                             </td>
