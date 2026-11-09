@@ -153,7 +153,7 @@ exigirLogin();
                         </p>
                         
                     </div>
-                    <i class="bi bi-train-front-fill text-danger fs-1"></i>
+                    <i class="bi bi-train-front-fill text fs-1"></i>
                 </div>
             </div>
         </div>
@@ -167,7 +167,7 @@ exigirLogin();
                         </p>
                        
                     </div>
-                    <i class="bi bi-broadcast text-success fs-1"></i>
+                    <i class="bi bi-broadcast text fs-1"></i>
                 </div>
             </div>
         </div>
@@ -181,7 +181,7 @@ exigirLogin();
                         </p>
                         
                     </div>
-                    <i class="bi bi-activity text-warning fs-1"></i>
+                    <i class="bi bi-activity text fs-1"></i>
                 </div>
             </div>
         </div>
@@ -195,7 +195,7 @@ exigirLogin();
                         </p>
                         
                     </div>
-                    <i class="bi bi-exclamation-triangle text-danger fs-1"></i>
+                    <i class="bi bi-exclamation-triangle text fs-1"></i>
                 </div>
             </div>
         </div>
