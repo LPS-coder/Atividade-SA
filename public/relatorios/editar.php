@@ -82,12 +82,36 @@ $trens = $conn->query("SELECT id_trem, nome_trens, codigo FROM trens ORDER BY no
         </a>
         <hr>
         <ul class="nav nav-pills flex-column mb-auto">
-            <li><a href="../dashboard.php" class="nav-link text-white"><i class="bi bi-speedometer2 me-2"></i>Dashboard</a></li>
-            <li><a href="../cadastro_de_sensores_e_trens.php" class="nav-link text-white"><i class="bi bi-broadcast me-2"></i>Sensores & Trens</a></li>
-            <li><a href="../monitoramento.php" class="nav-link text-white"><i class="bi bi-activity me-2"></i>Monitoramento</a></li>
-            <li><a href="../relatorios.php" class="nav-link active"><i class="bi bi-file-earmark-text me-2"></i>Relatórios</a></li>
-            <li><a href="../cadastro_user.php" class="nav-link text-white"><i class="bi bi-people me-2"></i>Cadastrados</a></li>
-            <li><a href="../rotas.php" class="nav-link text-white"><i class="bi bi-globe-americas me-2"></i>Rotas</a></li>
+            <li class="nav-item">
+                <a href="../dashboard.php" class="nav-link text-white">
+                    <i class="bi bi-speedometer2 me-2"></i>Dashboard
+                </a>
+            </li>
+            <li>
+                <a href="../cadastro_de_sensores_e_trens.php" class="nav-link text-white">
+                    <i class="bi bi-broadcast me-2"></i>Sensores & Trens
+                </a>
+            </li>
+            <li>
+                <a href="../monitoramento.php" class="nav-link text-white">
+                    <i class="bi bi-activity me-2"></i>Monitoramento
+                </a>
+            </li>
+            <li>
+                <a href="../relatorios.php" class="nav-link active" aria-current="page">
+                    <i class="bi bi-file-earmark-text me-2"></i>Relatórios
+                </a>
+            </li>
+            <li>
+                <a href="../cadastro_user.php" class="nav-link text-white">
+                    <i class="bi bi-people me-2"></i>Cadastrados
+                </a>
+            </li>
+            <li>
+                <a href="../rotas.php" class="nav-link text-white">
+                    <i class="bi bi-globe-americas me-2"></i>Rotas
+                </a>
+            </li>
         </ul>
         <hr>
         <div class="dropdown">
@@ -96,7 +120,9 @@ $trens = $conn->query("SELECT id_trem, nome_trens, codigo FROM trens ORDER BY no
                 <strong><?= htmlspecialchars($_SESSION["nome_funcionario"] ?? "Usuário") ?></strong>
             </a>
             <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
-                <li><a class="dropdown-item" href="../logout.php">Sair</a></li>
+                <li>
+                    <a class="dropdown-item" href="../logout.php">Sair</a>
+                </li>
             </ul>
         </div>
     </div>
