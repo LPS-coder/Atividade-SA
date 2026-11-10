@@ -7,7 +7,13 @@ require_once "../infra/conexao.php";
 $trens = $conn->query(
     "SELECT id_trem, nome_trens, codigo FROM trens ORDER BY nome_trens"
 );
+
+$rotas = $conn->query(
+    "SELECT id_rota, nome_rota FROM rotas ORDER BY nome_rota"
+);
 ?>
+
+
 
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -200,6 +206,11 @@ $trens = $conn->query(
                     O sensor solicitado não foi encontrado.
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Fechar"></button>
                 </div>
+            <?php elseif (($_GET["erro"] ?? "") === "trem_vazio"): ?>
+                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                    Preencha todos os campos e selecione uma rota para o trem.
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Fechar"></button>
+                </div>
         <?php endif; ?>
 
         <div class="d-flex justify-content-between align-items-center mb-4">
@@ -315,6 +326,7 @@ $trens = $conn->query(
                             Novo Trem
                         </h4>
 
+                                               
                         <form method="POST" action="trens/cadastro.php">
                             <div class="mb-3">
                                 <label for="tremNome" class="form-label">Nome</label>
@@ -326,9 +338,21 @@ $trens = $conn->query(
                                 <input type="text" class="form-control" id="tremCodigo" name="codigo" maxlength="20" required>
                             </div>
 
-                            <div class="mb-4">
+                            <div class="mb-3">
                                 <label for="tremModelo" class="form-label">Modelo</label>
                                 <input type="text" class="form-control" id="tremModelo" name="modelo" maxlength="100" required>
+                            </div>
+
+                            <div class="mb-4">
+                                <label for="tremRota" class="form-label">Rota vinculada</label>
+                                <select class="form-select" id="tremRota" name="id_rota" required>
+                                    <option value="" selected disabled>Selecione uma rota</option>
+                                    <?php while ($rota = $rotas->fetch_assoc()): ?>
+                                        <option value="<?= (int) $rota["id_rota"] ?>">
+                                            <?= htmlspecialchars($rota["nome_rota"]) ?>
+                                        </option>
+                                    <?php endwhile; ?>
+                                </select>
                             </div>
 
                             <button type="submit" class="btn btn-outline-dark w-100 py-2 fw-bold">
@@ -336,6 +360,7 @@ $trens = $conn->query(
                                 Cadastrar Trem
                             </button>
                         </form>
+  
                     </div>
                 </div>
             </div>
@@ -399,6 +424,7 @@ $trens = $conn->query(
                             <th>Nome</th>
                             <th>Código</th>
                             <th>Modelo</th>
+                            <th>Rota</th>
                             <th>Ações</th>
                         </tr>
                     </thead>
