@@ -108,7 +108,6 @@ CREATE TABLE IF NOT EXISTS monitoramento (
         REFERENCES rotas(id_rota)
 );
 
--- Tabela de dados coletados durante o monitoramento
 CREATE TABLE IF NOT EXISTS dados_monitoramento (
     id_dado INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     id_monitoramento INT NOT NULL,
