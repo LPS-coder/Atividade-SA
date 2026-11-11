@@ -228,6 +228,61 @@ $tipos = [
 
             </div>
 
+
+            <div class="card border-0 shadow-sm rounded-4 p-4 mt-4" id="clima-card">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <div>
+                        <h5 class="fw-bold mb-1">Condições climáticas</h5>
+                        <p class="text-secondary mb-0 small" id="clima-local">Carregando localização...</p>
+                    </div>
+                    <button type="button" class="btn btn-outline-danger btn-sm" id="clima-atualizar">
+                        <i class="bi bi-arrow-clockwise me-1"></i>
+                        Atualizar
+                        <span id="clima-carregando" class="spinner-border spinner-border-sm ms-1 d-none"></span>
+                    </button>
+                </div>
+
+                <div class="row align-items-center g-4">
+                    <div class="col-md-4">
+                        <div class="d-flex align-items-center gap-3">
+                            <i class="bi bi-cloud-sun text-danger" id="clima-icone" style="font-size: 3.5rem;"></i>
+                            <div>
+                                <h2 class="fw-bold mb-0"><span id="clima-temperatura">--</span> °C</h2>
+                                <span class="text-secondary" id="clima-condicao">Consultando clima...</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="row g-3">
+                            <div class="col-4">
+                                <i class="bi bi-thermometer-half text-danger"></i>
+                                <p class="text-secondary small mb-0">Sensação térmica</p>
+                                <strong id="clima-sensacao">--</strong>
+                            </div>
+                            <div class="col-4">
+                                <i class="bi bi-moisture text-danger"></i>
+                                <p class="text-secondary small mb-0">Umidade</p>
+                                <strong id="clima-umidade">--</strong>
+                            </div>
+                            <div class="col-4">
+                                <i class="bi bi-wind text-danger"></i>
+                                <p class="text-secondary small mb-0">Vento</p>
+                                <strong id="clima-vento">--</strong>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-2 text-md-end">
+                        <span id="clima-operacao" class="badge bg-secondary">Sem avaliação</span>
+                        <p class="text-secondary small mt-2 mb-0" id="clima-atualizado">--</p>
+                    </div>
+                </div>
+
+                <div id="clima-erro" class="alert alert-warning mt-3 mb-0 d-none"></div>
+            </div>
+
+
             <div class="card border-0 shadow-sm">
                 <div class="card-header bg-white py-3">
                     <h5 class="fw-bold mb-0">Sensores monitorados</h5>
@@ -310,6 +365,7 @@ $tipos = [
     </main>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../scripts/api-clima.js"></script>
 </body>
 </html>
 ```

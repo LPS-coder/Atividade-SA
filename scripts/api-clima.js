@@ -50,11 +50,14 @@ let climaTemDados = false;   // já mostramos algum dado real da API?
 
 
 
+
 async function buscarClima() {
     const url = "https://api.open-meteo.com/v1/forecast"
         + "?latitude=" + CLIMA_LOCAL.latitude
         + "&longitude=" + CLIMA_LOCAL.longitude
-        + "&current=temperature_2m,apparent_temperature,relative_humidity_2m,weather_code,wind_speed_10m,is_day";
+        + "&current=temperature_2m,apparent_temperature,relative_humidity_2m,weather_code,wind_speed_10m,is_day"
+        + "&wind_speed_unit=kmh"
+        + "&timezone=America%2FSao_Paulo";
 
     const controle = new AbortController();
     const temporizador = setTimeout(function () {
@@ -66,7 +69,7 @@ async function buscarClima() {
 
         if (!resposta.ok) {
             throw new Error("A Open-Meteo respondeu com status " + resposta.status);
-    }
+        }
 
         const dados = await resposta.json();
         const atual = dados.current;
@@ -81,6 +84,7 @@ async function buscarClima() {
     }
 }
 
+
 function climaDefinir(id, texto) {
     const elemento = document.getElementById(id);
 
@@ -93,12 +97,15 @@ function climaFormatar(valor, sufixo) {
     return typeof valor === "number" ? Math.round(valor) + sufixo : "--";
 }
 
-function climaDataHora() {
-    const agora = new Date();
 
-    return agora.toLocaleDateString("pt-BR") + " às "
-        + agora.toLocaleTimeString("pt-BR", { hour: "2-digit", minute: "2-digit" });
+function climaDataHora() {
+    return new Date().toLocaleTimeString("pt-BR", {
+        hour: "2-digit",
+        minute: "2-digit",
+        timeZone: "America/Sao_Paulo"
+    });
 }
+
 
 function mostrarClima(atual) {
     const info = CLIMA_CODIGOS[atual.weather_code]
@@ -112,7 +119,7 @@ function mostrarClima(atual) {
     climaDefinir("clima-sensacao", climaFormatar(atual.apparent_temperature, "°C"));
     climaDefinir("clima-umidade", climaFormatar(atual.relative_humidity_2m, "%"));
     climaDefinir("clima-vento", climaFormatar(atual.wind_speed_10m, " km/h"));
-    climaDefinir("clima-atualizado", climaDataHora());
+    climaDefinir("clima-atualizado", "Atualizado às " + climaDataHora());
 
     const icone = document.getElementById("clima-icone");
     if (icone) {
