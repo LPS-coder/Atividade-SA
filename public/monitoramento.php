@@ -160,7 +160,7 @@ $tipos = [
                     </h1>
                 </div>
 
-                <a href="cadastro_de_sensores_e_trens.php" class="btn btn-danger fw-bold">
+                <a href="cadastro_de_sensores_e_trens.php" class="btn btn-novo-sensor fw-bold">
                     <i class="bi bi-plus-lg me-1"></i>
                     Cadastrar sensor
                 </a>

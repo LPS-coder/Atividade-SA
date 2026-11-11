@@ -148,7 +148,7 @@ $relatorios = $conn->query("
                 <h1 class="fw-bold mb-0">Relatórios Operacionais</h1>
             </div>
 
-            <a href="relatorios/cadastro.php" class="btn btn-danger fw-bold px-4 py-2">
+            <a href="relatorios/cadastro.php" class="btn btn-novo-sensor fw-bold px-4 py-2">
                 <i class="bi bi-plus-lg me-2"></i>Novo Relatório
             </a>
         </div>

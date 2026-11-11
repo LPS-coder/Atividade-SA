@@ -46,7 +46,7 @@
 
 .btn-danger {
     height: 45px;
-    background: linear-gradient(90deg, #ff0000, #ff2f45);
+    background: #dc3545;
     border: none;
     font-weight: bold;
     font-size: 16px;
@@ -79,7 +79,7 @@
 }
 
 #body-dashboard .btn-novo-sensor{
-    background:#E30613;
+    background:#dc3545;
     border:none;
     color:rgb(255, 255, 255);
     box-shadow:none !important;
@@ -128,4 +128,50 @@ form-select:focus {
 
 #conteudo-principal{
     margin-left: 280px;
+}
+
+.dashboard-icon {
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #fff0f1;
+    border-radius: 12px;
+    font-size: 25px;
+}
+
+#body-dashboard .main .card {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+#body-dashboard .main .card:hover {
+    transform: translateY(-2px);
+}
+
+#body-dashboard .main .progress {
+    background-color: #f1f1f1;
+    border-radius: 20px;
+}
+
+#body-dashboard .main .progress-bar {
+    border-radius: 20px;
+}
+
+#body-dashboard .main table th {
+    white-space: nowrap;
+}
+
+.btn-novo-sensor {
+    background: var(--bs-danger) !important;
+    background-image: none !important;
+    border-color: var(--bs-danger) !important;
+    color: #fff !important;
+}
+
+.btn-novo-sensor:hover {
+    background: var(--bs-danger) !important;
+    background-image: none !important;
+    border-color: var(--bs-danger) !important;
+    color: #fff !important;
 }

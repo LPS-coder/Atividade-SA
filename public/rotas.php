@@ -142,7 +142,7 @@ $rotasRecentes = $conn->query($sqlRecentes);
             <h1 class="fw-bold mb-1">Rotas Ferroviárias</h1>
             <p class="text-secondary mb-0">Gerencie e consulte as rotas do sistema ferroviário.</p>
         </div>
-        <a href="rotas/cadastro.php" class="btn btn-danger py-2">
+        <a href="rotas/cadastro.php" class="btn btn-novo-sensor py-2">
             <i class="bi bi-plus-lg me-1"></i>Nova Rota
         </a>
     </div>
