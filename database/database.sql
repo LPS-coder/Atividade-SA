@@ -86,6 +86,7 @@ CREATE TABLE IF NOT EXISTS rotas (
         ON UPDATE CASCADE
 );
 
+
 CREATE TABLE IF NOT EXISTS monitoramento (
     id_monitoramento INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     id_funcionario INT NOT NULL,
@@ -93,18 +94,21 @@ CREATE TABLE IF NOT EXISTS monitoramento (
     id_rota INT,
     data_inicio DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     data_fim DATETIME,
-    status ENUM('ATIVO','FINALIZADO','PAUSADO')
+    status ENUM('ATIVO','PAUSADO','FINALIZADO')
         NOT NULL DEFAULT 'ATIVO',
     descricao TEXT,
 
     FOREIGN KEY (id_funcionario)
         REFERENCES funcionario(id_funcionario),
+
     FOREIGN KEY (id_trem)
         REFERENCES trens(id_trem),
+
     FOREIGN KEY (id_rota)
-         REFERENCES rotas(id_rota)
+        REFERENCES rotas(id_rota)
 );
 
+-- Tabela de dados coletados durante o monitoramento
 CREATE TABLE IF NOT EXISTS dados_monitoramento (
     id_dado INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     id_monitoramento INT NOT NULL,
@@ -116,6 +120,7 @@ CREATE TABLE IF NOT EXISTS dados_monitoramento (
 
     FOREIGN KEY (id_monitoramento)
         REFERENCES monitoramento(id_monitoramento),
+
     FOREIGN KEY (id_sensor)
         REFERENCES sensores(id_sensor)
 );
