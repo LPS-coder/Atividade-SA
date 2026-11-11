@@ -8,7 +8,8 @@ require_once "../infra/conexao.php";
 $mensagem = "";
 $erro = "";
 
-if ($_SERVER["REQUEST_METHOD"] === "POST") {
+
+if ($_SERVER["REQUEST_METHOD"] === "POST" && !isset($_POST["excluir_usuario"])) {
 
     $nome = trim($_POST["nome"] ?? "");
     $cpf = preg_replace("/\D/", "", $_POST["cpf"] ?? "");
@@ -16,37 +17,64 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $senha = $_POST["senha"] ?? "";
     $tipo_usuario = $_POST["tipo_usuario"] ?? "";
 
-if (
-    $nome === "" ||
-    $cpf === "" ||
-    $email === "" ||
-    $senha === "" ||
-    $tipo_usuario === ""
-) {
-    $erro = "Preencha todos os campos.";
-} elseif (strlen($cpf) !== 11) {
-    $erro = "O CPF deve conter 11 números.";
-} elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-    $erro = "Informe um e-mail válido.";
-} elseif (!in_array($tipo_usuario, ["Administrador", "Operador"])) {
-    $erro = "Tipo de usuário inválido.";
-} else {
+    $cep = trim($_POST["cep"] ?? "");
+    $logradouro = trim($_POST["logradouro"] ?? "");
+    $numero = trim($_POST["numero"] ?? "");
+    $bairro = trim($_POST["bairro"] ?? "");
+    $cidade = trim($_POST["cidade"] ?? "");
+    $uf = strtoupper(trim($_POST["uf"] ?? ""));
 
-    $senha_hash = password_hash($senha, PASSWORD_DEFAULT);
+    if (
+        $nome === "" ||
+        $cpf === "" ||
+        $email === "" ||
+        $senha === "" ||
+        $tipo_usuario === "" ||
+        $cep === "" ||
+        $logradouro === "" ||
+        $numero === "" ||
+        $bairro === "" ||
+        $cidade === "" ||
+        $uf === ""
+    ) {
+        $erro = "Preencha todos os campos.";
+    } elseif (strlen($cpf) !== 11) {
+        $erro = "O CPF deve conter 11 números.";
+    } elseif (strlen(preg_replace("/\D/", "", $cep)) !== 8) {
+        $erro = "Informe um CEP válido.";
+    } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        $erro = "Informe um e-mail válido.";
+    } elseif (!in_array($tipo_usuario, ["Administrador", "Operador"])) {
+        $erro = "Tipo de usuário inválido.";
+    } elseif (!preg_match("/^[A-Z]{2}$/", $uf)) {
+        $erro = "Informe uma UF válida.";
+    } else {
 
-    $sql = "INSERT INTO funcionario
-        (nome_funcionario, cpf_funcionario, email_funcionario, senha_funcionario, tipo_usuario)
-        VALUES (?, ?, ?, ?, ?)";
+        $senha_hash = password_hash($senha, PASSWORD_DEFAULT);
+
+        $tipoBanco = $tipo_usuario === "Administrador"
+            ? "ADMINISTRADOR"
+            : "OPERARIO";
+
+        $sql = "INSERT INTO funcionario
+            (nome_funcionario, cpf_funcionario, email_funcionario, senha_funcionario, tipo_usuario, cep, logradouro, numero, bairro, cidade, uf)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         $stmt = $conn->prepare($sql);
 
         $stmt->bind_param(
-            "sssss",
+            "sssssssssss",
             $nome,
             $cpf,
             $email,
             $senha_hash,
-            $tipo_usuario
+            $tipoBanco,
+            $cep,
+            $logradouro,
+            $numero,
+            $bairro,
+            $cidade,
+            $uf
         );
 
         if ($stmt->execute()) {
@@ -60,6 +88,7 @@ if (
         $stmt->close();
     }
 }
+
 
 $usuarios = [];
 
@@ -333,6 +362,37 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["excluir_usuario"])) {
 
                     </div>
 
+                    <div class="col-md-4 mb-3">
+                        <label for="cep" class="form-label">CEP</label>
+                        <input type="text" class="form-control" id="cep" name="cep" maxlength="9" inputmode="numeric" placeholder="00000-000" required>
+                        <div id="cep-mensagem" class="form-text"></div>
+                    </div>
+
+                    <div class="col-md-8 mb-3">
+                        <label for="logradouro" class="form-label">Logradouro</label>
+                        <input type="text" class="form-control" id="logradouro" name="logradouro" maxlength="150" required>
+                    </div>
+
+                    <div class="col-md-4 mb-3">
+                        <label for="numero" class="form-label">Número</label>
+                        <input type="text" class="form-control" id="numero" name="numero" maxlength="20" required>
+                    </div>
+
+                    <div class="col-md-4 mb-3">
+                        <label for="bairro" class="form-label">Bairro</label>
+                        <input type="text" class="form-control" id="bairro" name="bairro" maxlength="100" required>
+                    </div>
+
+                    <div class="col-md-3 mb-3">
+                        <label for="cidade" class="form-label">Cidade</label>
+                        <input type="text" class="form-control" id="cidade" name="cidade" maxlength="100" required>
+                    </div>
+
+                    <div class="col-md-1 mb-3">
+                        <label for="uf" class="form-label">UF</label>
+                        <input type="text" class="form-control" id="uf" name="uf" maxlength="2" required>
+                    </div>
+
                 </div>
 
                 <button type="submit" class="btn btn-danger">
@@ -514,6 +574,49 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["excluir_usuario"])) {
     </div>
 
 </div>
+
+<script>
+const campoCep = document.getElementById("cep");
+
+if (campoCep) {
+    campoCep.addEventListener("input", async function () {
+        let cep = this.value.replace(/\D/g, "").slice(0, 8);
+
+        this.value = cep.length > 5
+            ? cep.slice(0, 5) + "-" + cep.slice(5)
+            : cep;
+
+        if (cep.length !== 8) return;
+
+        const mensagem = document.getElementById("cep-mensagem");
+        mensagem.textContent = "Consultando CEP...";
+
+        try {
+            const resposta = await fetch(`https://viacep.com.br/ws/${cep}/json/`);
+            const dados = await resposta.json();
+
+            if (dados.erro) {
+                mensagem.textContent = "CEP não encontrado.";
+                return;
+            }
+
+            document.getElementById("logradouro").value = dados.logradouro || "";
+            document.getElementById("bairro").value = dados.bairro || "";
+            document.getElementById("cidade").value = dados.localidade || "";
+            document.getElementById("uf").value = dados.uf || "";
+
+            mensagem.textContent = "Endereço preenchido com sucesso!";
+            mensagem.className = "form-text text-success";
+
+            document.getElementById(dados.logradouro ? "numero" : "logradouro").focus();
+
+        } catch (erro) {
+            mensagem.textContent = "Não foi possível consultar o CEP. Tente novamente.";
+            mensagem.className = "form-text text-danger";
+        }
+    });
+}
+</script>
 
 </body>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>

@@ -1,4 +1,4 @@
-```php
+
 <?php
 require_once "../infra/seguranca.php";
 exigirAdministrador();
@@ -11,7 +11,7 @@ if (!$id || $id < 1) {
     exit;
 }
 
-$consulta = $conn->prepare("SELECT id_funcionario, nome_funcionario, email_funcionario, cpf_funcionario, tipo_usuario FROM funcionario WHERE id_funcionario = ?");
+$consulta = $conn->prepare("SELECT id_funcionario, nome_funcionario, email_funcionario, cpf_funcionario, tipo_usuario, cep, logradouro, numero, bairro, cidade, uf FROM funcionario WHERE id_funcionario = ?");
 $consulta->bind_param("i", $id);
 $consulta->execute();
 $usuario = $consulta->get_result()->fetch_assoc();
@@ -31,7 +31,25 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $tipo = $_POST["tipo_usuario"] ?? "";
     $senha = $_POST["senha"] ?? "";
 
-    if ($nome === "" || !filter_var($email, FILTER_VALIDATE_EMAIL) || strlen($cpf) !== 11 || !in_array($tipo, ["Administrador", "Operador"], true)) {
+    $cep = trim($_POST["cep"] ?? "");
+    $logradouro = trim($_POST["logradouro"] ?? "");
+    $numero = trim($_POST["numero"] ?? "");
+    $bairro = trim($_POST["bairro"] ?? "");
+    $cidade = trim($_POST["cidade"] ?? "");
+    $uf = strtoupper(trim($_POST["uf"] ?? ""));
+
+    if (
+        $nome === "" ||
+        !filter_var($email, FILTER_VALIDATE_EMAIL) ||
+        strlen($cpf) !== 11 ||
+        !in_array($tipo, ["Administrador", "Operador"], true) ||
+        strlen(preg_replace('/\D/', '', $cep)) !== 8 ||
+        $logradouro === "" ||
+        $numero === "" ||
+        $bairro === "" ||
+        $cidade === "" ||
+        !preg_match('/^[A-Z]{2}$/', $uf)
+    ) {
         $erro = "Preencha os campos corretamente.";
     } else {
         $consulta = $conn->prepare("SELECT id_funcionario FROM funcionario WHERE (email_funcionario = ? OR cpf_funcionario = ?) AND id_funcionario <> ?");
@@ -43,13 +61,15 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         if ($duplicado) {
             $erro = "Este e-mail ou CPF já está cadastrado para outro funcionário.";
         } else {
+            $tipoBanco = $tipo === "Administrador" ? "ADMINISTRADOR" : "OPERARIO";
+
             if ($senha !== "") {
                 $hash = password_hash($senha, PASSWORD_DEFAULT);
-                $atualizacao = $conn->prepare("UPDATE funcionario SET nome_funcionario = ?, email_funcionario = ?, cpf_funcionario = ?, tipo_usuario = ?, senha_funcionario = ? WHERE id_funcionario = ?");
-                $atualizacao->bind_param("sssssi", $nome, $email, $cpf, $tipo, $hash, $id);
+                $atualizacao = $conn->prepare("UPDATE funcionario SET nome_funcionario = ?, email_funcionario = ?, cpf_funcionario = ?, tipo_usuario = ?, senha_funcionario = ?, cep = ?, logradouro = ?, numero = ?, bairro = ?, cidade = ?, uf = ? WHERE id_funcionario = ?");
+                $atualizacao->bind_param("sssssssssssi", $nome, $email, $cpf, $tipoBanco, $hash, $cep, $logradouro, $numero, $bairro, $cidade, $uf, $id);
             } else {
-                $atualizacao = $conn->prepare("UPDATE funcionario SET nome_funcionario = ?, email_funcionario = ?, cpf_funcionario = ?, tipo_usuario = ? WHERE id_funcionario = ?");
-                $atualizacao->bind_param("ssssi", $nome, $email, $cpf, $tipo, $id);
+                $atualizacao = $conn->prepare("UPDATE funcionario SET nome_funcionario = ?, email_funcionario = ?, cpf_funcionario = ?, tipo_usuario = ?, cep = ?, logradouro = ?, numero = ?, bairro = ?, cidade = ?, uf = ? WHERE id_funcionario = ?");
+                $atualizacao->bind_param("ssssssssssi", $nome, $email, $cpf, $tipoBanco, $cep, $logradouro, $numero, $bairro, $cidade, $uf, $id);
             }
 
             if ($atualizacao->execute()) {
@@ -66,7 +86,13 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $usuario["nome_funcionario"] = $nome;
     $usuario["email_funcionario"] = $email;
     $usuario["cpf_funcionario"] = $cpf;
-    $usuario["tipo_usuario"] = $tipo;
+    $usuario["tipo_usuario"] = $tipoBanco ?? $tipo;
+    $usuario["cep"] = $cep;
+    $usuario["logradouro"] = $logradouro;
+    $usuario["numero"] = $numero;
+    $usuario["bairro"] = $bairro;
+    $usuario["cidade"] = $cidade;
+    $usuario["uf"] = $uf;
 }
 ?>
 <!DOCTYPE html>
@@ -79,114 +105,31 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
-<body>
+<body id="body-dashboard">
     <div id="sidebar" class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark">
-
-        <a
-            href="dashboard.php"
-            class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none"
-        >
-            <img
-                src="../assets/images/logo.png"
-                alt="Logo"
-                width="40"
-                height="40"
-                class="me-2"
-            >
-
-            <span class="fs-4">
-                OMNIRAIL
-            </span>
+        <a href="dashboard.php" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+            <img src="../assets/images/logo.png" alt="Logo" width="40" height="40" class="me-2">
+            <span class="fs-4">OMNIRAIL</span>
         </a>
-
         <hr>
-
         <ul class="nav nav-pills flex-column mb-auto">
-
-            <li class="nav-item">
-                <a href="dashboard.php" class="nav-link text-white">
-                    <i class="bi bi-speedometer2 me-2"></i>
-                    Dashboard
-                </a>
-            </li>
-
-            <li>
-                <a href="cadastro_de_sensores_e_trens.php" class="nav-link text-white">
-                    <i class="bi bi-broadcast me-2"></i>
-                    Sensores & Trens
-                </a>
-            </li>
-
-            <li>
-                <a href="monitoramento.php" class="nav-link text-white">
-                    <i class="bi bi-activity me-2"></i>
-                    Monitoramento
-                </a>
-            </li>
-
-            <li>
-                <a
-                    href="relatorios.php"
-                    class="nav-link text-white"
-                    aria-current="page"
-                >
-                    <i class="bi bi-file-earmark-text me-2"></i>
-                    Relatórios
-                </a>
-            </li>
-
-            <li>
-                <a href="cadastro_user.php" class="nav-link active">
-                    <i class="bi bi-people me-2"></i>
-                    Cadastrados
-                </a>
-            </li>
-
-            <li>
-                <a href="../rotas.php" class="nav-link text-white">
-                    <i class="bi bi-globe-americas me-2"></i>
-                    Rotas
-                </a>
-            </li>
+            <li><a href="dashboard.php" class="nav-link text-white"><i class="bi bi-speedometer2 me-2"></i>Dashboard</a></li>
+            <li><a href="cadastro_de_sensores_e_trens.php" class="nav-link text-white"><i class="bi bi-broadcast me-2"></i>Sensores & Trens</a></li>
+            <li><a href="monitoramento.php" class="nav-link text-white"><i class="bi bi-activity me-2"></i>Monitoramento</a></li>
+            <li><a href="relatorios.php" class="nav-link text-white"><i class="bi bi-file-earmark-text me-2"></i>Relatórios</a></li>
+            <li><a href="cadastro_user.php" class="nav-link active"><i class="bi bi-people me-2"></i>Cadastrados</a></li>
+            <li><a href="../rotas.php" class="nav-link text-white"><i class="bi bi-globe-americas me-2"></i>Rotas</a></li>
         </ul>
-
         <hr>
-
         <div class="dropdown">
-
-            <a
-                href="#"
-                class="d-flex align-items-center text-white text-decoration-none dropdown-toggle"
-                id="dropdownUser1"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-            >
-                <img
-                    src="../assets/images/User.png"
-                    alt="Usuário"
-                    class="rounded-circle me-2"
-                    width="32"
-                    height="32"
-                >
-
-                <strong>
-                <?= htmlspecialchars($_SESSION["nome_funcionario"] ?? "Usuário") ?>
-                </strong>
+            <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+                <img src="../assets/images/User.png" alt="Usuário" class="rounded-circle me-2" width="32" height="32">
+                <strong><?= htmlspecialchars($_SESSION["nome_funcionario"] ?? "Usuário") ?></strong>
             </a>
-
-            <ul
-                class="dropdown-menu dropdown-menu-dark text-small shadow"
-                aria-labelledby="dropdownUser1"
-            >
-                <li>
-                    <a class="dropdown-item" href="logout.php">
-                        Sair
-                    </a>
-                </li>
+            <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
+                <li><a class="dropdown-item" href="logout.php">Sair</a></li>
             </ul>
-
         </div>
-
     </div>
 
     <main class="flex-grow-1 bg-light p-5" style="margin-left: 280px; min-height: 100vh; width: calc(100% - 280px);">
@@ -218,8 +161,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                     <div class="col-md-6 mb-3">
                         <label for="tipo_usuario" class="form-label">Tipo de usuário</label>
                         <select class="form-select" id="tipo_usuario" name="tipo_usuario" required>
-                            <option value="Operador" <?= $usuario["tipo_usuario"] === "Operador" ? "selected" : "" ?>>Operador</option>
-                            <option value="Administrador" <?= $usuario["tipo_usuario"] === "Administrador" ? "selected" : "" ?>>Administrador</option>
+                            <option value="Operador" <?= $usuario["tipo_usuario"] === "OPERARIO" || $usuario["tipo_usuario"] === "Operador" ? "selected" : "" ?>>Operador</option>
+                            <option value="Administrador" <?= $usuario["tipo_usuario"] === "ADMINISTRADOR" || $usuario["tipo_usuario"] === "Administrador" ? "selected" : "" ?>>Administrador</option>
                         </select>
                     </div>
 
@@ -230,6 +173,42 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                     </div>
                 </div>
 
+                <hr>
+                <h5 class="fw-bold mb-3">Endereço</h5>
+
+                <div class="row">
+                    <div class="col-md-4 mb-3">
+                        <label for="cep" class="form-label">CEP</label>
+                        <input type="text" class="form-control" id="cep" name="cep" maxlength="9" inputmode="numeric" value="<?= htmlspecialchars($usuario["cep"] ?? "") ?>" placeholder="00000-000" required>
+                        <div id="cep-mensagem" class="form-text"></div>
+                    </div>
+
+                    <div class="col-md-8 mb-3">
+                        <label for="logradouro" class="form-label">Logradouro</label>
+                        <input type="text" class="form-control" id="logradouro" name="logradouro" maxlength="150" value="<?= htmlspecialchars($usuario["logradouro"] ?? "") ?>" required>
+                    </div>
+
+                    <div class="col-md-4 mb-3">
+                        <label for="numero" class="form-label">Número</label>
+                        <input type="text" class="form-control" id="numero" name="numero" maxlength="20" value="<?= htmlspecialchars($usuario["numero"] ?? "") ?>" required>
+                    </div>
+
+                    <div class="col-md-4 mb-3">
+                        <label for="bairro" class="form-label">Bairro</label>
+                        <input type="text" class="form-control" id="bairro" name="bairro" maxlength="100" value="<?= htmlspecialchars($usuario["bairro"] ?? "") ?>" required>
+                    </div>
+
+                    <div class="col-md-3 mb-3">
+                        <label for="cidade" class="form-label">Cidade</label>
+                        <input type="text" class="form-control" id="cidade" name="cidade" maxlength="100" value="<?= htmlspecialchars($usuario["cidade"] ?? "") ?>" required>
+                    </div>
+
+                    <div class="col-md-1 mb-3">
+                        <label for="uf" class="form-label">UF</label>
+                        <input type="text" class="form-control" id="uf" name="uf" maxlength="2" value="<?= htmlspecialchars($usuario["uf"] ?? "") ?>" required>
+                    </div>
+                </div>
+
                 <button type="submit" class="btn btn-danger">
                     <i class="bi bi-check-lg me-1"></i> Salvar alterações
                 </button>
@@ -237,6 +216,49 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             </form>
         </div>
     </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+    const campoCep = document.getElementById("cep");
+
+    if (campoCep) {
+        campoCep.addEventListener("input", async function () {
+            let cep = this.value.replace(/\D/g, "").slice(0, 8);
+
+            this.value = cep.length > 5
+                ? cep.slice(0, 5) + "-" + cep.slice(5)
+                : cep;
+
+            if (cep.length !== 8) return;
+
+            const mensagem = document.getElementById("cep-mensagem");
+            mensagem.textContent = "Consultando CEP...";
+            mensagem.className = "form-text";
+
+            try {
+                const resposta = await fetch(`https://viacep.com.br/ws/${cep}/json/`);
+                const dados = await resposta.json();
+
+                if (dados.erro) {
+                    mensagem.textContent = "CEP não encontrado.";
+                    mensagem.className = "form-text text-danger";
+                    return;
+                }
+
+                document.getElementById("logradouro").value = dados.logradouro || "";
+                document.getElementById("bairro").value = dados.bairro || "";
+                document.getElementById("cidade").value = dados.localidade || "";
+                document.getElementById("uf").value = dados.uf || "";
+
+                mensagem.textContent = "Endereço preenchido com sucesso!";
+                mensagem.className = "form-text text-success";
+                document.getElementById(dados.logradouro ? "numero" : "logradouro").focus();
+            } catch (erro) {
+                mensagem.textContent = "Não foi possível consultar o CEP. Tente novamente.";
+                mensagem.className = "form-text text-danger";
+            }
+        });
+    }
+    </script>
 </body>
 </html>
-```
