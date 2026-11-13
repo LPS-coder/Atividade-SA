@@ -1,4 +1,3 @@
-```php
 <?php
 require_once "../../infra/conexao.php";
 require_once "../../infra/seguranca.php";

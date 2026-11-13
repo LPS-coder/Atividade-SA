@@ -123,3 +123,11 @@ CREATE TABLE IF NOT EXISTS dados_monitoramento (
     FOREIGN KEY (id_sensor)
         REFERENCES sensores(id_sensor)
 );
+
+ALTER TABLE funcionario
+ADD COLUMN cep VARCHAR(9),
+ADD COLUMN logradouro VARCHAR(150),
+ADD COLUMN numero VARCHAR(20),
+ADD COLUMN bairro VARCHAR(100),
+ADD COLUMN cidade VARCHAR(100),
+ADD COLUMN uf CHAR(2);

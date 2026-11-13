@@ -1,4 +1,3 @@
-```php
 <?php
 require_once "../infra/seguranca.php";
 exigirLogin();
@@ -368,4 +367,3 @@ $tipos = [
     <script src="../scripts/api-clima.js"></script>
 </body>
 </html>
-```

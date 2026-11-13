@@ -1,4 +1,3 @@
-
 <?php
 require_once "../infra/seguranca.php";
 exigirAdministrador();
