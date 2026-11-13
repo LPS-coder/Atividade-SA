@@ -117,10 +117,10 @@ $resultado = $conn->query($sql);
                                         <td><?= date("d/m/Y H:i", strtotime($relatorio["data_geracao"])) ?></td>
                                         <td>
                                             <div class="d-flex justify-content-center gap-1">
-                                                <a href="visualizar.php?id=<?= (int) $relatorio["id_relatorio"] ?>" class="btn btn-sm btn-outline-primary" title="Visualizar">
+                                                <a href="visualizar.php?id=<?= (int) $relatorio["id_relatorio"] ?>" class="btn btn-sm btn-outline-secondary" title="Visualizar">
                                                     <i class="bi bi-eye"></i>
                                                 </a>
-                                                <a href="editar.php?id=<?= (int) $relatorio["id_relatorio"] ?>" class="btn btn-sm btn-outline-warning" title="Editar">
+                                                <a href="editar.php?id=<?= (int) $relatorio["id_relatorio"] ?>" class="btn btn-sm btn-outline-primary" title="Editar">
                                                     <i class="bi bi-pencil"></i>
                                                 </a>
                                                 <form action="excluir.php" method="POST" onsubmit="return confirm('Tem certeza que deseja excluir este relatório?')">
