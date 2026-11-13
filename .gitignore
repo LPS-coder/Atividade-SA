@@ -1,0 +1,29 @@
+# Sistema operacional
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Editor de código
+.vscode/
+.idea/
+
+# Arquivos temporários
+*.tmp
+*.temp
+*.log
+*.bak
+*.swp
+
+# Variáveis de ambiente e credenciais locais
+.env
+.env.*
+!.env.example
+
+# Dependências
+/vendor/
+/node_modules/
+
+# Backups e arquivos temporários do banco
+*.bak
+*.dump
+*.sqlite
