@@ -2,6 +2,7 @@
 
 ## Sobre o projeto
 
+O projeto OMNIRAIL nasceu de uma defasagem e invisibilidade comercial dos sistemas ferroviários, seu objetivo e automatizar e monitorar todas as etapas significativas de todo o processo que um ferrorama deve seguir, desde dos cadastros de cada um dos seus funcionários, operadores e administrador, até o calcúlo de tempo feito simultamente ao trajeto do trem usando de sensores no próprio trem.
 
 ## Funcionalidades do sistema
 
