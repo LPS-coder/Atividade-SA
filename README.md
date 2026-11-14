@@ -2,7 +2,14 @@
 
 ## Sobre o projeto
 
-O projeto OMNIRAIL nasceu de uma defasagem e invisibilidade comercial dos sistemas ferroviários, seu objetivo e automatizar e monitorar todas as etapas significativas de todo o processo que um ferrorama deve seguir, desde dos cadastros de cada um dos seus funcionários, operadores e administrador, até o calcúlo de tempo feito simultamente ao trajeto do trem usando de sensores no próprio trem.
+O **OMNIRAIL** é um sistema web de gerenciamento e monitoramento de operações ferroviárias, desenvolvido para uma **ferrorama**. A plataforma centraliza trens, sensores, leituras e alertas e acompanha as etapas significativas da operação: do cadastro de funcionários, operadores e administrador até o cálculo de tempo feito simultaneamente ao trajeto do trem, a partir de sensores instalados no próprio trem.
+
+
+## Problema que resolve
+
+O projeto nasceu da **defasagem e da invisibilidade comercial dos sistemas ferroviários**. Sem uma visão unificada, é difícil acompanhar velocidade, consumo de energia, localização e falhas de cada trem, o que prejudica o controle operacional, a manutenção e a segurança.
+
+O OMNIRAIL reúne esses dados em uma interface única, alimentada por sensores IoT, com histórico de falhas e relatórios.
 
 ## Funcionalidades do sistema
 
@@ -53,12 +60,11 @@ O sistema armazena informações de velocidade, localização, consumo de energi
 As informações são apresentadas de forma organizada, intuitiva e responsiva.
 
 ## Tecnologias utilizadas
-
-Frontend: HTML, CSS, JavaScript e Bootstrap.
-
-Backend: PHP.
-
-Banco de dados: MySQL.
+| Frontend | HTML, CSS, JavaScript e Bootstrap |
+| Backend | PHP |
+| Banco de dados | MySQL |
+| Ambiente local | XAMPP (Apache, PHP, phpMyAdmin) |
+| Gestão | Scrum, com quadro Kanban no GitHub |
 
 ## Estrutura do banco de dados
 
