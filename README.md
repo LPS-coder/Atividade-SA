@@ -2,7 +2,6 @@
 
 ## Sobre o projeto
 
-O OMNIRAIL é um sistema ferroviário desenvolvido com foco em monitoramento inteligente, integração de sensores IoT e análise operacional em tempo real. O projeto segue boas práticas de programação, usabilidade, segurança da informação e organização de dados, centralizando o cadastro de trens e sensores, a coleta de dados operacionais e a geração de relatórios para acompanhamento administrativo da malha ferroviária.
 
 ## Funcionalidades do sistema
 
