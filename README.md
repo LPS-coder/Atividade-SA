@@ -151,23 +151,6 @@ mysql -u root < database/omnirail.sql
 
 > **Reexecução:** o script usa `IF NOT EXISTS` e pode ser rodado de novo, mas o `ALTER TABLE` final (colunas de endereço) falha se já tiver sido aplicado, e o `INSERT` do administrador restaura a senha e o perfil padrão dele.
 
-### Diagrama de relacionamentos
-
-```mermaid
-erDiagram
-    FUNCIONARIO ||--o{ TRENS : cadastra}
-    FUNCIONARIO ||--o{ MONITORAMENTO : realiza}
-    FUNCIONARIO ||--o{ RELATORIOS : gera}
-    TRENS ||--o{ SENSORES : possui}
-    TRENS ||--o{ ROTAS : percorre}
-    TRENS ||--o{ MONITORAMENTO : "e monitorado em"}
-    TRENS ||--o{ RELATORIOS : "e tema de"}
-    ROTAS |o--o{ MONITORAMENTO : segue}
-    MONITORAMENTO ||--o{ DADOS_MONITORAMENTO : registra}
-    SENSORES ||--o{ DADOS_MONITORAMENTO : gera}
-    SENSORES ||--o{ RELATORIOS : "e tema de"}
-```
-
 ### Tabelas
 
 | Tabela | Finalidade | Principais campos |
