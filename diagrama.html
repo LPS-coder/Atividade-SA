@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>OMNIRAIL | Diagrama do Banco</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #111315;
+    color: #eeeeee;
+    padding: 25px;
+}
+
+/* CABEÇALHO */
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid #df0015;
+    padding-bottom: 20px;
+    margin-bottom: 25px;
+}
+
+header h1 {
+    font-size: 27px;
+    letter-spacing: 2px;
+}
+
+header h1 span {
+    color: #ed0019;
+}
+
+header p {
+    color: #999;
+    font-size: 13px;
+    margin-top: 6px;
+}
+
+.info {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.info span {
+    background: #222528;
+    border: 1px solid #373b40;
+    padding: 9px 13px;
+    border-radius: 5px;
+    font-size: 12px;
+    color: #ccc;
+}
+
+/* LEGENDA */
+
+.legenda {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 20px;
+    font-size: 13px;
+    flex-wrap: wrap;
+}
+
+.pk {
+    color: #5bd69a;
+}
+
+.fk {
+    color: #ff626f;
+}
+
+/* ÁREA DO DIAGRAMA */
+
+#area {
+    width: 100%;
+    overflow-x: auto;
+    display: flex;
+    justify-content: center;
+    background-color: #171a1d;
+    border: 1px solid #30353a;
+    border-radius: 9px;
+}
+
+#palco {
+    position: relative;
+    width: 1450px;
+    height: 1050px;
+    flex-shrink: 0;
+    margin: 0 auto;
+}
+
+/* LINHAS DE RELACIONAMENTO */
+
+#conexoes {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+.conexao {
+    fill: none;
+    stroke: #e00019;
+    stroke-width: 2;
+    opacity: 0.75;
+}
+
+.etiqueta {
+    fill: #ff626f;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+/* CARTÕES DAS TABELAS */
+
+.tabela {
+    position: absolute;
+    width: 245px;
+    background: #222629;
+    border: 1px solid #454b50;
+    border-radius: 7px;
+    overflow: hidden;
+    box-shadow: 0 5px 18px #0007;
+    z-index: 2;
+}
+
+.cabecalho {
+    background: #d90019;
+    padding: 13px;
+    font-size: 14px;
+    font-weight: bold;
+    letter-spacing: 0.7px;
+}
+
+.campo {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 5px;
+    padding: 9px 11px;
+    border-bottom: 1px solid #353a3e;
+    font-size: 11px;
+}
+
+.campo:last-child {
+    border-bottom: none;
+}
+
+.nome {
+    color: #e5e5e5;
+}
+
+.tipo {
+    color: #858e95;
+    font-size: 10px;
+    white-space: nowrap;
+}
+
+.marcador {
+    font-size: 9px;
+    font-weight: bold;
+    margin-right: 5px;
+}
+
+.campo.pk .marcador {
+    color: #5bd69a;
+}
+
+.campo.fk .marcador {
+    color: #ff626f;
+}
+
+.campo.pk {
+    background: #19362b;
+}
+
+.campo.fk {
+    background: #392126;
+}
+
+/* RODAPÉ */
+
+footer {
+    text-align: center;
+    color: #777;
+    font-size: 12px;
+    margin-top: 25px;
+}
+
+/* RESPONSIVIDADE */
+
+@media(max-width: 700px) {
+    body {
+        padding: 12px;
+    }
+
+    header {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 15px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <div>
+        <h1><span>●</span> OMNIRAIL</h1>
+        <p>Estrutura e relacionamentos do banco de dados</p>
+    </div>
+
+    <div class="info">
+        <span>7 Tabelas</span>
+        <span>11 Relacionamentos</span>
+        <span>MySQL</span>
+    </div>
+</header>
+
+<div class="legenda">
+    <span class="pk">■ PK — Chave Primária</span>
+    <span class="fk">■ FK — Chave Estrangeira</span>
+    <span>Estrutura do banco de dados OMNIRAIL</span>
+</div>
+
+<div id="area">
+<div id="palco">
+
+<svg id="conexoes"></svg>
+
+<!-- FUNCIONARIO -->
+
+<div class="tabela" id="funcionario" style="left:40px; top:60px;">
+
+    <div class="cabecalho">FUNCIONARIO</div>
+
+    <div class="campo pk">
+        <span><b class="marcador">PK</b>id_funcionario</span>
+        <span class="tipo">INT</span>
+    </div>
+
+    <div class="campo"><span class="nome">nome_funcionario</span><span class="tipo">VARCHAR(100)</span></div>
+    <div class="campo"><span class="nome">cpf_funcionario</span><span class="tipo">VARCHAR(11)</span></div>
+    <div class="campo"><span class="nome">email_funcionario</span><span class="tipo">VARCHAR(150)</span></div>
+    <div class="campo"><span class="nome">senha_funcionario</span><span class="tipo">VARCHAR(255)</span></div>
+    <div class="campo"><span class="nome">tipo_usuario</span><span class="tipo">ENUM</span></div>
+    <div class="campo"><span class="nome">cep</span><span class="tipo">VARCHAR(9)</span></div>
+    <div class="campo"><span class="nome">logradouro</span><span class="tipo">VARCHAR(150)</span></div>
+    <div class="campo"><span class="nome">numero</span><span class="tipo">VARCHAR(20)</span></div>
+    <div class="campo"><span class="nome">bairro</span><span class="tipo">VARCHAR(100)</span></div>
+    <div class="campo"><span class="nome">cidade</span><span class="tipo">VARCHAR(100)</span></div>
+    <div class="campo"><span class="nome">uf</span><span class="tipo">CHAR(2)</span></div>
+
+</div>
+
+<!-- TRENS -->
+
+<div class="tabela" id="trens" style="left:420px; top:60px;">
+
+    <div class="cabecalho">TRENS</div>
+
+    <div class="campo pk">
+        <span><b class="marcador">PK</b>id_trem</span>
+        <span class="tipo">INT</span>
+    </div>
+
+    <div class="campo"><span class="nome">nome_trens</span><span class="tipo">VARCHAR(100)</span></div>
+    <div class="campo"><span class="nome">codigo</span><span class="tipo">VARCHAR(20)</span></div>
+    <div class="campo"><span class="nome">modelo</span><span class="tipo">VARCHAR(100)</span></div>
+
+    <div class="campo fk">
+        <span><b class="marcador">FK</b>id_funcionario</span>
+        <span class="tipo">INT</span>
+    </div>
+
+</div>
+
+<!-- SENSORES -->
+
+<div class="tabela" id="sensores" style="left:800px; top:60px;">
+
+    <div class="cabecalho">SENSORES</div>
+
+    <div class="campo pk">
+        <span><b class="marcador">PK</b>id_sensor</span>
+        <span class="tipo">INT</span>
+    </div>
+
+    <div class="campo"><span class="nome">nome_sensores</span><span class="tipo">VARCHAR(100)</span></div>
+    <div class="campo"><span class="nome">localizacao</span><span class="tipo">VARCHAR(150)</span></div>
+    <div class="campo"><span class="nome">tipo_dado</span><span class="tipo">VARCHAR(50)</span></div>
+
+    <div class="campo fk">
+        <span><b class="marcador">FK</b>id_trem</span>
+        <span class="tipo">INT</span>
+    </div>
+
+</div>
+
+<!-- ROTAS -->
+
+<div class="tabela" id="rotas" style="left:40px; top:510px;">
+
+    <div class="cabecalho">ROTAS</div>
+
+    <div class="campo pk">
+        <span><b class="marcador">PK</b>id_rota</span>
+        <span class="tipo">INT</span>
+    </div>
+
+    <div class="campo"><span class="nome">nome_rota</span><span class="tipo">VARCHAR(100)</span></div>
+    <div class="campo"><span class="nome">descricao_rota</span><span class="tipo">VARCHAR(500)</span></div>
+    <div class="campo"><span class="nome">distancia_km</span><span class="tipo">DECIMAL(8,2)</span></div>
+    <div class="campo"><span class="nome">tempo_previsto_min</span><span class="tipo">INT</span></div>
+    <div class="campo"><span class="nome">data_criacao</span><span class="tipo">DATETIME</span></div>
+
+    <div class="campo fk">
+        <span><b class="marcador">FK</b>id_trem</span>
+        <span class="tipo">INT</span>
+    </div>
+
+</div>
+
+<!-- MONITORAMENTO -->
+
+<div class="tabela" id="monitoramento" style="left:420px; top:430px;">
+
+    <div class="cabecalho">MONITORAMENTO</div>
+
+    <div class="campo pk">
+        <span><b class="marcador">PK</b>id_monitoramento</span>
+        <span class="tipo">INT</span>
+    </div>
+
+    <div class="campo fk">
+        <span><b class="marcador">FK</b>id_funcionario</span>
+        <span class="tipo">INT</span>
+    </div>
+
+    <div class="campo fk">
+        <span><b class="marcador">FK</b>id_trem</span>
+        <span class="tipo">INT</span>
+    </div>
+
+    <div class="campo fk">
+        <span><b class="marcador">FK</b>id_rota</span>
+        <span class="tipo">INT (NULL)</span>
+    </div>
+
+    <div class="campo"><span class="nome">data_inicio</span><span class="tipo">DATETIME</span></div>
+    <div class="campo"><span class="nome">data_fim</span><span class="tipo">DATETIME</span></div>
+    <div class="campo"><span class="nome">status</span><span class="tipo">ENUM</span></div>
+    <div class="campo"><span class="nome">descricao</span><span class="tipo">TEXT</span></div>
+
+</div>
+
+<!-- DADOS MONITORAMENTO -->
+
+<div class="tabela" id="dados_monitoramento" style="left:800px; top:510px;">
+
+    <div class="cabecalho">DADOS_MONITORAMENTO</div>
+
+    <div class="campo pk">
+        <span><b class="marcador">PK</b>id_dado</span>
+        <span class="tipo">INT</span>
+    </div>
+
+    <div class="campo fk">
+        <span><b class="marcador">FK</b>id_monitoramento</span>
+        <span class="tipo">INT</span>
+    </div>
+
+    <div class="campo fk">
+        <span><b class="marcador">FK</b>id_sensor</span>
+        <span class="tipo">INT</span>
+    </div>
+
+    <div class="campo"><span class="nome">valor_registrado</span><span class="tipo">VARCHAR(255)</span></div>
+    <div class="campo"><span class="nome">unidade</span><span class="tipo">VARCHAR(30)</span></div>
+    <div class="campo"><span class="nome">data_registro</span><span class="tipo">DATETIME</span></div>
+    <div class="campo"><span class="nome">descricao</span><span class="tipo">TEXT</span></div>
+
+</div>
+
+<!-- RELATORIOS -->
+
+<div class="tabela" id="relatorios" style="left:1150px; top:250px;">
+
+    <div class="cabecalho">RELATORIOS</div>
+
+    <div class="campo pk">
+        <span><b class="marcador">PK</b>id_relatorio</span>
+        <span class="tipo">INT</span>
+    </div>
+
+    <div class="campo fk">
+        <span><b class="marcador">FK</b>id_funcionario</span>
+        <span class="tipo">INT</span>
+    </div>
+
+    <div class="campo fk">
+        <span><b class="marcador">FK</b>id_sensor</span>
+        <span class="tipo">INT</span>
+    </div>
+
+    <div class="campo fk">
+        <span><b class="marcador">FK</b>id_trem</span>
+        <span class="tipo">INT</span>
+    </div>
+
+    <div class="campo"><span class="nome">data_geracao</span><span class="tipo">DATETIME</span></div>
+    <div class="campo"><span class="nome">descricao</span><span class="tipo">TEXT</span></div>
+
+</div>
+
+</div>
+</div>
+
+<footer>
+    OMNIRAIL — Sistema de Gerenciamento Ferroviário
+</footer>
+
+<script>
+
+// RELACIONAMENTOS ENTRE AS TABELAS
+
+const palco = document.getElementById("palco");
+const svg = document.getElementById("conexoes");
+
+const relacoes = [
+    ["funcionario", "trens"],
+    ["trens", "sensores"],
+    ["funcionario", "relatorios"],
+    ["sensores", "relatorios"],
+    ["trens", "relatorios"],
+    ["trens", "rotas"],
+    ["funcionario", "monitoramento"],
+    ["trens", "monitoramento"],
+    ["rotas", "monitoramento"],
+    ["monitoramento", "dados_monitoramento"],
+    ["sensores", "dados_monitoramento"]
+];
+
+// DESENHAR LINHAS
+
+function desenharConexoes() {
+
+    svg.innerHTML = "";
+
+    relacoes.forEach(([origem, destino]) => {
+
+        const a = document.getElementById(origem);
+        const b = document.getElementById(destino);
+
+        const ax = a.offsetLeft + a.offsetWidth / 2;
+        const ay = a.offsetTop + a.offsetHeight / 2;
+
+        const bx = b.offsetLeft + b.offsetWidth / 2;
+        const by = b.offsetTop + b.offsetHeight / 2;
+
+        const meioX = (ax + bx) / 2;
+
+        const caminho = document.createElementNS(
+            "http://www.w3.org/2000/svg", "path"
+        );
+
+        caminho.setAttribute(
+            "d",
+            `M ${ax} ${ay} C ${meioX} ${ay}, ${meioX} ${by}, ${bx} ${by}`
+        );
+
+        caminho.setAttribute("class", "conexao");
+
+        svg.appendChild(caminho);
+
+        const texto = document.createElementNS(
+            "http://www.w3.org/2000/svg", "text"
+        );
+
+        texto.setAttribute("x", meioX);
+        texto.setAttribute("y", (ay + by) / 2 - 8);
+        texto.setAttribute("text-anchor", "middle");
+        texto.setAttribute("class", "etiqueta");
+        texto.textContent = "1:N";
+
+        svg.appendChild(texto);
+
+    });
+
+}
+
+window.addEventListener("load", desenharConexoes);
+window.addEventListener("resize", desenharConexoes);
+
+</script>
+
+</body>
+</html>
