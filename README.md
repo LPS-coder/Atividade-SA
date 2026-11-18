@@ -99,13 +99,13 @@ Implementado em PHP integrado ao MySQL:
 | Frontend | HTML, CSS, JavaScript e Bootstrap |
 | Gráficos e mapa | Gráficos interativos em JavaScript e mapa Leaflet com OpenStreetMap |
 | Backend | PHP |
-| Banco de dados | MySQL / MariaDB |
-| Ambiente local | XAMPP (Apache, PHP, MariaDB, phpMyAdmin) |
+| Banco de dados | MySQL |
+| Ambiente local | XAMPP (Apache, PHP, phpMyAdmin) |
 | Gestão | Scrum, com quadro Kanban no GitHub |
 
 ## Requisitos
 
-- [XAMPP](https://www.apachefriends.org/) com Apache, PHP e MySQL/MariaDB
+- [XAMPP](https://www.apachefriends.org/) com Apache, PHP e MySQL
 - Navegador moderno (Chrome, Edge ou Firefox)
 - Conexão com a internet (mapa e bibliotecas externas)
 - Git (opcional, para clonar o repositório)
